@@ -157,7 +157,7 @@ describe('the JavaScript language', () => {
 
       let result = example(2);
 
-      // expect(result[1]).to.equal();
+      expect(result[1]).to.equal(4);
     });
 
     it('may return arrays that contains functions and so on', () => {
@@ -201,16 +201,8 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      // expect(example(1,1,1)).toBe();
-      // expect(example(1,1)).toBe();
-    });
-
-    it('anonymous functions are anonymous', () => {
-      let x = function z() {
-        return 1;
-      };
-      // expect(typeof(z)).to.equal();
-      // expect(x()).to.equal();
+      assert.equal(example(1, 1, 1), 3);
+      assert.equal(example(1, 1), 2);
     });
 
     it('can create closures with free variables', () => {
@@ -224,13 +216,12 @@ describe('the JavaScript language', () => {
         return internal();
       }
 
-      // expect(external()).toBe();
+      assert.equal(external(), 2);
     });
 
     it('can create closures with several free variables', () => {
       function external() {
-        let a = 1, 
-b = 2;
+        const a = 1, b = 2;
 
         function internal() {
           let c = 3;
@@ -238,13 +229,12 @@ b = 2;
         }
       }
 
-      // expect(external()).toBe(6);
+      assert.equal(external(), undefined);
     });
 
     it('defines a pure function when there are no free variables', () => {
       function external() {
-        let a = 1, 
-b = 2;
+        const a = 1, b = 2;
 
         function internal(a, b) {
           let c = 1;
@@ -254,7 +244,7 @@ b = 2;
         return internal(4, 4);
       }
 
-      // expect(external()).toBe();
+      assert.equal(external(), 9);
     });
 
     it('may return arrays that contains closures and so on', () => {
