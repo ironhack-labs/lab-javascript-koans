@@ -1,75 +1,82 @@
-context = describe;
+const chai = require('chai');
+const $ = require('jquery');
 
-describe("the JavaScript language", function() {
+const assert = chai.assert;
+const expect = chai.expect;
 
-  describe("has different types and operators", function() {
-    it("considers numbers to be equal to their string representation", function() {
-      expect(1 == "1").toBeTruthy();
-      expect(1 != "1").toBeFalsy();
+// describe - It's used to group different tests on our code.
+// it - It receives a string that indicates what we are testing
+// expect - What we are expecting in the test.
+
+
+describe('the JavaScript language', () => {
+  describe('has different types and operators', () => {
+    it('considers numbers to be equal to their string representation', () => {
+      expect(1 == '1').to.be.true;
+      expect(1 != '1').to.be.false;
     });
 
-    it("knows that numbers and strings are not exactly the same", function() {
-      expect(1 === "1").toBeFalsy();
-      expect(1 !== "1").toBeTruthy();
+    it('knows that numbers and strings are not exactly the same', () => {
+      expect(1 === '1').to.be.false;
+      expect(1 !== '1').to.be.true;
     });
 
-    it("joins parts as string when using the plus operator", function() {
-      expect(1 + "a").toEqual("1a");
+    it('joins parts as string when using the plus operator', () => {
+      expect(`${1}a`).to.equal('1a');
     });
 
-    it("operates integers before joining the string", function() {
-      expect(1 + 1 + "2").toEqual('22');
+    it('operates integers before joining the string', () => {
+      expect(`${1 + 1}2`).to.equal('22');
     });
 
-    it("knows the type of the variable", function() {
-      var x = 1;
-
-      expect(typeof(x)).toEqual('number');
+    it('knows the type of the variable', function () {
+      const x = 1;
+      assert.typeOf(x, 'number');
     });
 
-    it("surprises me, NaN is not comparable with NaN", function() {
-      expect(5 / "a").toEqual(5 / "a");
-      //expect(typeof(NaN)).toEqual();
-      expect(isNaN(5 / "a")).toBeTruthy();
+    it('surprises me, NaN is not comparable with NaN', () => {
+      expect(5 / 'a').toEqual(5 / 'a');
+      // expect(typeof(NaN)).toEqual();
+      expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
-    it("considers an empty string to be falsy", function() {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+    it('considers an empty string to be falsy', () => {
+      // expect("" == false).toBe......();// Truthy or Falsy
+      // expect("" === false).toBe.....();// Truthy or Falsy
     });
 
-    it("considers zero to be falsy", function() {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+    it('considers zero to be falsy', () => {
+      // expect(0 == false).toBe......();// Truthy or Falsy
+      // expect(0 === false).toBe.....();// Truthy or Falsy
     });
 
-    it("considers nulls to be falsy", function() {
-      var x = null;
-      var result;
+    it('considers nulls to be falsy', () => {
+      let x = null;
+      let result;
 
       if (x) {
-         result = true;
+        result = true;
       } else {
-         result = false;
+        result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      // expect(result == false).toBe......();// Truthy or Falsy
+      // expect(null === false).toBe.....();// Truthy or Falsy
+      // expect(null == false).toBe....();// Truthy or Falsy
     });
 
-    it("knows the type of a function", function() {
-      function x(){}
+    it('knows the type of a function', () => {
+      function x() {}
 
-      expect(typeof(x)).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof (x)).toBe('function');
+      // expect(typeof(xxx)).toBe('...');
     });
 
-    it("has arrays and they can contain anything inside", function() {
-      var arr = [1,2,3,4];
+    it('has arrays and they can contain anything inside', () => {
+      let arr = [1, 2, 3, 4];
       arr.push(5);
       arr[9] = 6;
-      var matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
+      let matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
       /*
       expect(arr[1]).toEqual();
@@ -80,47 +87,47 @@ describe("the JavaScript language", function() {
       */
     });
 
-    it("may contain functions inside arrays", function() {
-      var arr = [1,2, function(arg){ return 3 + arg;}];
+    it('may contain functions inside arrays', () => {
+      let arr = [1, 2, function (arg) { return 3 + arg; }];
 
-      //expect(arr[2](1)).toEqual();
+      // expect(arr[2](1)).toEqual();
     });
 
-    it("concatenate arrays - well, kind of", function() {
-      var a = [1,2,3];
-      var b = [4,5,6];
+    it('concatenate arrays - well, kind of', () => {
+      let a = [1, 2, 3];
+      let b = [4, 5, 6];
 
-      //expect(a + b).toEqual();
+      // expect(a + b).toEqual();
     });
 
-    it("joins arrays and strings", function() {
-      var a = [1,2,3];
+    it('joins arrays and strings', () => {
+      let a = [1, 2, 3];
 
-      //expect ("1" + a).toEqual();
-      //expect(a + "1").toEqual();
+      // expect ("1" + a).toEqual();
+      // expect(a + "1").toEqual();
     });
 
-    it("joins arrays and other things", function() {
-      var a = [1,2,3];
-      var b = ['x', 'y', 'z'];
+    it('joins arrays and other things', () => {
+      let a = [1, 2, 3];
+      let b = ['x', 'y', 'z'];
 
-      //expect(1 + a).toEqual();
-      //expect(a + 1).toEqual();
-      //expect(1 + b).toEqual();
-      //expect(true + a).toEqual();
+      // expect(1 + a).toEqual();
+      // expect(a + 1).toEqual();
+      // expect(1 + b).toEqual();
+      // expect(true + a).toEqual();
     });
 
-    it("can't compare arrays", function() {
-      var a = [1,2,3];
-      var b = [1,2,3];
+    it("can't compare arrays", () => {
+      let a = [1, 2, 3];
+      let b = [1, 2, 3];
 
-      //expect(a == b).toBe.....();  // Truthy or Falsy
-      //expect(a === b).toBe.....(); // Truthy or Falsy
+      // expect(a == b).toBe.....();  // Truthy or Falsy
+      // expect(a === b).toBe.....(); // Truthy or Falsy
     });
 
-    it("is not the same to compare by value than by reference ", function() {
-      var a = [1,2,3];
-      var b = [1,2,3];
+    it('is not the same to compare by value than by reference ', () => {
+      let a = [1, 2, 3];
+      let b = [1, 2, 3];
 
       expect(a).toEqual(b);        // Jasmine toEqual compares by value
       expect(a).not.toBe(b);       // Jasmine toBe compares by reference
@@ -128,67 +135,67 @@ describe("the JavaScript language", function() {
   });
 
 
-  describe("considers functions as first class citizens", function() {
-    it("can declare named functions", function() {
+  describe('considers functions as first class citizens', () => {
+    it('can declare named functions', () => {
       function example() {
         return 'some example';
       }
 
-      //expect(example()).toEqual();
+      // expect(example()).toEqual();
     });
 
-    it("can declare anonymous functions", function() {
-      var someVar = function(a, b) {
+    it('can declare anonymous functions', () => {
+      let someVar = function (a, b) {
         return a + b;
       };
 
-      //expect(typeof(someVar)).toBe();
-      //expect(someVar(1,1)).toBe();
+      // expect(typeof(someVar)).toBe();
+      // expect(someVar(1,1)).toBe();
     });
 
-    it("may return anything", function() {
+    it('may return anything', () => {
       function example(arg) {
         return [arg, arg * 2, arg * 3];
       }
 
-      var result = example(2);
+      let result = example(2);
 
-      //expect(result[1]).toEqual();
+      // expect(result[1]).toEqual();
     });
 
-    it("may return arrays that contains functions and so on", function() {
+    it('may return arrays that contains functions and so on', () => {
       function example() {
          // write the missing code here
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      // expect(example()[0](1)[1]).toEqual(10);
     });
 
-    it("doesn't care about the declaration order when they are named", function() {
+    it("doesn't care about the declaration order when they are named", () => {
       function exampleA() {
-          return exampleB(1);
+        return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      // expect(exampleA()).toEqual();
 
       function exampleB(arg1) {
-          return arg1;
+        return arg1;
       }
     });
 
-    it("matters, the declaration order when they are anonymous", function() {
-      var exampleA = function() {
-          return exampleB(1);
+    it('matters, the declaration order when they are anonymous', () => {
+      let exampleA = function () {
+        return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
+      // expect(exampleA()).toEqual(1);
 
-      var exampleB = function(arg1) {
-          return arg1;
+      var exampleB = function (arg1) {
+        return arg1;
       };
     });
 
-    it("can use optional parameters", function() {
+    it('can use optional parameters', () => {
       function example(a, b, c) {
         if (c) {
           return a + b + c;
@@ -196,21 +203,21 @@ describe("the JavaScript language", function() {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      // expect(example(1,1,1)).toBe();
+      // expect(example(1,1)).toBe();
     });
 
-    it("anonymous functions are anonymous", function() {
-      var x = function z() {
+    it('anonymous functions are anonymous', () => {
+      let x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      // expect(typeof(z)).toEqual();
+      // expect(x()).toEqual();
     });
 
-    it("can create closures with free variables", function() {
+    it('can create closures with free variables', () => {
       function external() {
-        var a = 1;
+        let a = 1;
 
         function internal() {
           return a + 1;
@@ -219,215 +226,217 @@ describe("the JavaScript language", function() {
         return internal();
       }
 
-      //expect(external()).toBe();
+      // expect(external()).toBe();
     });
 
-    it("can create closures with several free variables", function() {
+    it('can create closures with several free variables', () => {
       function external() {
-        var a = 1, b = 2;
+        let a = 1, 
+b = 2;
 
         function internal() {
-          var c = 3;
+          let c = 3;
           return a + b + c;
         }
       }
 
-      //expect(external()).toBe(6);
+      // expect(external()).toBe(6);
     });
 
-    it("defines a pure function when there are no free variables", function() {
+    it('defines a pure function when there are no free variables', () => {
       function external() {
-        var a = 1, b = 2;
+        let a = 1, 
+b = 2;
 
         function internal(a, b) {
-          var c = 1;
+          let c = 1;
           return a + b + c;
         }
 
-        return internal(4,4);
+        return internal(4, 4);
       }
 
-      //expect(external()).toBe();
+      // expect(external()).toBe();
     });
 
-    it("may return arrays that contains closures and so on", function() {
+    it('may return arrays that contains closures and so on', () => {
       function example() {
         // write the missing code here
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      // expect(example()[0](1)[1]).toEqual(10);
+      // expect(example()[0](2)[1]).toEqual(11);
+      // expect(example()[0](3)[1]).toEqual(12);
     });
 
-    it("passes primitive types as values (a copy) to functions", function() {
+    it('passes primitive types as values (a copy) to functions', () => {
       function example(arg) {
-        arg = "test!";
+        arg = 'test!';
       }
 
-      var x = 1;
-      var y = "example";
-      var z = true;
+      let x = 1;
+      let y = 'example';
+      let z = true;
 
       example(x);
-      //expect(x).toEqual();
+      // expect(x).toEqual();
 
       example(y);
-      //expect(y).toEqual();
+      // expect(y).toEqual();
 
       example(z);
-      //expect(z).toEqual();
+      // expect(z).toEqual();
     });
 
-    it("passes arrays by reference", function() {
+    it('passes arrays by reference', () => {
       function example(arg) {
         arg[0] = 100;
       }
 
-      var x = [1,2,3];
+      let x = [1, 2, 3];
 
       example(x);
-      //expect(x).toEqual();
+      // expect(x).toEqual();
     });
 
-    it("passes objects by reference", function() {
+    it('passes objects by reference', () => {
       function example(arg) {
         arg.property = 'test';
       }
 
-      var x = { property: 'cool!' };
+      let x = { property: 'cool!' };
 
       example(x);
-      //expect(x).toEqual();
+      // expect(x).toEqual();
     });
 
-    it("may return a function as the result of invoking a function", function() {
-      function add(a, b){
+    it('may return a function as the result of invoking a function', () => {
+      function add(a, b) {
         return a + b;
       }
 
-      function example(){
+      function example() {
         return add;
       }
 
-      //expect(example()(1,2)).toEqual();
-      var f = example();
-      //expect(f(2,2)).toEqual();
+      // expect(example()(1,2)).toEqual();
+      let f = example();
+      // expect(f(2,2)).toEqual();
     });
 
-    it("can return closures as a function result", function() {
-      function plus(amount){
-        return function(number){
+    it('can return closures as a function result', () => {
+      function plus(amount) {
+        return function (number) {
           return number + amount;
         };
       }
 
-      var f = plus(5);
+      let f = plus(5);
 
-      //expect(f(3)).toBe();
+      // expect(f(3)).toBe();
     });
 
-    it("can have functions that receive other functions as arguments", function() {
-      function add(a,b){
+    it('can have functions that receive other functions as arguments', () => {
+      function add(a, b) {
         return a + b;
       }
 
-      function example(arg){
-        return arg(2,2) + 1;
+      function example(arg) {
+        return arg(2, 2) + 1;
       }
 
-      //expect(example(add)).toEqual();
+      // expect(example(add)).toEqual();
     });
 
-    it("may have functions as the input and the output", function() {
+    it('may have functions as the input and the output', () => {
       function plus(originalFunction) {
-        return function(arg1) {
+        return function (arg1) {
           return originalFunction() + arg1;
         };
       }
 
-      var f = plus(function() {return 1;});
+      let f = plus(() => { return 1; });
 
-      //expect(f(2)).toBe();
+      // expect(f(2)).toBe();
     });
 
-    it("can invoke functions indirectly using the special 'call'", function() {
-      function f(a, b){
+    it("can invoke functions indirectly using the special 'call'", () => {
+      function f(a, b) {
         return a + b;
       }
 
-      //expect(f.call(f,1,1)).toEqual();
+      // expect(f.call(f,1,1)).toEqual();
     });
 
-    it("can invoke functions indirectly using the special 'apply'", function() {
-      function f(a, b){
+    it("can invoke functions indirectly using the special 'apply'", () => {
+      function f(a, b) {
         return a + b;
       }
 
-      //expect(f.apply(f, [1,1])).toEqual();
+      // expect(f.apply(f, [1,1])).toEqual();
     });
 
-    it("doesnt have a private scope inside blocks", function() {
-      var j = 0;
-      for (var i = 0; i < 5; i++) {
+    it('doesnt have a private scope inside blocks', () => {
+      let j = 0;
+      for (let i = 0; i < 5; i++) {
         j += i;
       }
 
-      //expect(i).toEqual();
-      //expect(j).toEqual();
+      // expect(i).toEqual();
+      // expect(j).toEqual();
     });
   });
 
-  describe("has multiple ways to define and create objects", function() {
-    it("can define object literals", function() {
-        var obj = {
-          name:    'bob',
-          theName: function() {
+  describe('has multiple ways to define and create objects', () => {
+    it('can define object literals', () => {
+      let obj = {
+          name: 'bob',
+          theName() {
             return this.name;
-          }
+          },
         };
 
-        //expect(obj.theName()).toBe();
+        // expect(obj.theName()).toBe();
     });
 
-    it("can create properties dynamically", function() {
-      var obj = {
-        name:    'bob',
-        surname: 'sponge'
+    it('can create properties dynamically', () => {
+      let obj = {
+        name: 'bob',
+        surname: 'sponge',
       };
       obj.address = 'palm tree';
 
-      //expect(obj.address).toEqual();
-      //expect(obj['address']).toEqual();
-      //expect(obj['name']).toEqual();
+      // expect(obj.address).toEqual();
+      // expect(obj['address']).toEqual();
+      // expect(obj['name']).toEqual();
     });
 
-    it("may define complex objects", function() {
-      var user;
+    it('may define complex objects', () => {
+      let user;
       // write the contents of the obj to make the satisfy the expectations:
 
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+      // expect(user.address.street).toEqual('sesame');
+      // expect(user.friends[0].name).toEqual('triki');
     });
 
-    it("has a pattern called, the Module Pattern", function() {
+    it('has a pattern called, the Module Pattern', () => {
       function createObject() {
-        var points = 0;
+        let points = 0;
 
         return {
-          addPoint: function(){ ++points; },
-          score:    function(){ return points; }
+          addPoint(){ ++points; },
+          score(){ return points; },
         };
       }
 
-      var obj = createObject();
+      let obj = createObject();
       obj.addPoint();
 
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
+      // expect(obj.score()).toEqual();
+      // expect(typeof(obj.points)).toEqual();
     });
 
-    it("may create objects also with the module pattern", function() {
+    it('may create objects also with the module pattern', () => {
       function createObject(initialScore) {
         // write the code here
       }
@@ -440,83 +449,83 @@ describe("the JavaScript language", function() {
       */
     });
 
-    it("can define constructors", function() {
+    it('can define constructors', () => {
       function Obj() {
-        var name = 'bob';
+        let name = 'bob';
 
-        this.theName = function() {
+        this.theName = function () {
           return name;
         };
       }
 
-      var obj = new Obj();
-      //expect(obj.theName()).toBe();
+      let obj = new Obj();
+      // expect(obj.theName()).toBe();
     });
 
-    it("may contain 'static' methods", function() {
+    it("may contain 'static' methods", () => {
       function Obj() {
-        var name = 'bob';
+        let name = 'bob';
 
-        this.theName = function() {
+        this.theName = function () {
           return name;
         };
       }
 
-      Obj.someStaticMethod = function() {
+      Obj.someStaticMethod = function () {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      // expect(Obj.someStaticMethod()).toBe();
     });
 
-    it("can have have methods in the prototype", function() {
+    it('can have have methods in the prototype', () => {
       function Obj() {
-        var name = 'bob';
+        let name = 'bob';
       }
 
-      Obj.prototype.theName = function() {
+      Obj.prototype.theName = function () {
         return this.name;
       };
 
-      var obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
+      let obj = new Obj();
+      // expect(obj.theName()).toEqual();
+      // expect(obj.theName).toBe(new Obj().theName);
     });
 
-    it("can define a factory", function() {
+    it('can define a factory', () => {
       function obj() {
-        var self = {};
-        var name = 'bob';
+        let self = {};
+        let name = 'bob';
 
-        self.theName = function() {
+        self.theName = function () {
           return name;
         };
 
         return self;
       }
 
-      var instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      let instance = obj();
+      // expect(instance.theName()).toBe();
+      // expect(instance.theName).not.toBe(obj().theName);
     });
 
-    it("can create methods dynamically on an object instance", function() {
-        var obj = {};
-        var methodNames = ['meow', 'jump'];
+    it('can create methods dynamically on an object instance', () => {
+      let obj = {};
+      let methodNames = ['meow', 'jump'];
 
-        for (var i = 0; i < methodNames.length; i++) {
-          obj[[methodNames[i]]] = function() { return 'it works'; };
+      for (let i = 0; i < methodNames.length; i++) {
+          obj[[methodNames[i]]] = function () { return 'it works'; };
         }
 
-        //expect(obj.meow()).toEqual();
+        // expect(obj.meow()).toEqual();
     });
 
-    describe("the polymorphism", function() {
-      it("may use constructor plus prototype", function() {
+    describe('the polymorphism', () => {
+      it('may use constructor plus prototype', () => {
         function Parent() {
           this.name = 'parent';
         }
-        Parent.prototype.someMethod = function() {
+        Parent.prototype.someMethod = function () {
           return 10;
         };
 
@@ -526,181 +535,179 @@ describe("the JavaScript language", function() {
         }
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
-        var child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        let child = new Child();
+        // expect(child.someMethod()).toEqual();
+        // expect(child.name).toEqual();
       });
 
-      it("may use the functional inheritance", function(){
+      it('may use the functional inheritance', () =>  {
         function parent() {
-          var name = 'parent';
-          var self = {};
-          self.someMethod = function() {
-              return 10;
+          let name = 'parent';
+          let self = {};
+          self.someMethod = function () {
+            return 10;
           };
           return self;
         }
 
         function child() {
-          var name = 'child';
-          var self = parent();
+          let name = 'child';
+          let self = parent();
           return self;
         }
 
-        var instance = child();
-        //expect(instance.someMethod()).toBe();
+        let instance = child();
+        // expect(instance.someMethod()).toBe();
       });
-
     });
   });
 
-  describe("commons patterns with functions and behaviors", function() {
-    it("can invoke functions immediately to take advantage of scopes", function() {
-      var myNamespace = {};
+  describe('commons patterns with functions and behaviors', () => {
+    it('can invoke functions immediately to take advantage of scopes', () => {
+      let myNamespace = {};
 
-      (function(theNamespace) {
-          var counter = 0;
+      (function (theNamespace) {
+        let counter = 0;
 
-          theNamespace.addOne = function() {
+        theNamespace.addOne = function () {
             counter++;
           };
 
-          theNamespace.giveMeTheCount = function() {
+        theNamespace.giveMeTheCount = function () {
             return counter;
           };
-
       }(myNamespace));
 
       myNamespace.addOne();
       myNamespace.addOne();
 
-      //expect(myNamespace.giveMeTheCount()).toBe();
+      // expect(myNamespace.giveMeTheCount()).toBe();
     });
 
-    it("hoists variables the way you probably dont expect", function() {
+    it('hoists variables the way you probably dont expect', () => {
       function generate() {
-        var functions = [];
+        let functions = [];
         for (var i = 0; i < 5; i++) {
-          functions.push(function() {
+          functions.push(() => {
             return i;
           });
         }
         return functions;
       }
 
-      //expect(generate()[0]()).toEqual();
-      //expect(generate()[1]()).toEqual();
+      // expect(generate()[0]()).toEqual();
+      // expect(generate()[1]()).toEqual();
     });
   });
 
-  context("has ways to simulate classes", function() {
+  context('has ways to simulate classes', () => {
     // "Class"
     function Cat() {
       this.kilos = 1;
-      this.feed = function() {
+      this.feed = function () {
         this.kilos++;
       };
-      this.isPurring = function() {
+      this.isPurring = function () {
         return true;
       };
     }
 
-    //////////////////////////////////////
+    // ////////////////////////////////////
     // "Class"
-    //////////////////////////////////////
+    // ////////////////////////////////////
     function Lion(energy) {
       Cat.call(this);
       this.energy = energy || 100;
-      var self = this;
+      let self = this;
 
-      var run = function() { // private method
+      let run = function () { // private method
         self.energy -= 10;
       };
-      var attack = function() { // private method
+      let attack = function () { // private method
         self.energy -= 5;
       };
-      this.playWithFriend = function(friend) {
+      this.playWithFriend = function (friend) {
         if (friend.isPurring())
-          self.energy += 10;
+          {self.energy += 10;}
       };
-      this.hunt = function(){ // public method
+      this.hunt = function () { // public method
         run();
         attack();
         this.onHunting(); // fire event
       };
-      this.onHunting = function() { /* event */ };
+      this.onHunting = function () { /* event */ };
     }
 
-    context("and the THIS keyword", function() {
-      var cat;
+    context('and the THIS keyword', () => {
+      let cat;
 
-      beforeEach(function() {
+      beforeEach(() => {
         cat = new Cat();
         window.kilos = 0;
       });
 
-      it("sometimes works as expected in other languages", function() {
+      it('sometimes works as expected in other languages', () => {
         cat.feed();
         cat.feed();
 
-        //expect(cat.kilos).toEqual();
+        // expect(cat.kilos).toEqual();
       });
 
-      it("works different on dettached functions", function() {
+      it('works different on dettached functions', () => {
         window.kilos = 10;
-        var feed = cat.feed;
+        let feed = cat.feed;
 
         feed();
 
-        //expect(window.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        // expect(window.kilos).toEqual();
+        // expect(cat.kilos).toEqual();
       });
 
-      it("can be bound explicitly with CALL and APPLY", function() {
-        var feed = cat.feed;
+      it('can be bound explicitly with CALL and APPLY', () => {
+        let feed = cat.feed;
         feed.apply(cat);
 
-        //expect(cat.kilos).toEqual();
+        // expect(cat.kilos).toEqual();
       });
 
-      it("can be bound in modern browsers with BIND", function() {
-        var feed = cat.feed;
-        var bound = feed.bind(cat);
+      it('can be bound in modern browsers with BIND', () => {
+        let feed = cat.feed;
+        let bound = feed.bind(cat);
 
         bound();
 
-        //expect(cat.kilos).toEqual();
+        // expect(cat.kilos).toEqual();
       });
 
-      it("works different when function is attached to other object", function() {
-        var otherCat = new Cat();
+      it('works different when function is attached to other object', () => {
+        let otherCat = new Cat();
         otherCat.kilos = 10;
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-        //expect(otherCat.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        // expect(otherCat.kilos).toEqual();
+        // expect(cat.kilos).toEqual();
       });
 
-      it("can be handled using the SELF trick", function() {
-        var energy = 200;
-        var lion = new Lion(energy);
+      it('can be handled using the SELF trick', () => {
+        let energy = 200;
+        let lion = new Lion(energy);
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        // expect(lion.energy).toEqual();
       });
 
-      it("interprest the THIS when the function is executed", function() {
-        var energy = 200;
-        var lion = new Lion();
+      it('interprest the THIS when the function is executed', () => {
+        let energy = 200;
+        let lion = new Lion();
 
-        lion.hunt = function() {
+        lion.hunt = function () {
           this.energy = 4000;
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        // expect(lion.energy).toEqual();
       });
     });
   });
