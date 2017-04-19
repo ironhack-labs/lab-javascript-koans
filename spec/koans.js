@@ -562,8 +562,8 @@ describe("the JavaScript language", function() {
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
         var child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        expect(child.someMethod()).toEqual(10);
+        expect(child.name).toEqual('child');
       });
 
       it("may use the functional inheritance", function(){
@@ -583,7 +583,7 @@ describe("the JavaScript language", function() {
         }
 
         var instance = child();
-        //expect(instance.someMethod()).toBe();
+        expect(instance.someMethod()).toBe(10);
       });
 
     });
@@ -609,7 +609,7 @@ describe("the JavaScript language", function() {
       myNamespace.addOne();
       myNamespace.addOne();
 
-      //expect(myNamespace.giveMeTheCount()).toBe();
+      expect(myNamespace.giveMeTheCount()).toBe(2);
     });
 
     it("hoists variables the way you probably dont expect", function() {
@@ -623,8 +623,8 @@ describe("the JavaScript language", function() {
         return functions;
       }
 
-      //expect(generate()[0]()).toEqual();
-      //expect(generate()[1]()).toEqual();
+      expect(generate()[0]()).toEqual(5);
+      expect(generate()[1]()).toEqual(5);
     });
   });
 
