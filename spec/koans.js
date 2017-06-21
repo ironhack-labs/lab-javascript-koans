@@ -223,7 +223,7 @@ describe("the JavaScript language", function() {
         return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(2);
     });
 
     it("can create closures with several free variables", function() {
@@ -234,9 +234,10 @@ describe("the JavaScript language", function() {
           var c = 3;
           return a + b + c;
         }
+        return internal();
       }
 
-      //expect(external()).toBe(6);
+      expect(external()).toBe(6);
     });
 
     it("defines a pure function when there are no free variables", function() {
@@ -251,7 +252,7 @@ describe("the JavaScript language", function() {
         return internal(4,4);
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(9);
     });
 
     it("may return arrays that contains closures and so on", function() {
@@ -259,7 +260,7 @@ describe("the JavaScript language", function() {
         // write the missing code here
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
       //expect(example()[0](2)[1]).toEqual(11);
       //expect(example()[0](3)[1]).toEqual(12);
     });
