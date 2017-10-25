@@ -497,8 +497,8 @@ describe("the JavaScript language", function() {
       };
 
       var obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
+      expect(obj.theName()).toEqual(undefined);
+      expect(obj.theName).toBe(new Obj().theName);
     });
 
     it("can define a factory", function() {
@@ -514,8 +514,8 @@ describe("the JavaScript language", function() {
       }
 
       var instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe("bob");
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it("can create methods dynamically on an object instance", function() {
@@ -526,7 +526,7 @@ describe("the JavaScript language", function() {
           obj[[methodNames[i]]] = function() { return 'it works'; };
         }
 
-        //expect(obj.meow()).toEqual();
+        expect(obj.meow()).toEqual('it works');
     });
 
     describe("the polymorphism", function() {
@@ -545,8 +545,8 @@ describe("the JavaScript language", function() {
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
         var child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        expect(child.someMethod()).toEqual(10);
+        expect(child.name).toEqual("child");
       });
 
       it("may use the functional inheritance", function(){
