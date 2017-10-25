@@ -265,7 +265,9 @@ describe("the JavaScript language", function() {
 
     it("may return arrays that contains closures and so on", function() {
       function example() {
-
+        return [function(arg) {
+          return [0, 9 + arg];
+        }];
       }
 
       expect(example()[0](1)[1]).toEqual(10);
