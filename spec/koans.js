@@ -708,7 +708,7 @@ describe("the JavaScript language", function() {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it("interprest the THIS when the function is executed", function() {
@@ -720,7 +720,7 @@ describe("the JavaScript language", function() {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
