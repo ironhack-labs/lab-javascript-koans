@@ -409,10 +409,9 @@ describe("the JavaScript language", function() {
     it("may define complex objects", function() {
       var user;
       // write the contents of the obj to make the satisfy the expectations:
-      user={};
-      user.address.street = 'sesame';
-      user.friends = [];
-      user.friends.push({name:'triki'});
+      user = { address : { street : 'sesame'},
+               friends : [{ name : 'triki'}]
+             };
 
       expect(user.address.street).toEqual('sesame');
       expect(user.friends[0].name).toEqual('triki');
