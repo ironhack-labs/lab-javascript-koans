@@ -438,17 +438,17 @@ describe("the JavaScript language", function() {
     });
 
     it("may create objects also with the module pattern", function() {
-      function createObject(initialScore, initialColor) {
+      function CreateObject(initialScore, initialColor) {
          this.points = initialScore;
          this.color = initialColor;
       }
 
-      createObject.prototype.incrementScoreIn = function(value){
+      CreateObject.prototype.incrementScoreIn = function(value){
         this.points += value;
       };
 
 
-      var obj = new createObject(5, 'red');
+      var obj = new CreateObject(5, 'red');
       obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
       expect(obj.points).toEqual(10);
