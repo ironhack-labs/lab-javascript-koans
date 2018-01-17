@@ -142,8 +142,8 @@ describe("the JavaScript language", function() {
         return a + b;
       };
 
-      //expect(typeof(someVar)).toBe();
-      //expect(someVar(1,1)).toBe();
+      expect(typeof(someVar)).toBe('function');
+      expect(someVar(1,1)).toBe(2);
     });
 
     it("may return anything", function() {
@@ -153,15 +153,17 @@ describe("the JavaScript language", function() {
 
       var result = example(2);
 
-      //expect(result[1]).toEqual();
+      expect(result[1]).toEqual(4);
     });
 
     it("may return arrays that contains functions and so on", function() {
       function example() {
-         // write the missing code here
+        return [function(p){   
+          return [0,10 * p];
+        }] 
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -169,7 +171,7 @@ describe("the JavaScript language", function() {
           return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(exampleB(1));
 
       function exampleB(arg1) {
           return arg1;
@@ -181,7 +183,7 @@ describe("the JavaScript language", function() {
           return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
+      expect(exampleA()).toEqual(exampleA().toThrow(e));
 
       var exampleB = function(arg1) {
           return arg1;
