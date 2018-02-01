@@ -1,0 +1,35 @@
+html, body{
+    margin: 0;
+ }
+ body{
+    background-color: #fafafa;
+ }
+ .nav-bar{
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    padding: 20px 0;
+    border-bottom: 1px solid #e6e6e6;
+ }
+ .nav-bar div:nth-child(3) i{
+    margin-left: 15px;
+ }
+ .user-info{
+    display: flex;
+    justify-content: center;
+ }
+ .user-info img{
+    border-radius: 50%;
+    width: 110px;
+ }
+ .user-info article:nth-child(2) div:first-child{
+    display: flex;
+    align-items: center;
+ }
+ .user-info article:nth-child(2) div:nth-child(2){
+    display: flex;
+    
+ }
+.overlay{
+    
+}
