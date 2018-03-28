@@ -315,7 +315,7 @@ describe("the JavaScript language", function() {
 
       expect(example()(1,2)).toEqual(3);
       var f = example();
-      expect(f(2,2)).toEqual();
+      expect(f(2,2)).toEqual(4);
     });
 
     it("can return closures as a function result", function() {
@@ -327,7 +327,7 @@ describe("the JavaScript language", function() {
 
       var f = plus(5);
 
-      //expect(f(3)).toBe();
+      expect(f(3)).toBe(8);
     });
 
     it("can have functions that receive other functions as arguments", function() {
@@ -339,7 +339,7 @@ describe("the JavaScript language", function() {
         return arg(2,2) + 1;
       }
 
-      //expect(example(add)).toEqual();
+      expect(example(add)).toEqual(5);
     });
 
     it("may have functions as the input and the output", function() {
@@ -351,7 +351,7 @@ describe("the JavaScript language", function() {
 
       var f = plus(function() {return 1;});
 
-      //expect(f(2)).toBe();
+      expect(f(2)).toBe(3);
     });
 
     it("can invoke functions indirectly using the special 'call'", function() {
@@ -359,7 +359,7 @@ describe("the JavaScript language", function() {
         return a + b;
       }
 
-      //expect(f.call(f,1,1)).toEqual();
+      expect(f.call(f,1,1)).toEqual(2);
     });
 
     it("can invoke functions indirectly using the special 'apply'", function() {
@@ -367,7 +367,7 @@ describe("the JavaScript language", function() {
         return a + b;
       }
 
-      //expect(f.apply(f, [1,1])).toEqual();
+      expect(f.apply(f, [1,1])).toEqual(2);
     });
 
     it("doesnt have a private scope inside blocks", function() {
@@ -376,8 +376,8 @@ describe("the JavaScript language", function() {
         j += i;
       }
 
-      //expect(i).toEqual();
-      //expect(j).toEqual();
+      expect(i).toEqual(5);
+      expect(j).toEqual(10);
     });
   });
 
@@ -390,7 +390,7 @@ describe("the JavaScript language", function() {
           }
         };
 
-        //expect(obj.theName()).toBe();
+        expect(obj.theName()).toBe('bob');
     });
 
     it("can create properties dynamically", function() {
@@ -400,17 +400,19 @@ describe("the JavaScript language", function() {
       };
       obj.address = 'palm tree';
 
-      //expect(obj.address).toEqual();
-      //expect(obj['address']).toEqual();
-      //expect(obj['name']).toEqual();
+      expect(obj.address).toEqual('palm tree');
+      expect(obj['address']).toEqual('palm tree');
+      expect(obj['name']).toEqual('bob');
     });
 
     it("may define complex objects", function() {
-      var user;
-      // write the contents of the obj to make the satisfy the expectations:
+      var user = {
+        address: { street: 'sesame' },
+        friends: [{ name: 'triki' }]
+      }
 
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+      expect(user.address.street).toEqual('sesame');
+      expect(user.friends[0].name).toEqual('triki');
     });
 
     it("has a pattern called, the Module Pattern", function() {
@@ -426,8 +428,8 @@ describe("the JavaScript language", function() {
       var obj = createObject();
       obj.addPoint();
 
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
+      expect(obj.score()).toEqual();
+      expect(typeof(obj.points)).toEqual();
     });
 
     it("may create objects also with the module pattern", function() {
