@@ -157,12 +157,13 @@ describe("the JavaScript language", function() {
       expect(result[1]).toEqual(4);
     });
 
-    it("may return arrays that contains functions and so on", function() {
-      function example() {
-         // write the missing code here
+    it("may return arrays that contains functions and so on", 
+    function() {
+      function example(x) {
+        return [x];
+      // var x = [function(arg){return arg+9},0];
       }
-
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example(10)[0]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -170,35 +171,44 @@ describe("the JavaScript language", function() {
           return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(1);
 
       function exampleB(arg1) {
           return arg1;
       }
     });
 
-    it("matters, the declaration order when they are anonymous", function() {
-      var exampleA = function() {
+    it("matters, the declaration order when they are anonymous", 
+    function() {
+      var exampleA = function() { // Without moving exampleB under Example A, it wouldn't see it.
           return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
-
       var exampleB = function(arg1) {
-          return arg1;
+        return arg1;
       };
+
+      expect(exampleA()).toEqual(1);
+
+      // var exampleB = function(arg1) { // This was down here previously. 
+      //     return arg1;
+      // };
     });
 
     it("can use optional parameters", function() {
-      function example(a, b, c) {
-        if (c) {
+     
+      function example(a, b, c) 
+    //function example(1, 1, 1) 
+      {
+        if (c)// if (1) 
+        {
           return a + b + c;
         }
-        return a + b;
+          return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3);
+      expect(example(1,1)).toBe(2);
     });
 
     it("anonymous functions are anonymous", function() {
