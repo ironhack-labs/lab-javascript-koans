@@ -29,96 +29,95 @@ describe("the JavaScript language", function() {
 
     it("surprises me, NaN is not comparable with NaN", function() {
       expect(5 / "a").toEqual(5 / "a");
-      //expect(typeof(NaN)).toEqual();
+      expect(typeof(NaN)).toEqual('number');
       expect(isNaN(5 / "a")).toBeTruthy();
     });
 
     it("considers an empty string to be falsy", function() {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == false).toBeTruthy();// Truthy or Falsy - Equality Operator
+      expect("" === false).toBeFalsy();// Truthy or Falsy - Identity Operator
     });
 
     it("considers zero to be falsy", function() {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBeTruthy();// Truthy or Falsy
+      expect(0 === false).toBeFalsy();// Truthy or Falsy - Compares # to boolean value.
     });
 
     it("considers nulls to be falsy", function() {
-      var x = null;
+      var x = null; 
       var result;
 
-      if (x) {
+      if (x) { // Here null is the same as false. 
          result = true;
       } else {
          result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBeTruthy();// Truthy or Falsy
+      expect(null === false).toBeFalsy();// Truthy or Falsy - Does not mean it's a false boolean.
+      expect(null == false).toBeFalsy();// Truthy or Falsy - It's just how it is! Deal with it!
     });
 
     it("knows the type of a function", function() {
       function x(){}
 
       expect(typeof(x)).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof(xxx)).toBe('undefined');
     });
 
     it("has arrays and they can contain anything inside", function() {
-      var arr = [1,2,3,4];
-      arr.push(5);
-      arr[9] = 6;
+      var arr = [1,2,3,4]; 
+      arr.push(5); // arr = [1,2,3,4,5];
+      arr[9] = 6; // Skip 6 through 8 and put a 6 in the index [10]
       var matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
-      /*
-      expect(arr[1]).toEqual();
-      expect(arr[4]).toEqual();
-      expect(arr[6]).toEqual();
-      expect(arr[9]).toEqual();
-      expect(matrix[0][2]).toEqual();
-      */
+      expect(arr[1]).toEqual(2);
+      expect(arr[4]).toEqual(5);
+      expect(arr[6]).toEqual(undefined);
+      expect(arr[9]).toEqual(6);
+      expect(matrix[0][2]).toEqual('c');
+      
     });
 
     it("may contain functions inside arrays", function() {
       var arr = [1,2, function(arg){ return 3 + arg;}];
 
-      //expect(arr[2](1)).toEqual();
+      expect(arr[2](1)).toEqual(4); // Passes one to the function to return 4.
     });
 
-    it("concatenate arrays - well, kind of", function() {
-      var a = [1,2,3];
-      var b = [4,5,6];
+    it("concatenate arrays - well, kind of", function() { // *****
+      var a = [1,2,3]; 
+      var b = [4,5,6]; // Adds last index to the first index of the second variable.
 
-      //expect(a + b).toEqual();
+      expect(a + b).toEqual('1,2,34,5,6'); 
     });
 
     it("joins arrays and strings", function() {
       var a = [1,2,3];
 
-      //expect ("1" + a).toEqual();
-      //expect(a + "1").toEqual();
+      expect ("1" + a).toEqual('11,2,3'); 
+      expect(a + "1").toEqual('1,2,31'); // If you do not add arrays correctly, it will default to a string and put them together.
     });
 
     it("joins arrays and other things", function() {
       var a = [1,2,3];
       var b = ['x', 'y', 'z'];
 
-      //expect(1 + a).toEqual();
-      //expect(a + 1).toEqual();
-      //expect(1 + b).toEqual();
-      //expect(true + a).toEqual();
+      expect(1 + a).toEqual('11,2,3');
+      expect(a + 1).toEqual('1,2,31');
+      expect(1 + b).toEqual('1x,y,z');
+      expect(true + a).toEqual('true1,2,3'); // Still defaults to a screen.
     });
 
-    it("can't compare arrays", function() {
-      var a = [1,2,3];
-      var b = [1,2,3];
+    it("can't compare arrays", function() { // Self explanitory! can't compare arrays!!!
+      var a = [1,2,3]; // True
+      var b = [1,2,3]; // True
 
-      //expect(a == b).toBe.....();  // Truthy or Falsy
-      //expect(a === b).toBe.....(); // Truthy or Falsy
+      expect(a == b).toBeFalsy();  // Truthy or Falsy
+      expect(a === b).toBeFalsy(); // Truthy or Falsy
     });
 
-    it("is not the same to compare by value than by reference ", function() {
+    it("is not the same to compare by value than by reference ", function() { // This is how you caompare arrays properly!
       var a = [1,2,3];
       var b = [1,2,3];
 
@@ -127,41 +126,44 @@ describe("the JavaScript language", function() {
     });
   });
 
-
   describe("considers functions as first class citizens", function() {
-    it("can declare named functions", function() {
+    it("can declare named functions", 
+    function() { 
       function example() {
-        return 'some example';
+        return;
       }
 
-      //expect(example()).toEqual();
+      expect(example()).toEqual();
     });
 
-    it("can declare anonymous functions", function() {
-      var someVar = function(a, b) {
+    it("can declare anonymous functions", 
+    function() { // This is an improper way of calling a function. It looks for a NAME!
+      var someVar = function(a, b) 
+      {
         return a + b;
       };
 
-      //expect(typeof(someVar)).toBe();
-      //expect(someVar(1,1)).toBe();
+      expect(typeof(someVar)).toBe('function'); 
+      expect(someVar(1,1)).toBe(2);
     });
 
     it("may return anything", function() {
       function example(arg) {
-        return [arg, arg * 2, arg * 3];
+        return [arg, arg * 2, arg * 3]; //
       }
 
       var result = example(2);
 
-      //expect(result[1]).toEqual();
+      expect(result[1]).toEqual(4);
     });
 
-    it("may return arrays that contains functions and so on", function() {
-      function example() {
-         // write the missing code here
+    it("may return arrays that contains functions and so on", 
+    function() {
+      function example(x) {
+        return [x];
+      // var x = [function(arg){return arg+9},0];
       }
-
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example(10)[0]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -169,35 +171,44 @@ describe("the JavaScript language", function() {
           return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(1);
 
       function exampleB(arg1) {
           return arg1;
       }
     });
 
-    it("matters, the declaration order when they are anonymous", function() {
-      var exampleA = function() {
+    it("matters, the declaration order when they are anonymous", 
+    function() {
+      var exampleA = function() { // Without moving exampleB under Example A, it wouldn't see it.
           return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
-
       var exampleB = function(arg1) {
-          return arg1;
+        return arg1;
       };
+
+      expect(exampleA()).toEqual(1);
+
+      // var exampleB = function(arg1) { // This was down here previously. 
+      //     return arg1;
+      // };
     });
 
     it("can use optional parameters", function() {
-      function example(a, b, c) {
-        if (c) {
+     
+      function example(a, b, c) 
+    //function example(1, 1, 1) 
+      {
+        if (c)// if (1) 
+        {
           return a + b + c;
         }
-        return a + b;
+          return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3);
+      expect(example(1,1)).toBe(2);
     });
 
     it("anonymous functions are anonymous", function() {
