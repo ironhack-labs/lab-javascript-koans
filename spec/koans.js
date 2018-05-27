@@ -91,8 +91,6 @@ describe("the JavaScript language", function() {
       var b = [4,5,6];
 
       expect(a + b).toEqual('1,2,34,5,6');
-      // expect(a + b).toEqual(a.concat(b));
-
     });
 
     it("joins arrays and strings", function() {
@@ -263,7 +261,7 @@ describe("the JavaScript language", function() {
         // write the missing code here
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
       //expect(example()[0](2)[1]).toEqual(11);
       //expect(example()[0](3)[1]).toEqual(12);
     });
@@ -337,8 +335,8 @@ describe("the JavaScript language", function() {
       expect(f(3)).toBe(8);
     });
 
-    it("can have functions that receive other functions as arguments", function() {
-      function add(a,b){
+    it("can have functions that receive other functions as arguments", function () {
+      function add(a, b) {
         return a + b;
       }
 
@@ -717,5 +715,7 @@ describe("the JavaScript language", function() {
         //expect(lion.energy).toEqual();
       });
     });
+
   });
+
 });
