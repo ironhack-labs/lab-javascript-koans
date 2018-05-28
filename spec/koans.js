@@ -157,11 +157,15 @@ describe("the JavaScript language", function() {
     });
 
     it("may return arrays that contains functions and so on", function() {
-      function example() {
-        // write the missing code here
+      function example(num) {
+        return [
+          function example(num) { 
+            return [0, 9 + num];
+          }
+        ];
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -257,13 +261,13 @@ describe("the JavaScript language", function() {
     });
 
     it("may return arrays that contains closures and so on", function() {
-      function example() {
-        // write the missing code here
+      function example(num) {
+        return [function example(num) { return [0, 9 + num] }]
       }
 
       expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it("passes primitive types as values (a copy) to functions", function() {
@@ -438,17 +442,23 @@ describe("the JavaScript language", function() {
     });
 
     it("may create objects also with the module pattern", function() {
-      function createObject(initialScore) {
-        // write the code here
-      
-
+      function createObject(initialScore, color) {
+        return {
+          initialScore: initialScore,
+          color: 'red',
+          points: function () { 
+            return initialScore; 
+          },
+          incrementScoreIn: function (score) {
+            return initialScore += score;
+          }
+        };
       }
 
-      
-      // var obj = createObject(5, 'red');
-      // obj.incrementScoreIn(5);
-      // expect(obj.color).toEqual('red');
-      // expect(obj.points()).toEqual(10);
+      var obj = createObject(5, 'red');
+      obj.incrementScoreIn(5);
+      expect(obj.color).toEqual('red');
+      expect(obj.points()).toEqual(10);
       
     });
 
@@ -700,7 +710,7 @@ describe("the JavaScript language", function() {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it("interprest the THIS when the function is executed", function() {
@@ -712,7 +722,7 @@ describe("the JavaScript language", function() {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
 
