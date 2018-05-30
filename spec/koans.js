@@ -39,8 +39,8 @@ describe("the JavaScript language", function () {
     });
 
     it("considers zero to be falsy", function () {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBeTruthy();// Truthy or Falsy
+      expect(0 === false).toBeFalsy();// Truthy or Falsy
     });
 
     it("considers nulls to be falsy", function () {
