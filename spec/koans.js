@@ -82,7 +82,7 @@ describe("the JavaScript language", function () {
     it("may contain functions inside arrays", function () {
       var arr = [1, 2, function (arg) { return 3 + arg; }];
 
-      expect(arr[2](1)).toEqual();
+      expect(arr[2](1)).toEqual(4);
     });
 
     it("concatenate arrays - well, kind of", function () {
