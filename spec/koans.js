@@ -95,8 +95,8 @@ describe("the JavaScript language", function () {
     it("joins arrays and strings", function () {
       var a = [1, 2, 3];
 
-      //expect ("1" + a).toEqual();
-      //expect(a + "1").toEqual();
+      expect("1" + a).toEqual("11,2,3");
+      expect(a + "1").toEqual("1,2,31");
     });
 
     it("joins arrays and other things", function () {
