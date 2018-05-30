@@ -34,8 +34,8 @@ describe("the JavaScript language", function () {
     });
 
     it("considers an empty string to be falsy", function () {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == false).toBeTruthy();// Truthy or Falsy
+      expect("" === false).toBeFalsy();// Truthy or Falsy
     });
 
     it("considers zero to be falsy", function () {
