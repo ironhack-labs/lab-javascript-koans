@@ -53,16 +53,16 @@ describe("the JavaScript language", function () {
         result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBeTruthy();// Truthy or Falsy
+      expect(null === false).toBeFalsy();// Truthy or Falsy
+      expect(null == false).toBeFalsy();// Truthy or Falsy
     });
 
     it("knows the type of a function", function () {
       function x() { }
 
       expect(typeof (x)).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof (xxx)).toBe('undefined');
     });
 
     it("has arrays and they can contain anything inside", function () {
