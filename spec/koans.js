@@ -158,7 +158,7 @@ describe("the JavaScript language", function() {
 
     it("may return arrays that contains functions and so on", function() {
       function example() {
-         return [function(a)]
+        // [function]
       }
 
       //expect(example()[0](1)[1]).toEqual(10);
