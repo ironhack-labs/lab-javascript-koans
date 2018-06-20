@@ -96,26 +96,26 @@ describe("the JavaScript language", function() {
     it("joins arrays and strings", function() {
       var a = [1,2,3];
 
-      //expect ("1" + a).toEqual();
-      //expect(a + "1").toEqual();
+      expect ("1" + a).toEqual("11,2,3");
+      expect(a + "1").toEqual("1,2,31");
     });
 
     it("joins arrays and other things", function() {
       var a = [1,2,3];
       var b = ['x', 'y', 'z'];
 
-      //expect(1 + a).toEqual();
-      //expect(a + 1).toEqual();
-      //expect(1 + b).toEqual();
-      //expect(true + a).toEqual();
+      expect(1 + a).toEqual("11,2,3");
+      expect(a + 1).toEqual("1,2,31");
+      expect(1 + b).toEqual("1x,y,z");
+      expect(true + a).toEqual("true1,2,3");
     });
 
     it("can't compare arrays", function() {
       var a = [1,2,3];
       var b = [1,2,3];
 
-      //expect(a == b).toBe.....();  // Truthy or Falsy
-      //expect(a === b).toBe.....(); // Truthy or Falsy
+      expect(a == b).toBeFalsy();  // Truthy or Falsy
+      expect(a === b).toBeFalsy(); // Truthy or Falsy
     });
 
     it("is not the same to compare by value than by reference ", function() {
@@ -134,7 +134,7 @@ describe("the JavaScript language", function() {
         return 'some example';
       }
 
-      //expect(example()).toEqual();
+      expect(example()).toEqual("some example");
     });
 
     it("can declare anonymous functions", function() {
@@ -142,8 +142,8 @@ describe("the JavaScript language", function() {
         return a + b;
       };
 
-      //expect(typeof(someVar)).toBe();
-      //expect(someVar(1,1)).toBe();
+      expect(typeof(someVar)).toBe();
+      expect(someVar(1,1)).toBe();
     });
 
     it("may return anything", function() {
@@ -153,15 +153,15 @@ describe("the JavaScript language", function() {
 
       var result = example(2);
 
-      //expect(result[1]).toEqual();
+      expect(result[1]).toEqual(4);
     });
 
     it("may return arrays that contains functions and so on", function() {
       function example() {
-         // write the missing code here
+         return [example]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual();
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -169,7 +169,7 @@ describe("the JavaScript language", function() {
           return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(1);
 
       function exampleB(arg1) {
           return arg1;
@@ -181,11 +181,12 @@ describe("the JavaScript language", function() {
           return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
-
       var exampleB = function(arg1) {
-          return arg1;
-      };
+        return arg1;
+    };
+
+      expect(exampleA()).toEqual(1);
+
     });
 
     it("can use optional parameters", function() {
@@ -196,8 +197,8 @@ describe("the JavaScript language", function() {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe();
+      expect(example(1,1)).toBe();
     });
 
     it("anonymous functions are anonymous", function() {
