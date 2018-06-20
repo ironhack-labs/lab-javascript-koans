@@ -438,11 +438,11 @@ describe("the JavaScript language", function() {
 
     it("may create objects also with the module pattern", function() {
       function createObject(initialScore, initialColor) {
-        
+        var num = 0
         return {
           color: initialColor,
-          points: function(){return initialScore + this.incrementScoreIn},
-          incrementScoreIn: function(arg){return arg}
+          incrementScoreIn: function(arg){return num=arg},
+          points: function(){return initialScore + num },  
         }
       }
 
@@ -465,7 +465,7 @@ describe("the JavaScript language", function() {
       }
 
       var obj = new Obj();
-      //expect(obj.theName()).toBe();
+      expect(obj.theName()).toBe('bob');
     });
 
     it("may contain 'static' methods", function() {
@@ -481,7 +481,7 @@ describe("the JavaScript language", function() {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      expect(Obj.someStaticMethod()).toBe(22);
     });
 
     it("can have have methods in the prototype", function() {
@@ -494,8 +494,8 @@ describe("the JavaScript language", function() {
       };
 
       var obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
+      expect(obj.theName()).toEqual(undefined);
+      expect(obj.theName).toBe(new Obj().theName);
     });
 
     it("can define a factory", function() {
@@ -511,8 +511,8 @@ describe("the JavaScript language", function() {
       }
 
       var instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it("can create methods dynamically on an object instance", function() {
@@ -523,7 +523,7 @@ describe("the JavaScript language", function() {
           obj[[methodNames[i]]] = function() { return 'it works'; };
         }
 
-        //expect(obj.meow()).toEqual();
+        expect(obj.jump()).toEqual('it works');
     });
 
     describe("the polymorphism", function() {
