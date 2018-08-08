@@ -721,7 +721,6 @@ describe("the JavaScript language", function() {
 
         bound();
       // !!!!!!!!----😱-------!!!!!!!!!!😱!!!!!!!!!!--------😱------!!!!!!!!!
-
         expect(cat.kilos).toEqual(2);
       });
 
@@ -731,8 +730,9 @@ describe("the JavaScript language", function() {
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-        // expect(otherCat.kilos).toEqual();
-        // expect(cat.kilos).toEqual();
+      // !!!!!!!!----😱-------!!!!!!!!!!😱!!!!!!!!!!--------😱------!!!!!!!!!
+        expect(otherCat.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it("can be handled using the SELF trick", function() {
@@ -741,7 +741,7 @@ describe("the JavaScript language", function() {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it("interprest the THIS when the function is executed", function() {
@@ -753,7 +753,7 @@ describe("the JavaScript language", function() {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
