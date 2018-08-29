@@ -422,14 +422,14 @@ describe("the JavaScript language", function() {
     });
 
     it("may define complex objects", function() {
-      var user = {
-        address: {
-          street: 'sesame';
-        },
-        friends: [{
-          name: 'triki'
-        }];
-      }
+      // var user = {
+      //   address: {
+      //     street: 'sesame';
+      //   },
+      //   friends: [{
+      //     name: 'triki'
+      //   }];
+      // }
       // write the contents of the obj to make the satisfy the expectations:
 
       expect(user.address.street).toEqual('sesame');
