@@ -415,8 +415,7 @@ describe("the JavaScript language", function() {
         } 
         
       }
-      // write the contents of the obj to make the satisfy the expectations:
-
+      
       expect(user.address.street).toEqual('sesame');
       expect(user.friends[0].name).toEqual('triki');
     });
@@ -434,21 +433,26 @@ describe("the JavaScript language", function() {
       var obj = createObject();
       obj.addPoint();
 
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
+      expect(obj.score()).toEqual(1);
+      expect(typeof(obj.points)).toEqual("undefined");
     });
 
     it("may create objects also with the module pattern", function() {
-      function createObject(initialScore) {
-        // write the code here
+      function createObject(initialScore) { 
+        return {
+        incrementScoreIn: function (n){
+          initialScore +=n;
+        },
+        points: function(){
+          return initialScore;
+        },
+        color: "red"
       }
-
-      /*
+    }      
       var obj = createObject(5, 'red');
       obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
-      expect(obj.points()).toEqual(10);
-      */
+      expect(obj.points()).toEqual(10);      
     });
 
     it("can define constructors", function() {
