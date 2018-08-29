@@ -378,8 +378,8 @@ describe("the JavaScript language", function() {
         j += i;
       }
 
-      expect(i).toEqual();
-      expect(j).toEqual();
+      expect(i).toEqual(5);
+      expect(j).toEqual(10);
     });
   });
 
@@ -392,7 +392,7 @@ describe("the JavaScript language", function() {
           }
         };
 
-        //expect(obj.theName()).toBe();
+        expect(obj.theName()).toBe("bob");
     });
 
     it("can create properties dynamically", function() {
@@ -402,17 +402,23 @@ describe("the JavaScript language", function() {
       };
       obj.address = 'palm tree';
 
-      //expect(obj.address).toEqual();
-      //expect(obj['address']).toEqual();
-      //expect(obj['name']).toEqual();
+      expect(obj.address).toEqual("palm tree");
+      expect(obj['address']).toEqual("palm tree");
+      expect(obj['name']).toEqual("bob");
     });
 
     it("may define complex objects", function() {
-      var user;
+      var user = {
+        friends: [{name: "triki"}],
+        address:  {
+          street: "sesame"
+        } 
+        
+      }
       // write the contents of the obj to make the satisfy the expectations:
 
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+      expect(user.address.street).toEqual('sesame');
+      expect(user.friends[0].name).toEqual('triki');
     });
 
     it("has a pattern called, the Module Pattern", function() {
