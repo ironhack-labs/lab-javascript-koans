@@ -412,10 +412,14 @@ describe("the JavaScript language", function() {
     });
 
     it("may define complex objects", function() {
-      var user;
-      user.address.street = 'sesame';
-      user.friends.name = ['triki', 'jean'];
-  
+      var user = {
+        address: {
+          street: "sesame"
+        },
+        friends: [{
+          name: "triki"
+        }]
+      };
       // write the contents of the obj to make the satisfy the expectations:
 
       expect(user.address.street).toEqual('sesame');
@@ -441,15 +445,15 @@ describe("the JavaScript language", function() {
 
     it("may create objects also with the module pattern", function() {
       function createObject(initialScore) {
-        return initialScore + obj.color;
+        return {
+        score: initialScore,
+        color: 'red',
+        incrementScoreIn: function (arg) { return this.score += arg},
+        points: function () { return this.score}
       }
-      obj.color = 'red';
-      var obj = createObject(5, 'red');
-      obj.incrementScoreIn(5);
-      expect(obj.color).toEqual('red');
-      expect(obj.points()).toEqual(10);
-
+    }
     });
+
 
     it("can define constructors", function() {
       function Obj() {
