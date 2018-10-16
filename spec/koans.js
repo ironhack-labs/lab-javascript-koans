@@ -180,15 +180,16 @@ describe("the JavaScript language", function() {
     });
 
     it("matters, the declaration order when they are anonymous", function() {
+      var exampleB = function(arg1) {
+        return arg1;
+    };
       var exampleA = function() {
           return exampleB(1);
       };
 
-      // expect(exampleA()).toEqual(1);
+      expect(exampleA()).toEqual(1);
 
-      var exampleB = function(arg1) {
-          return arg1;
-      };
+     
     });
 
     it("can use optional parameters", function() {
@@ -255,9 +256,7 @@ describe("the JavaScript language", function() {
 
     it("may return arrays that contains closures and so on", function() {
       function example() {
-        var test = [
-          function num ()
-        ]
+
       }
 
       expect(example()[0](1)[1]).toEqual(10);
