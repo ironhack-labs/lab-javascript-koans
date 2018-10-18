@@ -311,9 +311,9 @@ describe("the JavaScript language", function() {
         return add;
       }
 
-      //expect(example()(1,2)).toEqual();
+      expect(example()(1,2)).toEqual(3); 
       var f = example();
-      //expect(f(2,2)).toEqual();
+      expect(f(2,2)).toEqual(4); // I expected to write f()(2,2) instead of f(2,2) to make this work
     });
 
     it("can return closures as a function result", function() {
@@ -325,7 +325,7 @@ describe("the JavaScript language", function() {
 
       var f = plus(5);
 
-      //expect(f(3)).toBe();
+      expect(f(3)).toBe(8); // free variable (number) has been taken by 3 ? is that correct ?
     });
 
     it("can have functions that receive other functions as arguments", function() {
@@ -337,7 +337,7 @@ describe("the JavaScript language", function() {
         return arg(2,2) + 1;
       }
 
-      //expect(example(add)).toEqual();
+      expect(example(add)).toEqual(5); // messed up my brain
     });
 
     it("may have functions as the input and the output", function() {
