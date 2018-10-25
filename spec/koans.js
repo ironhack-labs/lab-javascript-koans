@@ -508,213 +508,198 @@ describe('the JavaScript language', () => {
         return self;
       }
 
-      var instance = obj();
-      expect(instance.theName()).toBe('bob');
-      expect(instance.theName).not.toBe(obj().theName);
-    });
-
-    it("can create methods dynamically on an object instance", function () {
-      var obj = {};
-      var methodNames = ['meow', 'jump'];
-
-      for (var i = 0; i < methodNames.length; i++) {
-        obj[[methodNames[i]]] = function () { return 'it works'; };
-      }
-
-      expect(obj.meow()).toEqual('it works');
-    });
-
-    describe("the polymorphism", function () {
-      it("may use constructor plus prototype", function () {
-        function Parent() {
-          this.name = 'parent';
-        }
-        Parent.prototype.someMethod = function () {
-          return 10;
-        };
-
-        function Child() {
-          Parent.call(this); // constructor stealing
-          this.name = 'child';
-        }
-        Child.prototype = Object.create(Parent.prototype); // prototype chaining
-
-        var child = new Child();
-        expect(child.someMethod()).toEqual(10);
-        expect(child.name).toEqual('child');
-      });
-
-      it("may use the functional inheritance", function () {
-        function parent() {
-          var name = 'parent';
-          var self = {};
-          self.someMethod = function () {
+      describe("the polymorphism", function() {
+        it("may use constructor plus prototype", function() {
+          function Parent() {
+            this.name = 'parent';
+          }
+          Parent.prototype.someMethod = function() {
             return 10;
           };
-          return self;
-        }
-
-        function child() {
-          var name = 'child';
-          var self = parent();
-          return self;
-        }
-
-        var instance = child();
-        expect(instance.someMethod()).toBe(10);
+  
+          function Child() {
+            Parent.call(this); // constructor stealing
+            this.name = 'child';
+          }
+          Child.prototype = Object.create(Parent.prototype); // prototype chaining
+  
+          var child = new Child();
+          //expect(child.someMethod()).toEqual();
+          //expect(child.name).toEqual();
+        });
+  
+        it("may use the functional inheritance", function(){
+          function parent() {
+            var name = 'parent';
+            var self = {};
+            self.someMethod = function() {
+                return 10;
+            };
+            return self;
+          }
+  
+          function child() {
+            var name = 'child';
+            var self = parent();
+            return self;
+          }
+  
+          var instance = child();
+          //expect(instance.someMethod()).toBe();
+        });
+  
       });
-
     });
-  });
-
-  describe("commons patterns with functions and behaviors", function () {
-    it("can invoke functions immediately to take advantage of scopes", function () {
-      var myNamespace = {};
-
-      (function (theNamespace) {
-        var counter = 0;
-
-        theNamespace.addOne = function () {
-          counter++;
-        };
-
-        theNamespace.giveMeTheCount = function () {
-          return counter;
-        };
-
-      }(myNamespace));
-
-      myNamespace.addOne();
-      myNamespace.addOne();
-
-      expect(myNamespace.giveMeTheCount()).toBe(2);
-    });
-
-    it("hoists variables the way you probably dont expect", function () {
-      function generate() {
-        var functions = [];
-        for (var i = 0; i < 5; i++) {
-          functions.push(function () {
-            return i;
-          });
+  
+    describe("commons patterns with functions and behaviors", function() {
+      it("can invoke functions immediately to take advantage of scopes", function() {
+        var myNamespace = {};
+  
+        (function(theNamespace) {
+            var counter = 0;
+  
+            theNamespace.addOne = function() {
+              counter++;
+            };
+  
+            theNamespace.giveMeTheCount = function() {
+              return counter;
+            };
+  
+        }(myNamespace));
+  
+        myNamespace.addOne();
+        myNamespace.addOne();
+  
+        //expect(myNamespace.giveMeTheCount()).toBe();
+      });
+  
+      it("hoists variables the way you probably dont expect", function() {
+        function generate() {
+          var functions = [];
+          for (var i = 0; i < 5; i++) {
+            functions.push(function() {
+              return i;
+            });
+          }
+          return functions;
         }
-        return functions;
+  
+        //expect(generate()[0]()).toEqual();
+        //expect(generate()[1]()).toEqual();
+      });
+    });
+  
+    context("has ways to simulate classes", function() {
+      // "Class"
+      function Cat() {
+        this.kilos = 1;
+        this.feed = function() {
+          this.kilos++;
+        };
+        this.isPurring = function() {
+          return true;
+        };
       }
-
-      expect(generate()[0]()).toEqual(5);
-      expect(generate()[1]()).toEqual(5);
-    });
-  });
-
-  context("has ways to simulate classes", function () {
-    // "Class"
-    function Cat() {
-      this.kilos = 1;
-      this.feed = function () {
-        this.kilos++;
-      };
-      this.isPurring = function () {
-        return true;
-      };
-    }
-
-    //////////////////////////////////////
-    // "Class"
-    //////////////////////////////////////
-    function Lion(energy) {
-      Cat.call(this);
-      this.energy = energy || 100;
-      var self = this;
-
-      var run = function () { // private method
-        self.energy -= 10;
-      };
-      var attack = function () { // private method
-        self.energy -= 5;
-      };
-      this.playWithFriend = function (friend) {
-        if (friend.isPurring())
-          self.energy += 10;
-      };
-      this.hunt = function () { // public method
-        run();
-        attack();
-        this.onHunting(); // fire event
-      };
-      this.onHunting = function () { /* event */ };
-    }
-
-    context("and the THIS keyword", function () {
-      var cat;
-
-      beforeEach(function () {
-        cat = new Cat();
-        window.kilos = 0;
-      });
-
-      it("sometimes works as expected in other languages", function () {
-        cat.feed();
-        cat.feed();
-
-        expect(cat.kilos).toEqual(3);
-      });
-
-      it("works different on dettached functions", function () {
-        window.kilos = 10;
-        var feed = cat.feed;
-
-        feed();
-
-        expect(window.kilos).toEqual(11);
-        expect(cat.kilos).toEqual(1);
-      });
-
-      it("can be bound explicitly with CALL and APPLY", function () {
-        var feed = cat.feed;
-        feed.apply(cat);
-
-        expect(cat.kilos).toEqual(2);
-      });
-
-      it("can be bound in modern browsers with BIND", function () {
-        var feed = cat.feed;
-        var bound = feed.bind(cat);
-
-        bound();
-
-        expect(cat.kilos).toEqual(2);
-      });
-
-      it("works different when function is attached to other object", function () {
-        var otherCat = new Cat();
-        otherCat.kilos = 10;
-        otherCat.feed = cat.feed;
-
-        otherCat.feed();
-        expect(otherCat.kilos).toEqual(11);
-        expect(cat.kilos).toEqual(1);
-      });
-
-      it("can be handled using the SELF trick", function () {
-        var energy = 200;
-        var lion = new Lion(energy);
-
-        lion.hunt();
-
-        expect(lion.energy).toEqual(185);
-      });
-
-      it("interprest the THIS when the function is executed", function () {
-        var energy = 200;
-        var lion = new Lion();
-
-        lion.hunt = function () {
-          this.energy = 4000;
+  
+      //////////////////////////////////////
+      // "Class"
+      //////////////////////////////////////
+      function Lion(energy) {
+        Cat.call(this);
+        this.energy = energy || 100;
+        var self = this;
+  
+        var run = function() { // private method
+          self.energy -= 10;
         };
-        lion.hunt();
-
-        expect(lion.energy).toEqual(4000);
+        var attack = function() { // private method
+          self.energy -= 5;
+        };
+        this.playWithFriend = function(friend) {
+          if (friend.isPurring())
+            self.energy += 10;
+        };
+        this.hunt = function(){ // public method
+          run();
+          attack();
+          this.onHunting(); // fire event
+        };
+        this.onHunting = function() { /* event */ };
+      }
+  
+      context("and the THIS keyword", function() {
+        var cat;
+  
+        beforeEach(function() {
+          cat = new Cat();
+          window.kilos = 0;
+        });
+  
+        it("sometimes works as expected in other languages", function() {
+          cat.feed();
+          cat.feed();
+  
+          //expect(cat.kilos).toEqual();
+        });
+  
+        it("works different on dettached functions", function() {
+          window.kilos = 10;
+          var feed = cat.feed;
+  
+          feed();
+  
+          //expect(window.kilos).toEqual();
+          //expect(cat.kilos).toEqual();
+        });
+  
+        it("can be bound explicitly with CALL and APPLY", function() {
+          var feed = cat.feed;
+          feed.apply(cat);
+  
+          //expect(cat.kilos).toEqual();
+        });
+  
+        it("can be bound in modern browsers with BIND", function() {
+          var feed = cat.feed;
+          var bound = feed.bind(cat);
+  
+          bound();
+  
+          //expect(cat.kilos).toEqual();
+        });
+  
+        it("works different when function is attached to other object", function() {
+          var otherCat = new Cat();
+          otherCat.kilos = 10;
+          otherCat.feed = cat.feed;
+  
+          otherCat.feed();
+          //expect(otherCat.kilos).toEqual();
+          //expect(cat.kilos).toEqual();
+        });
+  
+        it("can be handled using the SELF trick", function() {
+          var energy = 200;
+          var lion = new Lion(energy);
+  
+          lion.hunt();
+  
+          //expect(lion.energy).toEqual();
+        });
+  
+        it("interprest the THIS when the function is executed", function() {
+          var energy = 200;
+          var lion = new Lion();
+  
+          lion.hunt = function() {
+            this.energy = 4000;
+          };
+          lion.hunt();
+  
+          //expect(lion.energy).toEqual();
+        });
       });
     });
   });
-});
+  
