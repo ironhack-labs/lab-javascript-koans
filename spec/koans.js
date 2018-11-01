@@ -468,7 +468,7 @@ describe("the JavaScript language", function () {
       }
 
       var obj = new Obj();
-      //expect(obj.theName()).toBe();
+      expect(obj.theName()).toBe('bob');
     });
 
     it("may contain 'static' methods", function () {
@@ -484,7 +484,7 @@ describe("the JavaScript language", function () {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      expect(Obj.someStaticMethod()).toBe(22);
     });
 
     it("can have have methods in the prototype", function () {
@@ -497,8 +497,8 @@ describe("the JavaScript language", function () {
       };
 
       var obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
+      expect(obj.theName()).toEqual(undefined);
+      expect(obj.theName).toBe(new Obj().theName);
     });
 
     it("can define a factory", function () {
@@ -514,8 +514,8 @@ describe("the JavaScript language", function () {
       }
 
       var instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it("can create methods dynamically on an object instance", function () {
@@ -526,7 +526,7 @@ describe("the JavaScript language", function () {
         obj[[methodNames[i]]] = function () { return 'it works'; };
       }
 
-      //expect(obj.meow()).toEqual();
+      expect(obj.meow()).toEqual('it works');
     });
 
     describe("the polymorphism", function () {
@@ -545,8 +545,8 @@ describe("the JavaScript language", function () {
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
         var child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        expect(child.someMethod()).toEqual(10);
+        expect(child.name).toEqual('child');
       });
 
       it("may use the functional inheritance", function () {
@@ -566,7 +566,7 @@ describe("the JavaScript language", function () {
         }
 
         var instance = child();
-        //expect(instance.someMethod()).toBe();
+        expect(instance.someMethod()).toBe(10);
       });
 
     });
@@ -592,7 +592,7 @@ describe("the JavaScript language", function () {
       myNamespace.addOne();
       myNamespace.addOne();
 
-      //expect(myNamespace.giveMeTheCount()).toBe();
+      expect(myNamespace.giveMeTheCount()).toBe(2);
     });
 
     it("hoists variables the way you probably dont expect", function () {
@@ -606,8 +606,8 @@ describe("the JavaScript language", function () {
         return functions;
       }
 
-      //expect(generate()[0]()).toEqual();
-      //expect(generate()[1]()).toEqual();
+      expect(generate()[0]()).toEqual(5);
+      expect(generate()[1]()).toEqual(5);
     });
   });
 
@@ -661,7 +661,7 @@ describe("the JavaScript language", function () {
         cat.feed();
         cat.feed();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(3);
       });
 
       it("works different on dettached functions", function () {
@@ -670,15 +670,15 @@ describe("the JavaScript language", function () {
 
         feed();
 
-        //expect(window.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(window.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it("can be bound explicitly with CALL and APPLY", function () {
         var feed = cat.feed;
         feed.apply(cat);
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it("can be bound in modern browsers with BIND", function () {
@@ -687,7 +687,7 @@ describe("the JavaScript language", function () {
 
         bound();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it("works different when function is attached to other object", function () {
@@ -696,8 +696,8 @@ describe("the JavaScript language", function () {
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-        //expect(otherCat.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(otherCat.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it("can be handled using the SELF trick", function () {
@@ -706,7 +706,7 @@ describe("the JavaScript language", function () {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it("interprest the THIS when the function is executed", function () {
@@ -718,7 +718,7 @@ describe("the JavaScript language", function () {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
