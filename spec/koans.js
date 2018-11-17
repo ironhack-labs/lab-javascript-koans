@@ -222,10 +222,9 @@ describe("the JavaScript language", function() {
           return a + 1;
         }
 
-        return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe();
     });
 
     it("can create closures with several free variables", function() {
@@ -236,9 +235,9 @@ describe("the JavaScript language", function() {
           var c = 3;
           return a + b + c;
         }
+        return internal();
       }
-
-      //expect(external()).toBe(6);
+      expect(external()).toBe(6);
     });
 
     it("defines a pure function when there are no free variables", function() {
@@ -249,21 +248,20 @@ describe("the JavaScript language", function() {
           var c = 1;
           return a + b + c;
         }
-
-        return internal(4,4);
       }
-
-      //expect(external()).toBe();
+      expect(external()).toBe();
     });
 
     it("may return arrays that contains closures and so on", function() {
       function example() {
-        // write the missing code here
+        return [function arr(num){
+          return [0,num+9];
+        }]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it("passes primitive types as values (a copy) to functions", function() {
@@ -276,7 +274,7 @@ describe("the JavaScript language", function() {
       var z = true;
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual();
 
       example(y);
       //expect(y).toEqual();
