@@ -29,18 +29,18 @@ describe("the JavaScript language", function() {
 
     it("surprises me, NaN is not comparable with NaN", function() {
       expect(5 / "a").toEqual(5 / "a");
-      //expect(typeof(NaN)).toEqual();
+      expect(typeof(NaN)).not.toEqual();
       expect(isNaN(5 / "a")).toBeTruthy();
     });
 
     it("considers an empty string to be falsy", function() {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == false).toBeTruthy();// Truthy solo compara
+      expect("" === false).toBeFalsy();// Falsy al comparar tb tipo
     });
 
     it("considers zero to be falsy", function() {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBeTruthy();// Truthy solo compara y 0 es false
+      expect(0 === false).toBeFalsy();// Falsy al comparar tb el tipo
     });
 
     it("considers nulls to be falsy", function() {
@@ -53,16 +53,16 @@ describe("the JavaScript language", function() {
          result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBeTruthy();// no entra en el If => salta al else y es false
+      expect(null === false).toBeFalsy();//  null no pasa del if x=null 
+      expect(null == false).toBeFalsy();//  
     });
 
     it("knows the type of a function", function() {
       function x(){}
 
-      expect(typeof(x)).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof(x)).toBe('function'); 
+      expect(typeof(xxx)).toBe('undefined'); //funcion no definida 
     });
 
     it("has arrays and they can contain anything inside", function() {
@@ -71,51 +71,50 @@ describe("the JavaScript language", function() {
       arr[9] = 6;
       var matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
-      /*
-      expect(arr[1]).toEqual();
-      expect(arr[4]).toEqual();
-      expect(arr[6]).toEqual();
-      expect(arr[9]).toEqual();
-      expect(matrix[0][2]).toEqual();
-      */
+      expect(arr[1]).toEqual(2);
+      expect(arr[4]).toEqual(5);
+      expect(arr[6]).toEqual(undefined);//espacios vacios
+      expect(arr[9]).toEqual(6);
+      expect(matrix[0][2]).toEqual("c");
+      
     });
 
     it("may contain functions inside arrays", function() {
       var arr = [1,2, function(arg){ return 3 + arg;}];
 
-      //expect(arr[2](1)).toEqual();
+      expect(arr[2](1)).toEqual(4); //la posicion 2 es una funcion, se la pasa el valor 1 por arg y devuelve 3+1=4
     });
 
     it("concatenate arrays - well, kind of", function() {
       var a = [1,2,3];
       var b = [4,5,6];
 
-      //expect(a + b).toEqual();
+      expect(a + b).toEqual("1,2,34,5,6"); //un array con el array a+b pero el ultimo y primer numero juntos
     });
 
     it("joins arrays and strings", function() {
       var a = [1,2,3];
 
-      //expect ("1" + a).toEqual();
-      //expect(a + "1").toEqual();
+      expect ("1" + a).toEqual("11,2,3"); //se le "concatena" el 1 al primer elem del array
+      expect(a + "1").toEqual("1,2,31"); //idem pero al ultimo
     });
 
     it("joins arrays and other things", function() {
       var a = [1,2,3];
       var b = ['x', 'y', 'z'];
 
-      //expect(1 + a).toEqual();
-      //expect(a + 1).toEqual();
-      //expect(1 + b).toEqual();
-      //expect(true + a).toEqual();
+      expect(1 + a).toEqual("11,2,3");
+      expect(a + 1).toEqual("1,2,31");
+      expect(1 + b).toEqual("1x,y,z");
+      expect(true + a).toEqual("true1,2,3");
     });
 
     it("can't compare arrays", function() {
       var a = [1,2,3];
       var b = [1,2,3];
 
-      //expect(a == b).toBe.....();  // Truthy or Falsy
-      //expect(a === b).toBe.....(); // Truthy or Falsy
+      expect(a == b).toBeFalsy();  // 
+      expect(a === b).toBeFalsy(); //
     });
 
     it("is not the same to compare by value than by reference ", function() {
