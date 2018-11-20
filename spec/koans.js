@@ -436,6 +436,22 @@ describe("the JavaScript language", function() {
       expect(typeof(obj.points)).toEqual('undefined');
     });
 
+    it("may create objects also with the module pattern", function() {
+      function createObject(initialScore, color) {
+        return {
+          incrementScoreIn: function(point) {initialScore += point},
+          color: color,
+          points: function() {return initialScore},
+        }
+      }
+
+
+      var obj = createObject(5, 'red');
+      obj.incrementScoreIn(5);
+      expect(obj.color).toEqual('red');
+      expect(obj.points()).toEqual(10);
+    });
+
 
     it("can define constructors", function() {
       function Obj() {
