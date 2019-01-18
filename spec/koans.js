@@ -392,7 +392,7 @@ describe("the JavaScript language", function() {
         return a + b;
       }
 
-      expect(f.apply(f, [1,1])).toEqual(2);
+      expect(f.apply(f, [1, 1])).toEqual(2);
     });
 
     it("doesnt have a private scope inside blocks", function() {
@@ -401,8 +401,8 @@ describe("the JavaScript language", function() {
         j += i;
       }
 
-      //expect(i).toEqual();
-      //expect(j).toEqual();
+      expect(i).toEqual(5);
+      expect(j).toEqual(10);
     });
   });
 
@@ -426,19 +426,20 @@ describe("the JavaScript language", function() {
       obj.address = "palm tree";
 
       expect(obj.address).toEqual("palm tree");
-      expect(obj['address']).toEqual("palm tree");
-      expect(obj['name']).toEqual("bob");
+      expect(obj["address"]).toEqual("palm tree");
+      expect(obj["name"]).toEqual("bob");
     });
 
     it("may define complex objects", function() {
-      var user = {
-        address: { street: "sesame"},
-        friends: [{name: "triki"}]
-      };
       // write the contents of the obj to make the satisfy the expectations:
 
-      expect(user.address.street).toEqual('sesame');
-      expect(user.friends[0].name).toEqual('triki');
+      var user = {
+        address: { street: "sesame" },
+        friends: [{ name: "triki" }, { name: "dzlndk" }]
+      };
+
+      expect(user.address.street).toEqual("sesame");
+      expect(user.friends[0].name).toEqual("triki");
     });
 
     it("has a pattern called, the Module Pattern", function() {
@@ -457,22 +458,33 @@ describe("the JavaScript language", function() {
 
       var obj = createObject();
       obj.addPoint();
-
+      // 1 because of obj.addPoint() L161 ?
       expect(obj.score()).toEqual(1);
-      expect(typeof(obj.points)).toEqual("undefined");
+      expect(typeof obj.points).toEqual("undefined");
     });
 
     it("may create objects also with the module pattern", function() {
       function createObject(initialScore) {
         // write the code here
-      }
+        var points = 0;
 
-      /*
-      var obj = createObject(5, 'red');
+        return {
+          incrementScoreIn: function() {
+            return initialScore++;
+          }
+        };
+
+        return {
+          points: function(add) {
+            return add + initialScore;
+          }
+        };
+      }
+      var obj = createObject(5, "red");
       obj.incrementScoreIn(5);
-      expect(obj.color).toEqual('red');
-      expect(obj.points()).toEqual(10);
-      */
+
+      // expect(obj.color).toEqual("red");
+      // expect(obj.points()).toEqual(10);
     });
 
     it("can define constructors", function() {
@@ -500,7 +512,6 @@ describe("the JavaScript language", function() {
       Obj.someStaticMethod = function() {
         return 22;
       };
-
       expect(Obj.someStaticMethod()).toBe(22);
     });
 
@@ -531,8 +542,8 @@ describe("the JavaScript language", function() {
       }
 
       var instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe("bob");
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it("can create methods dynamically on an object instance", function() {
