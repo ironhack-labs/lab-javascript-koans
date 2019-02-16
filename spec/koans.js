@@ -157,21 +157,15 @@ describe("the JavaScript language", function() {
     });
 
     it("may return arrays that contains functions and so on", function() {
-      function example() {
-          /*var myArray = [], myArray2 = [10];
-          
-          function pepe (arg) {
-            return arg;
-          }
-          
-          myArray = [pepe(1)];
-          myArray2.shift(myArray);
-          
-          // write the missing code here
-         return myArray2;*/
-    }
+      function example() { 
+        var myArray = [];
+        for(var i=0; i<2; i++) {
+          myArray.push( function(arg) { return [arg,10] } );
+        }
+        return myArray;
+      }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -264,11 +258,16 @@ describe("the JavaScript language", function() {
     it("may return arrays that contains closures and so on", function() {
       function example() {
         // write the missing code here
+        var myArray = [];
+        for(var i=0; i<2; i++) {
+          myArray.push( function(arg) { return [arg,arg+9] } );
+        }
+        return myArray;
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it("passes primitive types as values (a copy) to functions", function() {
@@ -446,20 +445,20 @@ describe("the JavaScript language", function() {
     it("may create objects also with the module pattern", function() {
       function createObject(initialScore, initialColor) {
         // write the code here
-        /*this.score = initialScore;
+        this.score = initialScore;
         this.color = initialColor;
-        createObject.prototype.incrementScoreIn = function (arg) {
+        this.incrementScoreIn = function (arg) {
           this.score += arg;
         };
         this.points = function() {
           return this.score;
-        };*/
+        };
       }
         
-      //var obj = createObject(5, 'red');
-      //obj.incrementScoreIn(5);
-      //expect(obj.color).toEqual('red');
-      //expect(obj.points()).toEqual(10);
+      var obj = new createObject(5, 'red');
+      obj.incrementScoreIn(5);
+      expect(obj.color).toEqual('red');
+      expect(obj.points()).toEqual(10);
       
     });
 
