@@ -405,46 +405,50 @@ describe("the JavaScript language", function() {
     });
 
     it("may define complex objects", function() {
-      var user = {
-        address: {},
-        friend: [{name:''}]
-      };
+      var uuser;
       // write the contents of the obj to make the satisfy the expectations:
-      user.address.street="sesame";
-      user.friends[0].name="triki"
+      user = {
+        address: {
+          street: 'sesame',
+        },
+        friends: [{name: 'triki',}],
+      }
 
       expect(user.address.street).toEqual('sesame');
       expect(user.friends[0].name).toEqual('triki');
     });
 
-    it("has a pattern called, the Module Pattern", function() {
-      function createObject() {
-        var points = 0;
+      it("has a pattern called, the Module Pattern", function() {
+        function createObject() {
+          var points = 0;
 
-        return {
-          addPoint: function(){ ++points; },
-          score:    function(){ return points; }
-        };
-      }
+          return {
+            addPoint: function(){ ++points; },
+            score:    function(){ return points; }
+          };
+        }
 
-      var obj = createObject();
-      obj.addPoint();
+        var obj = createObject();
+        obj.addPoint();
 
-      expect(obj.score()).toEqual(1);
-      expect(typeof(obj.points)).toEqual('undefined');
-    });
+        expect(obj.score()).toEqual(1);
+        expect(typeof(obj.points)).toEqual('undefined');
+      });
 
     it("may create objects also with the module pattern", function() {
       function createObject(initialScore) {
-        // write the code here     
-        // var value = initialScore 
-        return {
-          incrementScoreIn: () =>{initialScore++},
-          points : () =>{incrementScoreIn}
-        }
+          var scoreIncrement = 0;
+          var scoreInitial = initialScore;
+          return {
+            color: arguments[1],
+            incrementScoreIn: function(goals) { scoreIncrement += goals; },
+            points: function() {
+              return scoreIncrement + scoreInitial;
+            },
+          }
       }
+
       var obj = createObject(5, 'red');
-      obj.color = 'red'
       obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
