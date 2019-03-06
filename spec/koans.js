@@ -429,20 +429,23 @@ it("can return closures as a function result", function() {
   });
 
   it("has a pattern called, the Module Pattern", function() {
-   //  function createObject() {
-   //    var points = 0;
+   
+  
+    function createObject() {
+      var points = 0;
 
-   //    return {
-   //      addPoint: function(){ ++points; },
-   //      score:    function(){ return points; }
-   //    };
-   //  }
+      return {
+        addPoint: function(){ ++points; },
+        score:    function(){ return points; }
+      };
+    }
 
-   //  var obj = createObject();
-   //  obj.addPoint();
+    var obj = createObject();
+    obj.addPoint();
 
-   //  expect(obj.score()).toEqual();
-   //  expect(typeof(obj.points)).toEqual();
+    expect(obj.score()).toEqual(1);
+    expect(typeof(obj.points)).toEqual('undefined');
+
   });
 
   it("may create objects also with the module pattern", function() {
@@ -508,7 +511,7 @@ Obj.prototype.theName = function() {
 
   it("can define a factory", function() {
     function obj() {
-      var self = {};
+      var self = {}
       var name = 'bob';
 
       self.theName = function() {
@@ -547,7 +550,7 @@ Obj.prototype.theName = function() {
         Parent.call(this); // constructor stealing
         this.name = 'child';
       }
-      Child.prototype = Object.create(Parent.prototype); // prototype chaining
+      Child.prototype = Object.create(Parent.prototype); 
 
       var child = new Child();
       expect(child.someMethod()).toEqual(10);
@@ -617,7 +620,7 @@ Obj.prototype.theName = function() {
  });
 
  context("has ways to simulate classes", function() {
-   // "Class"
+  
    function Cat() {
      this.kilos = 1;
      this.feed = function() {
@@ -628,9 +631,7 @@ Obj.prototype.theName = function() {
      };
    }
 
-   //////////////////////////////////////
-   // "Class"
-   //////////////////////////////////////
+
    function Lion(energy) {
      Cat.call(this);
      this.energy = energy || 100;
