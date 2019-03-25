@@ -70,13 +70,11 @@ describe('the JavaScript language', function() {
 			arr[9] = 6;
 			var matrix = [ [ 'a', 'b', 'c' ], [ 'd', 'e', 'f' ], [ 'g', 7, 8 ] ];
 
-			/*
-      expect(arr[1]).toEqual();
-      expect(arr[4]).toEqual();
-      expect(arr[6]).toEqual();
-      expect(arr[9]).toEqual();
-      expect(matrix[0][2]).toEqual();
-      */
+			expect(arr[1]).toEqual(2);
+			expect(arr[4]).toEqual(5);
+			expect(arr[6]).toEqual();
+			expect(arr[9]).toEqual(6);
+			expect(matrix[0][2]).toEqual('c');
 		});
 
 		it('may contain functions inside arrays', function() {
