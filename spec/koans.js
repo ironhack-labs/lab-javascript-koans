@@ -160,10 +160,14 @@ describe('the JavaScript language', function() {
 
 		it('may return arrays that contains functions and so on', function() {
 			function example() {
-				// write the missing code here
+				return [
+					function(number) {
+						return [ 0 * number, 10 * number ];
+					}
+				];
 			}
 
-			//expect(example()[0](1)[1]).toEqual(10);
+			expect(example()[0](1)[1]).toEqual(10);
 		});
 
 		it("doesn't care about the declaration order when they are named", function() {
@@ -171,7 +175,7 @@ describe('the JavaScript language', function() {
 				return exampleB(1);
 			}
 
-			//expect(exampleA()).toEqual();
+			expect(exampleA()).toEqual(1);
 
 			function exampleB(arg1) {
 				return arg1;
