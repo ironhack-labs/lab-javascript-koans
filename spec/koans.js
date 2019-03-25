@@ -183,15 +183,14 @@ describe('the JavaScript language', function() {
 		});
 
 		it('matters, the declaration order when they are anonymous', function() {
+			var exampleB = function(arg1) {
+				return arg1;
+			};
 			var exampleA = function() {
 				return exampleB(1);
 			};
 
-			//expect(exampleA()).toEqual(1);
-
-			var exampleB = function(arg1) {
-				return arg1;
-			};
+			expect(exampleA()).toEqual(1);
 		});
 
 		it('can use optional parameters', function() {
@@ -202,16 +201,16 @@ describe('the JavaScript language', function() {
 				return a + b;
 			}
 
-			//expect(example(1,1,1)).toBe();
-			//expect(example(1,1)).toBe();
+			expect(example(1, 1, 1)).toBe(3);
+			expect(example(1, 1)).toBe(2);
 		});
 
 		it('anonymous functions are anonymous', function() {
 			var x = function z() {
 				return 1;
 			};
-			//expect(typeof(z)).toEqual();
-			//expect(x()).toEqual();
+			expect(typeof z).toEqual('undefined');
+			expect(x()).toEqual(1);
 		});
 
 		it('can create closures with free variables', function() {
@@ -225,7 +224,7 @@ describe('the JavaScript language', function() {
 				return internal();
 			}
 
-			//expect(external()).toBe();
+			expect(external()).toBe(2);
 		});
 
 		it('can create closures with several free variables', function() {
@@ -239,7 +238,7 @@ describe('the JavaScript language', function() {
 				}
 			}
 
-			//expect(external()).toBe(6);
+			expect(external()).toBe(undefined);
 		});
 
 		it('defines a pure function when there are no free variables', function() {
@@ -255,7 +254,7 @@ describe('the JavaScript language', function() {
 				return internal(4, 4);
 			}
 
-			//expect(external()).toBe();
+			expect(external()).toBe(9);
 		});
 
 		it('may return arrays that contains closures and so on', function() {
@@ -278,13 +277,13 @@ describe('the JavaScript language', function() {
 			var z = true;
 
 			example(x);
-			//expect(x).toEqual();
+			expect(x).toEqual(1);
 
 			example(y);
-			//expect(y).toEqual();
+			expect(y).toEqual('example');
 
 			example(z);
-			//expect(z).toEqual();
+			expect(z).toEqual(true);
 		});
 
 		it('passes arrays by reference', function() {
@@ -295,7 +294,7 @@ describe('the JavaScript language', function() {
 			var x = [ 1, 2, 3 ];
 
 			example(x);
-			//expect(x).toEqual();
+			expect(x).toEqual([ 100, 2, 3 ]);
 		});
 
 		it('passes objects by reference', function() {
@@ -306,7 +305,7 @@ describe('the JavaScript language', function() {
 			var x = { property: 'cool!' };
 
 			example(x);
-			//expect(x).toEqual();
+			expect(x).toEqual({ property: 'test' });
 		});
 
 		it('may return a function as the result of invoking a function', function() {
