@@ -158,10 +158,10 @@ describe("the JavaScript language", function() {
 
     it("may return arrays that contains functions and so on", function() {
       function example() {
-        let x = [[10,[10,[10],[10], 10]]]
+        return [(sum)=>{return [,sum +9]}]
       }
 
-      // expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", function() {
@@ -180,12 +180,12 @@ describe("the JavaScript language", function() {
       var exampleA = function() {
           return exampleB(1);
       };
-
-      // expect(exampleA()).toEqual(1);
-
+      
+      
       var exampleB = function(arg1) {
-          return arg1;
+        return arg1;
       };
+      expect(exampleA()).toEqual(1);
     });
 
     it("can use optional parameters", function() {
@@ -252,12 +252,14 @@ describe("the JavaScript language", function() {
 
     it("may return arrays that contains closures and so on", function() {
       function example() {
-        // write the missing code here
-      }
+        return [(num) => [, num + 9]]
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+
+      }
+      // Espera regresar un arrelgo, y ese arreglo tiene una funcion en la posicion 0, y espera que el resultado sea un arreglo y que lo que esta en el primer elemento de ese arreglo 
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it("passes primitive types as values (a copy) to functions", function() {
@@ -438,21 +440,23 @@ describe("the JavaScript language", function() {
     });
 
     it("may create objects also with the module pattern", function() {
-      function createObject(initialScore) {
-        // let initialScore = (color,points) => {
-        //   this.color = color
-        //   this.points = points
-        //     incrementScoreIn = (incremento)=>{
-        //       this.points += incremento
-        //     }
-        //   }
-      }
-
+      function createObject(initialScore, color) {
+        return {
+          score: initialScore,
+          color: color,
+          incrementScoreIn: function(num){
+            this.score += num
+          },
+          points:function(){
+            return this.score
+          }
+        }
+    }
       
-      // var obj = createObject(5, 'red');
-      // obj.incrementScoreIn(5);
-      // expect(obj.color).toEqual('red');
-      // expect(obj.points()).toEqual(10);
+      var obj = createObject(5, 'red');
+      obj.incrementScoreIn(5);
+      expect(obj.color).toEqual('red');
+      expect(obj.points()).toEqual(10);
       
     });
 
@@ -685,7 +689,7 @@ describe("the JavaScript language", function() {
 
         bound();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it("works different when function is attached to other object", function() {
