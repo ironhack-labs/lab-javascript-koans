@@ -252,15 +252,14 @@ describe("the JavaScript language", function() {
 
     it("may return arrays that contains closures and so on", function() {
       function example() {
-        return [() => [0, 10]]
+        let y = 9;
+        return [(x) => [x, x + y]]
       }
 
       expect(example()[0](1)[1]).toEqual(10);
-      expect(example()[0](2)[1]).toEqual(10);
-      expect(example()[0](3)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
-  // l259 - pq?
-  // argumento não influencia o retorno?
 
     it("passes primitive types as values (a copy) to functions", function() {
       function example(arg) {
@@ -618,19 +617,6 @@ describe("the JavaScript language", function() {
       expect(generate()[1]()).toEqual(5);
     });
   });
-  // l605 - pq?
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
 
   context("has ways to simulate classes", function() {
     // "Class"
