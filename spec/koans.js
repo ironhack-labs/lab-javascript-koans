@@ -434,13 +434,12 @@ describe("the JavaScript language", function() {
     });
 
     it("may create objects also with the module pattern", function() {
-      function createObject(initialScore) {
-        var points = 5;
-        var color = '';
+      function createObject(initialScore, colorArg) {
+        var points = initialScore;
         return {
           incrementScoreIn: function(n){return points += n},
           points: function() {return points},
-          color: 'red',
+          color: colorArg,
         }
       }
 
@@ -510,19 +509,6 @@ describe("the JavaScript language", function() {
       var instance = obj();
       expect(instance.theName()).toBe('bob');
       expect(instance.theName).not.toBe(obj().theName); 
-      // l511 - pq?
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
     });
 
     it("can create methods dynamically on an object instance", function() {
