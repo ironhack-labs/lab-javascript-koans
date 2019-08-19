@@ -464,11 +464,12 @@ describe('the JavaScript language', function () {
         // write the code here
         return {
           color: color,
-          incrementScoreIn: function () {
-            console.log('I am useless')
+          score: initialScore,
+          incrementScoreIn: function (increment) {
+            this.score += increment
           },
           points: function () {
-            return initialScore * 2
+            return this.score
           }
         }
       }
