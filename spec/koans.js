@@ -471,7 +471,7 @@ describe("the JavaScript language", function() {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      expect(Obj.someStaticMethod()).toBe(22);
     });
 
     it("can have have methods in the prototype", function() {
