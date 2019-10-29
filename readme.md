@@ -62,7 +62,7 @@ function add(num1, num2) {
 
 If we pass as parameters to the `add` function the numbers 1 and 2, we should get a 3 as a result. So we are calling the `add` function with two numbers, and we expect from the function to return us the sum of those numbers.
 
-If we get 3 as a result, the test will pass. If we get any other result, the test will fail. In pseudocode, it would be something like this:
+If we get 3 as a result, the test will pass. If we get any other result, the test will fail. In pseudo code, it would be something like this:
 
 ```
 given the parameters 1 and 2 to the add function, we expect to get 3 as a result
@@ -120,11 +120,27 @@ So, the test `expect(1 == "1").toBeTruthy()` will pass. There is a huge list of 
 
 We will see there are many matchers we can use. Right now, we just need the ones described above to do the Koans.
 
-## Requirements
+## Exercise
+### Requirements
 
-We need to execute our tests. First of all, fork and clone this repo into your Github account. Once you are done, open the file `SpecRunner.html` with your browser.
+- Fork this repo
+- Clone this repo
 
-In the beginning, you will see all the tests in green. This is because the tests we have to implement are commented.
+### Submission
+
+Upon completion, run the following commands:
+```bash
+$ git add .
+$ git commit -m "done"
+$ git push origin master
+```
+Create Pull Request so your TAs can check up your work.
+
+### Instructions
+
+We need to execute our tests. After you forked and cloned this repo, open the file `SpecRunner.html` in your browser.
+
+In the beginning, you will see all the tests in green. This is because only the tests that are passing are un-commented. The tests we have to implement are commented out.
 
 All the tests are located inside the `spec` folder. Open the `koans.js` file and uncomment the following line:
 
