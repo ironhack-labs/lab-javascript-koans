@@ -1,6 +1,6 @@
-![Ironhack Logo](https://i.imgur.com/1QgrNNw.png)
+![logo_ironhack_blue 7](https://user-images.githubusercontent.com/23629340/40541063-a07a0a8a-601a-11e8-91b5-2f13e4e6b441.png)
 
-# JS | Koans Lab
+# LAB | JS Koans
 
 ## Koans
 
@@ -8,17 +8,17 @@
 
 ```
 Two monks were arguing on top of a hill about a big
-flag in the top of a temple. One monk reflected: 
+flag in the top of a temple. One monk reflected:
 
-> "The flag is moving" 
+> "The flag is moving"
 
 The other, thought for a while and said:
 
-> "The wind is moving.". 
+> "The wind is moving.".
 
 The sixth patriarch happened to be passing by.
 
-He told them: 
+He told them:
 
 > "Not the wind, not the flag; The mind is moving."
 ```
@@ -55,7 +55,7 @@ Given a function with some parameters, we expect to get a result. If the result 
 Let's suppose we have the following function:
 
 ```javascript
-function add (num1, num2) {
+function add(num1, num2) {
   // ...
 }
 ```
@@ -79,11 +79,11 @@ This is the anatomy of a test. We have the knowledge to understand what is a tes
 To understand better what are the parts of the test in Jasmine, we will walk through an example. This is the first test we will find in our Koans:
 
 ```javascript
-describe("the JavaScript language", function () {
-  describe("has different types and operators", function() {
-    it("considers numbers to be equal to their string representation", function() {
-      expect(1 == "1").toBeTruthy();
-      expect(1 != "1").toBeFalsy();
+describe('the JavaScript language', () => {
+  describe('has different types and operators', () => {
+    it('considers numbers to be equal to their string representation', () => {
+      expect(1 == '1').toBeTruthy();
+      expect(1 != '1').toBeFalsy();
     });
   });
 });
@@ -129,7 +129,7 @@ At the beginning you will see all the tests in green. This is because the tests 
 All the tests are located inside the `spec` folder. Open the `koans.js` file and uncomment the following line:
 
 ```javascript
-it("surprises me, NaN is not comparable with NaN", function() {
+it("surprises me, NaN is not comparable with NaN", () => { {
   expect(5 / "a").toEqual(5 / "a");
   //expect(typeof(NaN)).toEqual();
   expect(isNaN(5 / "a")).toBeTruthy();
