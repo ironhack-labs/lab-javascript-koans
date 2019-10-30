@@ -355,7 +355,7 @@ describe('the JavaScript language', () => {
         return arg(2, 2) + 1;
       }
 
-      //expect(example(add)).toEqual();
+      expect(example(add)).toEqual(5);
     });
 
     it('may have functions as the input and the output', () => {
@@ -369,7 +369,7 @@ describe('the JavaScript language', () => {
         return 1;
       });
 
-      //expect(f(2)).toBe();
+      expect(f(2)).toBe(3);
     });
 
     it("can invoke functions indirectly using the special 'call'", () => {
@@ -377,7 +377,7 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(f.call(f,1,1)).toEqual();
+      expect(f.call(f, 1, 1)).toEqual(2);
     });
 
     it("can invoke functions indirectly using the special 'apply'", () => {
@@ -385,17 +385,17 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(f.apply(f, [1,1])).toEqual();
+      expect(f.apply(f, [1, 1])).toEqual(2);
     });
 
     it("doesn't have a private scope inside blocks", () => {
       let j = 0;
-      for (let i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         j += i;
       }
 
-      //expect(i).toEqual();
-      //expect(j).toEqual();
+      expect(i).toEqual(5);
+      expect(j).toEqual(10);
     });
   });
 
