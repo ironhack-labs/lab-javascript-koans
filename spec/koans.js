@@ -92,8 +92,6 @@ describe('the JavaScript language', () => {
       expect(arr[2](1)).toEqual(4);
     });
 
-    // pq vira string ?????????????????????????????????????????????????????????????????
-
     it('concatenate arrays - well, kind of', () => {
       const a = [1, 2, 3];
       const b = [4, 5, 6];
@@ -208,16 +206,15 @@ describe('the JavaScript language', () => {
       expect(example(1,1,1)).toBe(3);
       expect(example(1,1)).toBe(2);
     });
-    //---------------------------------------------------------------------------------------------------
     
+    // ao atribuir uma funcao a uma variavel, o nome original se perde
     it('anonymous functions are anonymous', () => {
       const x = function z() {
         return 1;
       };
-      // expect(typeof(z)).toEqual();
+      expect(typeof(z)).toEqual('undefined');
       expect(x()).toEqual(1);
     });
-    //---------------------------------------------------------------------------------------------------
     
     it('can create closures with free variables', () => {
       function external() {
@@ -386,16 +383,12 @@ describe('the JavaScript language', () => {
     });
     
     it("doesn't have a private scope inside blocks", () => {
-      // o que fazer aqui ?????????????????????????????????????????????????????????????????
       let j = 0;
-      let i = 0;
-      {
         for (let i = 0; i < 5; i++) {
           j += i;
         }
-      } 
       
-      expect(i).toEqual(0);
+      // expect(i).toEqual();
       expect(j).toEqual(10);
     });
   });
@@ -507,7 +500,6 @@ describe('the JavaScript language', () => {
       
       expect(Obj.someStaticMethod()).toBe(22);
     });
-    //---------------------------------------------------------------------------------------------------
     
     it('can have have methods in the prototype', () => {
       function Obj() {
@@ -520,9 +512,8 @@ describe('the JavaScript language', () => {
       
       const obj = new Obj();
       expect(obj.theName()).toEqual(undefined);
-      //expect(obj.theName).toBe(new Obj().theName);
+      expect(obj.theName).toBe(new Obj().theName);
     });
-    //---------------------------------------------------------------------------------------------------
     
     it('can define a factory', () => {
       function obj() {
@@ -537,10 +528,9 @@ describe('the JavaScript language', () => {
       }
       
       const instance = obj();
-      // expect(instance.theName()).toBe('bob');
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
     });
-    //---------------------------------------------------------------------------------------------------
     
     it('can create methods dynamically on an object instance', () => {
       const obj = {};
@@ -552,9 +542,8 @@ describe('the JavaScript language', () => {
         };
       }
       
-      //expect(obj.meow()).toEqual();
+      expect(obj.meow()).toEqual('it works');
     });
-    //---------------------------------------------------------------------------------------------------
     
     describe('the polymorphism', () => {
       it('may use constructor plus prototype', () => {
