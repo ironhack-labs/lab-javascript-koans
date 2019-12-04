@@ -441,6 +441,7 @@ describe('the JavaScript language', () => {
       expect(user.friends[0].name).toEqual('triki');
     });
 
+    // it is cool because we're creating an objects with a set property value. There is a method just to do it... i guess..
     it('has a pattern called, the Module Pattern', () => {
       function createObject() {
         let points = 0;
@@ -465,20 +466,18 @@ describe('the JavaScript language', () => {
     it('may create objects also with the module pattern', () => {
       function createObject(initialScore, color) {
         // write the code here
-        return {
-          color: this.color;
-          incrementScoreIn() {}
-        }
+
       }
 
       
-      const obj = createObject(5, 'red');
-      obj.incrementScoreIn(5);
-      expect(obj.color).toEqual('red');
-      expect(obj.points()).toEqual(10);
+      // const obj = createObject(5, 'red');
+      // obj.incrementScoreIn(5);
+      // expect(obj.color).toEqual('red');
+      // expect(obj.points()).toEqual(10);
       
     });
 
+    // e um constructor, mas o nome ja vem salvo. Por que?
     it('can define constructors', () => {
       function Obj() {
         const name = 'bob';
@@ -489,7 +488,7 @@ describe('the JavaScript language', () => {
       }
 
       const obj = new Obj();
-      //expect(obj.theName()).toBe();
+      expect(obj.theName()).toBe('bob');
     });
 
     it("may contain 'static' methods", () => {
@@ -505,7 +504,7 @@ describe('the JavaScript language', () => {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      expect(Obj.someStaticMethod()).toBe(22);
     });
 
     it('can have have methods in the prototype', () => {
@@ -516,10 +515,10 @@ describe('the JavaScript language', () => {
       Obj.prototype.theName = function() {
         return this.name;
       };
-
+// nao sei se entendi
       const obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
+      expect(obj.theName()).toEqual(undefined);
+      expect(obj.theName).toBe(new Obj().theName);
     });
 
     it('can define a factory', () => {
@@ -535,8 +534,8 @@ describe('the JavaScript language', () => {
       }
 
       const instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it('can create methods dynamically on an object instance', () => {
@@ -549,7 +548,7 @@ describe('the JavaScript language', () => {
         };
       }
 
-      //expect(obj.meow()).toEqual();
+      expect(obj.meow()).toEqual();
     });
 
     describe('the polymorphism', () => {
