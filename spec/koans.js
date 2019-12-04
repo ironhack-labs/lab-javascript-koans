@@ -464,10 +464,12 @@ describe('the JavaScript language', () => {
         let score = initialScore;
         return {
           color: 'red',
-          incrementScoreIn: (num) => score += num,
+          incrementScoreIn: function (num) {
+            return score += num;
           },
-          points: () => score,
-          },
+          points: function () {
+            return score;
+          }
         }
       }
       
@@ -517,7 +519,7 @@ describe('the JavaScript language', () => {
       };
       
       const obj = new Obj();
-      expect(obj.theName()).toEqual('bob');
+      expect(obj.theName()).toEqual(undefined);
       //expect(obj.theName).toBe(new Obj().theName);
     });
     //---------------------------------------------------------------------------------------------------
