@@ -158,11 +158,16 @@ describe('the JavaScript language', () => {
     });
 
     it('may return arrays that contains functions and so on', () => { // NÃO SEI!! 
-    //   function example(num) {
-    //     return [function(){}]
-    //   }
+      function example() {
+        return [
+          function(num){
+          return [num, num + 9]
+        },
+        'hahaha',
+      ]
+      }
 
-    //   expect(example()[0](1)[1]).toEqual(10); 
+      expect(example()[0](1)[1]).toEqual(10); 
     });
 
     it("doesn't care about the declaration order when they are named", () => {
@@ -213,7 +218,7 @@ describe('the JavaScript language', () => {
       function external() { //O EXTERNAL SEMPRE VAI SOMAR AS OUTRAS VARIAVEIS (INTERNAL)?
         const a = 1;
 
-        function internal() {
+        function internal() { 
           return a + 1;
         }
 
@@ -228,13 +233,14 @@ describe('the JavaScript language', () => {
         const a = 1,
           b = 2;
 
+          
         function internal() {
           const c = 3;
           return a + b + c;
         }
       }
 
-      expect(external(6)).toBe(undefined); //????
+      expect(external()).toBe(undefined); //????
     });
 
     it('defines a pure function when there are no free variables', () => {
