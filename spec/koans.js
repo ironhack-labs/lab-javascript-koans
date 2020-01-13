@@ -205,16 +205,16 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3); //1 es truthy
+      expect(example(1,1)).toBe(2); // ultimo argumento es null osea falsey
     });
 
     it('anonymous functions are anonymous', () => {
       const x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      expect(typeof(z)).toEqual('undefined'); //porque z esta dentro de x, y no enceuntra z por ser anonima, maybe?
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -228,7 +228,7 @@ describe('the JavaScript language', () => {
         return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(2);
     });
 
     it('can create closures with several free variables', () => {
@@ -240,14 +240,15 @@ describe('the JavaScript language', () => {
           const c = 3;
           return a + b + c;
         }
+        return internal()
       }
 
-      //expect(external()).toBe(6);
+      expect(external()).toBe(6);
     });
 
     it('defines a pure function when there are no free variables', () => {
       function external() {
-        const a = 1,
+        const a = 1, //ignora esto porque toma en cuenta los argumentos.
           b = 2;
 
         function internal(a, b) {
@@ -258,17 +259,18 @@ describe('the JavaScript language', () => {
         return internal(4, 4);
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(9);
     });
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
+        return [(arg) => [0,arg+9]]
+
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
@@ -281,13 +283,13 @@ describe('the JavaScript language', () => {
       const z = true;
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual(1);
 
       example(y);
-      //expect(y).toEqual();
+      expect(y).toEqual('example');
 
       example(z);
-      //expect(z).toEqual();
+      expect(z).toEqual(true);
     });
 
     it('passes arrays by reference', () => {
@@ -298,7 +300,7 @@ describe('the JavaScript language', () => {
       const x = [1, 2, 3];
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual([100,2,3]);
     });
 
     it('passes objects by reference', () => {
@@ -309,7 +311,7 @@ describe('the JavaScript language', () => {
       const x = { property: 'cool!' };
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual(Object({property: 'test'})); //AQUI QUE PEZ?, tienes que escribir literal el objeto con el parametro?
     });
 
     it('may return a function as the result of invoking a function', () => {
@@ -321,9 +323,9 @@ describe('the JavaScript language', () => {
         return add;
       }
 
-      //expect(example()(1,2)).toEqual();
-      const f = example();
-      //expect(f(2,2)).toEqual();
+      expect(example()(1,2)).toEqual(3);
+      const f = example(); // f=add => add(2,2) => f(2,2)
+      expect(f(2,2)).toEqual(4); 
     });
 
     it('can return closures as a function result', () => {
@@ -335,11 +337,11 @@ describe('the JavaScript language', () => {
 
       const f = plus(5);
 
-      //expect(f(3)).toBe();
+      expect(f(3)).toBe(8);
     });
 
 
-  //AQUI ME QUEDO YO
+
 
     it('can have functions that receive other functions as arguments', () => {
       function add(a, b) {
@@ -449,15 +451,14 @@ describe('the JavaScript language', () => {
 
     it('may create objects also with the module pattern', () => {
       function createObject(initialScore) {
-        // write the code here
+        return Object.create
       }
-
-      /*
       const obj = createObject(5, 'red');
       obj.incrementScoreIn(5);
+      
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
-      */
+
     });
 
     it('can define constructors', () => {
