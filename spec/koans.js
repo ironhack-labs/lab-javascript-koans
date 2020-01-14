@@ -340,393 +340,320 @@ describe('the JavaScript language', () => {
       expect(f(3)).toBe(8);
     });
 
-
-
-
     it('can have functions that receive other functions as arguments', () => {
       function add(a, b) {
-        return a + b;
+          return a + b;
       }
-
       function example(arg) {
-        return arg(2, 2) + 1;
+          return arg(2, 2) + 1;
       }
-
-      //expect(example(add)).toEqual();
-    });
-
-    it('may have functions as the input and the output', () => {
-      function plus(originalFunction) {
-        return function(arg1) {
-          return originalFunction() + arg1;
-        };
-      }
-
-      const f = plus(function() {
-        return 1;
-      });
-
-      //expect(f(2)).toBe();
-    });
-
-    it("can invoke functions indirectly using the special 'call'", () => {
-      function f(a, b) {
-        return a + b;
-      }
-
-      //expect(f.call(f,1,1)).toEqual();
-    });
-
-    it("can invoke functions indirectly using the special 'apply'", () => {
-      function f(a, b) {
-        return a + b;
-      }
-
-      //expect(f.apply(f, [1,1])).toEqual();
-    });
-
-    it("doesn't have a private scope inside blocks", () => {
-      let j = 0;
-      for (let i = 0; i < 5; i++) {
-        j += i;
-      }
-
-      //expect(i).toEqual();
-      //expect(j).toEqual();
-    });
+      expect(example(add)).toBeTruthy();
   });
-
-  describe('has multiple ways to define and create objects', () => {
-    it('can define object literals', () => {
+  it('may have functions as the input and the output', () => {
+      function plus(originalFunction) {
+          return function(arg1) {
+              return originalFunction() + arg1;
+          };
+      }
+      const f = plus(function() {
+          return 1;
+      });
+      expect(f(2)).toBe(3);
+  });
+  it("can invoke functions indirectly using the special 'call'", () => {
+      function f(a, b) {
+          return a + b;
+      }
+      expect(f.call(f, 1, 1)).toEqual(2);
+  });
+  it("can invoke functions indirectly using the special 'apply'", () => {
+      function f(a, b) {
+          return a + b;
+      }
+      expect(f.apply(f, [1, 1])).toEqual(2);
+  });
+  it("doesn't have a private scope inside blocks", () => {
+      let j = 0;
+      for (var i = 0; i < 5; i++) {
+          j += i;
+      }
+      expect(i).toEqual(5);
+      expect(j).toEqual(10);
+  });
+});
+describe('has multiple ways to define and create objects', () => {
+  it('can define object literals', () => {
       const obj = {
-        name: 'bob',
-        theName: function() {
-          return this.name;
-        }
+          name: 'bob',
+          theName: function() {
+              return this.name;
+          }
       };
-
-      //expect(obj.theName()).toBe();
-    });
-
-    it('can create properties dynamically', () => {
+      expect(obj.theName()).toBe('bob');
+  });
+  it('can create properties dynamically', () => {
       const obj = {
-        name: 'bob',
-        surname: 'sponge'
+          name: 'bob',
+          surname: 'sponge'
       };
       obj.address = 'palm tree';
-
-      //expect(obj.address).toEqual();
-      //expect(obj['address']).toEqual();
-      //expect(obj['name']).toEqual();
-    });
-
-    it('may define complex objects', () => {
-      let user;
-      // write the contents of the obj to make the satisfy the expectations:
-
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
-    });
-
-    it('has a pattern called, the Module Pattern', () => {
-      function createObject() {
-        let points = 0;
-
-        return {
-          addPoint: function() {
-            ++points;
+      expect(obj.address).toEqual('palm tree');
+      expect(obj['address']).toEqual('palm tree');
+      expect(obj['name']).toEqual('bob');
+  });
+  it('may define complex objects', () => {
+      let user = {
+          address: {
+              street: 'sesame'
           },
-          score: function() {
-            return points;
-          }
-        };
+          friends: [{ name: 'triki' }]
+      };
+      // write the contents of the obj to make the satisfy the expectations:
+      expect(user.address.street).toEqual('sesame');
+      expect(user.friends[0].name).toEqual('triki');
+  });
+  it('has a pattern called, the Module Pattern', () => {
+      function createObject() {
+          let points = 0;
+          return {
+              addPoint: function() {
+                  ++points;
+              },
+              score: function() {
+                  return points;
+              }
+          };
       }
-
       const obj = createObject();
       obj.addPoint();
-
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
-    });
-
-    it('may create objects also with the module pattern', () => {
-      function createObject(initialScore) {
-        return Object.create
+      expect(obj.score()).toEqual(1);
+      expect(typeof(obj.points)).toEqual('undefined');
+  });
+  it('may create objects also with the module pattern', () => {
+      function createObject(initialScore, color) {
+          // write the code here
+          this.points = () => this.incrementScoreIn(initialScore)
+          this.incrementScoreIn = (score) => Number(score + 5)
+          this.color = color;
       }
-      const obj = createObject(5, 'red');
-      obj.incrementScoreIn(5);
-      
+      const obj = new createObject(5, 'red');
+      return obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
-
-    });
-
-    it('can define constructors', () => {
+  });
+  it('can define constructors', () => {
       function Obj() {
-        const name = 'bob';
-
-        this.theName = function() {
-          return name;
-        };
+          const name = 'bob';
+          this.theName = function() {
+              return name;
+          };
       }
-
       const obj = new Obj();
-      //expect(obj.theName()).toBe();
-    });
-
-    it("may contain 'static' methods", () => {
+      expect(obj.theName()).toBe('bob');
+  });
+  it("may contain 'static' methods", () => {
       function Obj() {
-        const name = 'bob';
-
-        this.theName = function() {
-          return name;
-        };
+          const name = 'bob';
+          this.theName = function() {
+              return name;
+          };
       }
-
       Obj.someStaticMethod = function() {
-        return 22;
+          return 22;
       };
-
-      //expect(Obj.someStaticMethod()).toBe();
-    });
-
-    it('can have have methods in the prototype', () => {
+      expect(Obj.someStaticMethod()).toBe(22);
+  });
+  it('can have have methods in the prototype', () => {
       function Obj() {
-        const name = 'bob';
+          const name = 'bob';
       }
-
       Obj.prototype.theName = function() {
-        return this.name;
+          return this.name;
       };
-
       const obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
-    });
-
-    it('can define a factory', () => {
+      expect(obj.theName()).toEqual(undefined);
+      expect(obj.theName).toBe(new Obj().theName);
+  });
+  it('can define a factory', () => {
       function obj() {
-        const self = {};
-        const name = 'bob';
-
-        self.theName = function() {
-          return name;
-        };
-
-        return self;
-      }
-
-      const instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
-    });
-
-    it('can create methods dynamically on an object instance', () => {
-      const obj = {};
-      const methodNames = ['meow', 'jump'];
-
-      for (let i = 0; i < methodNames.length; i++) {
-        obj[[methodNames[i]]] = function() {
-          return 'it works';
-        };
-      }
-
-      //expect(obj.meow()).toEqual();
-    });
-
-    describe('the polymorphism', () => {
-      it('may use constructor plus prototype', () => {
-        function Parent() {
-          this.name = 'parent';
-        }
-        Parent.prototype.someMethod = function() {
-          return 10;
-        };
-
-        function Child() {
-          Parent.call(this); // constructor stealing
-          this.name = 'child';
-        }
-        Child.prototype = Object.create(Parent.prototype); // prototype chaining
-
-        const child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
-      });
-
-      it('may use the functional inheritance', () => {
-        function parent() {
-          const name = 'parent';
           const self = {};
-          self.someMethod = function() {
-            return 10;
+          const name = 'bob';
+          self.theName = function() {
+              return name;
           };
           return self;
-        }
-
-        function child() {
-          const name = 'child';
-          const self = parent();
-          return self;
-        }
-
-        const instance = child();
-        //expect(instance.someMethod()).toBe();
-      });
-    });
-  });
-
-  describe('commons patterns with functions and behaviors', () => {
-    it('can invoke functions immediately to take advantage of scopes', () => {
-      const myNamespace = {};
-
-      (function(theNamespace) {
-        let counter = 0;
-
-        theNamespace.addOne = function() {
-          counter++;
-        };
-
-        theNamespace.giveMeTheCount = function() {
-          return counter;
-        };
-      })(myNamespace);
-
-      myNamespace.addOne();
-      myNamespace.addOne();
-
-      //expect(myNamespace.giveMeTheCount()).toBe();
-    });
-
-    it("hoists variables the way you probably don't expect", () => {
-      function generate() {
-        const functions = [];
-        for (let i = 0; i < 5; i++) {
-          functions.push(function() {
-            return i;
-          });
-        }
-        return functions;
       }
-
-      //expect(generate()[0]()).toEqual();
-      //expect(generate()[1]()).toEqual();
-    });
+      const instance = obj();
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
   });
-
-  context('has ways to simulate classes', () => {
-    // "Class"
-    function Cat() {
+  it('can create methods dynamically on an object instance', () => {
+      const obj = {};
+      const methodNames = ['meow', 'jump'];
+      for (let i = 0; i < methodNames.length; i++) {
+          obj[[methodNames[i]]] = function() {
+              return 'it works';
+          };
+      }
+      expect(obj.meow()).toEqual('it works');
+  });
+  describe('the polymorphism', () => {
+      it('may use constructor plus prototype', () => {
+          function Parent() {
+              this.name = 'parent';
+          }
+          Parent.prototype.someMethod = function() {
+              return 10;
+          };
+          function Child() {
+              Parent.call(this); // constructor stealing
+              this.name = 'child';
+          }
+          Child.prototype = Object.create(Parent.prototype); // prototype chaining
+          const child = new Child();
+          expect(child.someMethod()).toEqual(10);
+          expect(child.name).toEqual('child');
+      });
+      it('may use the functional inheritance', () => {
+          function parent() {
+              const name = 'parent';
+              const self = {};
+              self.someMethod = function() {
+                  return 10;
+              };
+              return self;
+          }
+          function child() {
+              const name = 'child';
+              const self = parent();
+              return self;
+          }
+          const instance = child();
+          expect(instance.someMethod()).toBe(10);
+      });
+  });
+});
+describe('commons patterns with functions and behaviors', () => {
+  it('can invoke functions immediately to take advantage of scopes', () => {
+      const myNamespace = {};
+      (function(theNamespace) {
+          let counter = 0;
+          theNamespace.addOne = function() {
+              counter++;
+          };
+          theNamespace.giveMeTheCount = function() {
+              return counter;
+          };
+      })(myNamespace);
+      myNamespace.addOne();
+      myNamespace.addOne();
+      expect(myNamespace.giveMeTheCount()).toBe(2);
+  });
+  it("hoists variables the way you probably don't expect", () => {
+      function generate() {
+          const functions = [];
+          for (let i = 0; i < 5; i++) {
+              functions.push(function() {
+                  return i;
+              });
+          }
+          return functions;
+      }
+      expect(generate()[0]()).toEqual(0);
+      expect(generate()[1]()).toEqual(1);
+  });
+});
+context('has ways to simulate classes', () => {
+  // "Class"
+  function Cat() {
       this.kilos = 1;
       this.feed = function() {
-        this.kilos++;
+          this.kilos++;
       };
       this.isPurring = function() {
-        return true;
+          return true;
       };
-    }
-
-    //////////////////////////////////////
-    // "Class"
-    //////////////////////////////////////
-    function Lion(energy) {
+  }
+  //////////////////////////////////////
+  // "Class"
+  //////////////////////////////////////
+  function Lion(energy) {
       Cat.call(this);
       this.energy = energy || 100;
       const self = this;
-
       const run = function() {
-        // private method
-        self.energy -= 10;
+          // private method
+          self.energy -= 10;
       };
       const attack = function() {
-        // private method
-        self.energy -= 5;
+          // private method
+          self.energy -= 5;
       };
       this.playWithFriend = function(friend) {
-        if (friend.isPurring()) self.energy += 10;
+          if (friend.isPurring()) self.energy += 10;
       };
       this.hunt = function() {
-        // public method
-        run();
-        attack();
-        this.onHunting(); // fire event
+          // public method
+          run();
+          attack();
+          this.onHunting(); // fire event
       };
       this.onHunting = function() {
-        /* event */
+          /* event */
       };
-    }
-
-    context('and the THIS keyword', () => {
+  }
+  context('and the THIS keyword', () => {
       let cat;
-
       beforeEach(function() {
-        cat = new Cat();
-        window.kilos = 0;
+          cat = new Cat();
+          window.kilos = 0;
       });
-
       it('sometimes works as expected in other languages', () => {
-        cat.feed();
-        cat.feed();
-
-        //expect(cat.kilos).toEqual();
+          cat.feed();
+          cat.feed();
+          expect(cat.kilos).toEqual(3);
       });
-
       it('works different on detached functions', () => {
-        window.kilos = 10;
-        let feed = cat.feed;
-
-        feed();
-
-        //expect(window.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+          window.kilos = 10;
+          let feed = cat.feed;
+          feed();
+          expect(window.kilos).toEqual(11);
+          expect(cat.kilos).toEqual(1);
       });
-
       it('can be bound explicitly with CALL and APPLY', () => {
-        const feed = cat.feed;
-        feed.apply(cat);
-
-        //expect(cat.kilos).toEqual();
+          const feed = cat.feed;
+          feed.apply(cat);
+          expect(cat.kilos).toEqual(2);
       });
-
       it('can be bound in modern browsers with BIND', () => {
-        const feed = cat.feed;
-        const bound = feed.bind(cat);
-
-        bound();
-
-        //expect(cat.kilos).toEqual();
+          const feed = cat.feed;
+          const bound = feed.bind(cat);
+          bound();
+          expect(cat.kilos).toEqual(2);
       });
-
       it('works different when function is attached to other object', () => {
-        const otherCat = new Cat();
-        otherCat.kilos = 10;
-        otherCat.feed = cat.feed;
-
-        otherCat.feed();
-        //expect(otherCat.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+          const otherCat = new Cat();
+          otherCat.kilos = 10;
+          otherCat.feed = cat.feed;
+          otherCat.feed();
+          expect(otherCat.kilos).toEqual(11);
+          expect(cat.kilos).toEqual(1);
       });
-
       it('can be handled using the SELF trick', () => {
-        const energy = 200;
-        const lion = new Lion(energy);
-
-        lion.hunt();
-
-        //expect(lion.energy).toEqual();
+          const energy = 200;
+          const lion = new Lion(energy);
+          lion.hunt();
+          expect(lion.energy).toEqual(185);
       });
-
       it('interprets the THIS when the function is executed', () => {
-        const energy = 200;
-        const lion = new Lion();
-
-        lion.hunt = function() {
-          this.energy = 4000;
-        };
-        lion.hunt();
-
-        //expect(lion.energy).toEqual();
+          const energy = 200;
+          const lion = new Lion();
+          lion.hunt = function() {
+              this.energy = 4000;
+          };
+          lion.hunt();
+          expect(lion.energy).toEqual(4000);
       });
-    });
   });
+});
 });
