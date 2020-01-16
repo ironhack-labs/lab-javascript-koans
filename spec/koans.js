@@ -28,18 +28,18 @@ describe('the JavaScript language', () => {
 
     it('surprises me, NaN is not comparable with NaN', () => {
       expect(5 / 'a').toEqual(5 / 'a');
-      //expect(typeof(NaN)).toEqual();
+      expect(typeof(NaN)).toEqual(typeof(2));
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
     it('considers an empty string to be falsy', () => {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == false).toBeTruthy(); // Truthy or Falsy
+      expect("" === false).toBeFalsy(); // Truthy or Falsy
     });
 
     it('considers zero to be falsy', () => {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBeTruthy();// Truthy or Falsy
+      expect(0 === false).toBeFalsy();// Truthy or Falsy
     });
 
     it('considers nulls to be falsy', () => {
@@ -52,9 +52,9 @@ describe('the JavaScript language', () => {
         result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBeTruthy(); // Truthy or Falsy
+      expect(null === false).toBeFalsy(); // Truthy or Falsy
+      expect(null == false).toBeFalsy(); // Truthy or Falsy
     });
 
     it('knows the type of a function', () => {
@@ -63,7 +63,7 @@ describe('the JavaScript language', () => {
       }
 
       expect(typeof x).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof(xxx)).toBe('undefined'); 
     });
 
     it('has arrays and they can contain anything inside', () => {
@@ -73,13 +73,12 @@ describe('the JavaScript language', () => {
 
       const matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
-      /*
       expect(arr[1]).toEqual();
       expect(arr[4]).toEqual();
       expect(arr[6]).toEqual();
       expect(arr[9]).toEqual();
       expect(matrix[0][2]).toEqual();
-      */
+    
     });
 
     it('may contain functions inside arrays', () => {
