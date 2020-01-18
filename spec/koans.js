@@ -28,18 +28,19 @@ describe('the JavaScript language', () => {
 
     it('surprises me, NaN is not comparable with NaN', () => {
       expect(5 / 'a').toEqual(5 / 'a');
-      //expect(typeof(NaN)).toEqual();
+      expect(typeof(NaN)).toEqual(typeof(NaN));
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
     it('considers an empty string to be falsy', () => {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+
+      //expect('' == false).toBe(false);// Truthy or Falsy
+      expect('' === false).toBe(false);// Truthy or Falsy
     });
 
     it('considers zero to be falsy', () => {
       //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 === false).toBe(false);// Truthy or Falsy
     });
 
     it('considers nulls to be falsy', () => {
@@ -53,7 +54,7 @@ describe('the JavaScript language', () => {
       }
 
       //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
+      expect(null === false).toBe(false);// Truthy or Falsy
       //expect(null == false).toBe....();// Truthy or Falsy
     });
 
