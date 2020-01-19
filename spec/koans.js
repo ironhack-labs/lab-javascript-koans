@@ -730,7 +730,7 @@ describe('the JavaScript language', () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it('interprets the THIS when the function is executed', () => {
@@ -742,7 +742,7 @@ describe('the JavaScript language', () => {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual();
       });
     });
   });
