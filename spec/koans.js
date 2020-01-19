@@ -742,7 +742,7 @@ describe('the JavaScript language', () => {
         };
         lion.hunt();
 
-        expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
