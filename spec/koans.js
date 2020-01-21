@@ -455,21 +455,30 @@ describe('the JavaScript language', () => {
       const obj = createObject();
       obj.addPoint();
 
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
+      expect(obj.score()).toEqual(1);
+      expect(typeof(obj.points)).toEqual("undefined");
     });
 
     it('may create objects also with the module pattern', () => {
       function createObject(initialScore) {
-        // write the code here
+        // write the code here        
+        const object = {
+          points : 5,
+          color : "red",
+          incrementScoreIn : function(initialScore){
+            return object.points + initialScore
+          }
+        }
+        
       }
 
-      /*
+      
       const obj = createObject(5, 'red');
-      obj.incrementScoreIn(5);
+      
+      obj.incrementScoreIn(5);  //undefined?
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
-      */
+    
     });
 
     it('can define constructors', () => {
@@ -482,7 +491,7 @@ describe('the JavaScript language', () => {
       }
 
       const obj = new Obj();
-      //expect(obj.theName()).toBe();
+      expect(obj.theName()).toBe('bob');
     });
 
     it("may contain 'static' methods", () => {
@@ -498,7 +507,7 @@ describe('the JavaScript language', () => {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      expect(Obj.someStaticMethod()).toBe(22);
     });
 
     it('can have have methods in the prototype', () => {
@@ -511,7 +520,7 @@ describe('the JavaScript language', () => {
       };
 
       const obj = new Obj();
-      //expect(obj.theName()).toEqual();
+      expect(obj.theName()).toEqual('bob');
       //expect(obj.theName).toBe(new Obj().theName);
     });
 
