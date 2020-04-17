@@ -575,8 +575,8 @@ describe('the JavaScript language', () => {
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
         const child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        expect(child.someMethod()).toEqual(10);
+        expect(child.name).toEqual('child');
       });
 
       it('may use the functional inheritance', () => {
@@ -596,7 +596,7 @@ describe('the JavaScript language', () => {
         }
 
         const instance = child();
-        //expect(instance.someMethod()).toBe();
+        expect(instance.someMethod()).toBe(10);
       });
     });
   });
