@@ -430,13 +430,15 @@ describe('the JavaScript language', () => {
       let user = {
         address: {
           street: 'sesame'
-        }
-
+        },
+        friends: [{
+          name: 'triki'
+        }]
       };
       // write the contents of the obj to make the satisfy the expectations:
 
       expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+      expect(user.friends[0].name).toEqual('triki');
     });
 
     it('has a pattern called, the Module Pattern', () => {
@@ -462,15 +464,26 @@ describe('the JavaScript language', () => {
 
     it('may create objects also with the module pattern', () => {
       function createObject(initialScore) {
-        // write the code here
-      }
+        let finalScore = initialScore;
 
-      /*
+        return {
+          incrementScoreIn: function (score) {
+            finalScore += score;
+          },
+          color: 'red',
+          points: function () {
+            return finalScore
+          }
+        };
+      };
+      
+
+      
       const obj = createObject(5, 'red');
       obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
-      */
+      
     });
 
     it('can define constructors', () => {
