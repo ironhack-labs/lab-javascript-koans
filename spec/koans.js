@@ -514,7 +514,7 @@ describe('the JavaScript language', () => {
         return 22;
       };
 
-      //expect(Obj.someStaticMethod()).toBe();
+      expect(Obj.someStaticMethod()).toBe(22);
     });
 
     it('can have have methods in the prototype', () => {
@@ -527,8 +527,8 @@ describe('the JavaScript language', () => {
       };
 
       const obj = new Obj();
-      //expect(obj.theName()).toEqual();
-      //expect(obj.theName).toBe(new Obj().theName);
+      expect(obj.theName()).toEqual(undefined);
+      expect(obj.theName).toBe(new Obj().theName);
     });
 
     it('can define a factory', () => {
@@ -544,8 +544,8 @@ describe('the JavaScript language', () => {
       }
 
       const instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it('can create methods dynamically on an object instance', () => {
@@ -558,7 +558,7 @@ describe('the JavaScript language', () => {
         };
       }
 
-      //expect(obj.meow()).toEqual();
+      expect(obj.meow()).toEqual('it works');
     });
 
     describe('the polymorphism', () => {
