@@ -464,14 +464,14 @@ describe('the JavaScript language', () => {
     it('may create objects also with the module pattern', () => {
       function createObject(initialScore, initialColor) {
         let totalPoints = 0;
-        
+
         return {
           incrementScoreIn(score) {
             totalPoints = score + initialScore;
           },
           color: initialColor,
           points: () => {
-            return totalPoints
+            return totalPoints;
           }
         };
       };
