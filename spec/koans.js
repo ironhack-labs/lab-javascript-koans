@@ -169,8 +169,8 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        return [function(){
-          return [0,10]
+        return [function () {
+          return [0, 10]
         }]
       }
 
@@ -267,8 +267,8 @@ describe('the JavaScript language', () => {
     it('may return arrays that contains closures and so on', () => {
       function example() {
         let a = 9;
-        return [function(y){
-          return [0,a+y];
+        return [function (y) {
+          return [0, a + y];
         }]
       }
 
@@ -457,33 +457,30 @@ describe('the JavaScript language', () => {
 
       const obj = createObject();
       obj.addPoint();
-
       expect(obj.score()).toEqual(1);
       expect(typeof (obj.points)).toEqual('undefined');
     });
 
     it('may create objects also with the module pattern', () => {
-      function createObject(initialScore) {
-        let finalScore = initialScore;
-
+      function createObject(initialScore, initialColor) {
+        let totalPoints = 0;
+        
         return {
-          incrementScoreIn: function (score) {
-            finalScore += score;
+          incrementScoreIn(score) {
+            totalPoints = score + initialScore;
           },
-          color: 'red',
-          points: function () {
-            return finalScore
+          color: initialColor,
+          points: () => {
+            return totalPoints
           }
         };
       };
-      
 
-      
       const obj = createObject(5, 'red');
       obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
-      
+
     });
 
     it('can define constructors', () => {
