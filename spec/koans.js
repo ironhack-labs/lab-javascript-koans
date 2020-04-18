@@ -289,13 +289,13 @@ describe('the JavaScript language', () => {
       const z = true;
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual(1);
 
       example(y);
-      //expect(y).toEqual();
+      expect(y).toEqual('example');
 
       example(z);
-      //expect(z).toEqual();
+      expect(z).toEqual(true);
     });
 
     it('passes arrays by reference', () => {
@@ -306,7 +306,7 @@ describe('the JavaScript language', () => {
       const x = [1, 2, 3];
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual([100,2,3]);
     });
 
     it('passes objects by reference', () => {
@@ -319,7 +319,7 @@ describe('the JavaScript language', () => {
       };
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual({property = 'test'});
     });
 
     it('may return a function as the result of invoking a function', () => {
