@@ -59,8 +59,10 @@ describe('the JavaScript language', () => {
 
     it('knows the type of a function', () => {
       function x() {
-
+        return function () {
+        }
       }
+      let xxx = x();
 
       expect(typeof x).toBe('function');
       expect(typeof (xxx)).toBe('function');
@@ -102,7 +104,7 @@ describe('the JavaScript language', () => {
       const a = [1, 2, 3];
       const b = [4, 5, 6];
 
-      expect(a + b).toEqual('1,2,34,5,6');
+    expect(a + b).toEqual('1,2,34,5,6');
     });
 
     it('joins arrays and strings', () => {
@@ -153,7 +155,7 @@ describe('the JavaScript language', () => {
         return a + b;
       };
 
-      expect(typeof (someVar)).toBe();
+      expect(typeof (someVar)).toBe('function');
       expect(someVar(1, 1)).toBe(2);
     });
 
@@ -170,9 +172,9 @@ describe('the JavaScript language', () => {
     it('may return arrays that contains functions and so on', () => {
       function example() {
         return [function () {
-          return []
+          return [0,10];
 
-        }]
+        },1]
       }
 
       expect(example()[0](1)[1]).toEqual(10);
@@ -183,11 +185,12 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       }
 
-      expect(exampleA()).toEqual(1);
+      
 
       function exampleB(arg1) {
         return arg1;
       }
+      expect(exampleA()).toEqual(1);
     });
 
     it('matters, the declaration order when they are anonymous', () => {
@@ -195,11 +198,12 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      expect(exampleA()).toEqual(1);
+      
 
       const exampleB = function (arg1) {
         return arg1;
       };
+      expect(exampleA()).toEqual(1);
     });
 
     it('can use optional parameters', () => {
@@ -218,7 +222,7 @@ describe('the JavaScript language', () => {
       const x = function z() {
         return 1;
       };
-      expect(typeof (z)).toEqual();
+      expect(typeof (z)).toEqual('undefined');
       expect(x()).toEqual(1);
     });
 
@@ -317,11 +321,8 @@ describe('the JavaScript language', () => {
       const x = {
         property: 'cool!'
       };
-
-      example(x);
-      expect(x).toEqual({
-        property = 'test'
-      });
+      expect(x);
+      expect(x).toEqual({property: 'test'});
     });
 
     it('may return a function as the result of invoking a function', () => {
@@ -412,7 +413,7 @@ describe('the JavaScript language', () => {
         }
       };
 
-      //expect(obj.theName()).toBe();
+      expect(obj.theName()).toBe('bob');
     });
 
     it('can create properties dynamically', () => {
@@ -422,17 +423,28 @@ describe('the JavaScript language', () => {
       };
       obj.address = 'palm tree';
 
-      //expect(obj.address).toEqual();
-      //expect(obj['address']).toEqual();
-      //expect(obj['name']).toEqual();
+      expect(obj.address).toEqual('palm tree');
+      expect(obj['address']).toEqual('palm tree');
+      expect(obj['name']).toEqual('bob');
     });
 
     it('may define complex objects', () => {
       let user;
-      // write the contents of the obj to make the satisfy the expectations:
+      user = {
+        age: 23,
+        friends: [{
+          name: 'triki',
+        }],
+        address: {
+          street: 'sesame'
+        }
 
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+
+
+      }
+
+      expect(user.address.street).toEqual('sesame');
+      expect(user.friends[0].name).toEqual('triki');
     });
 
     it('has a pattern called, the Module Pattern', () => {
@@ -452,8 +464,8 @@ describe('the JavaScript language', () => {
       const obj = createObject();
       obj.addPoint();
 
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
+      expect(obj.score()).toEqual(1);
+      expect(typeof(obj.points)).toEqual('undefined');
     });
 
     it('may create objects also with the module pattern', () => {
@@ -479,7 +491,7 @@ describe('the JavaScript language', () => {
       }
 
       const obj = new Obj();
-      /xpect(obj.theName()).toBe('bob');
+      expect(obj.theName()).toBe('bob');
     });
 
     it("may contain 'static' methods", () => {
@@ -525,8 +537,8 @@ describe('the JavaScript language', () => {
       }
 
       const instance = obj();
-      //expect(instance.theName()).toBe();
-      //expect(instance.theName).not.toBe(obj().theName);
+      expect(instance.theName()).toBe('bob');
+      expect(instance.theName).not.toBe(obj().theName);
     });
 
     it('can create methods dynamically on an object instance', () => {
@@ -539,7 +551,7 @@ describe('the JavaScript language', () => {
         };
       }
 
-      //expect(obj.meow()).toEqual();
+      expect(obj.meow()).toEqual('it works');
     });
 
     describe('the polymorphism', () => {
@@ -558,8 +570,8 @@ describe('the JavaScript language', () => {
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
         const child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        expect(child.someMethod()).toEqual(10);
+        expect(child.name).toEqual('child');
       });
 
       it('may use the functional inheritance', () => {
@@ -579,7 +591,7 @@ describe('the JavaScript language', () => {
         }
 
         const instance = child();
-        //expect(instance.someMethod()).toBe();
+        expect(instance.someMethod()).toBe(10);
       });
     });
   });
@@ -603,7 +615,7 @@ describe('the JavaScript language', () => {
       myNamespace.addOne();
       myNamespace.addOne();
 
-      //expect(myNamespace.giveMeTheCount()).toBe();
+      expect(myNamespace.giveMeTheCount()).toBe(2);
     });
 
     it("hoists variables the way you probably don't expect", () => {
@@ -617,8 +629,8 @@ describe('the JavaScript language', () => {
         return functions;
       }
 
-      //expect(generate()[0]()).toEqual();
-      //expect(generate()[1]()).toEqual();
+      expect(generate()[0]()).toEqual(0);
+      expect(generate()[1]()).toEqual(1);
     });
   });
 
@@ -711,8 +723,8 @@ describe('the JavaScript language', () => {
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-        //expect(otherCat.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(otherCat.kilos).toEqual(10);
+        //expect(cat.kilos).toEqual('undefined');
       });
 
       it('can be handled using the SELF trick', () => {
@@ -721,7 +733,7 @@ describe('the JavaScript language', () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it('interprets the THIS when the function is executed', () => {
@@ -733,7 +745,7 @@ describe('the JavaScript language', () => {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
