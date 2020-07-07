@@ -170,6 +170,7 @@ describe('the JavaScript language', () => {
     it('may return arrays that contains functions and so on', () => {
       function example() {
         // write the missing code here
+
       }
 
       //expect(example()[0](1)[1]).toEqual(10);
@@ -192,11 +193,11 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
-
       const exampleB = function (arg1) {
         return arg1;
       };
+
+      expect(exampleA()).toEqual(1);
     });
 
     it('can use optional parameters', () => {
@@ -216,7 +217,7 @@ describe('the JavaScript language', () => {
         return 1;
       };
       expect(typeof (z)).toEqual('undefined');
-      //expect(x()).toEqual('number');
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -264,13 +265,17 @@ describe('the JavaScript language', () => {
     });
 
     it('may return arrays that contains closures and so on', () => {
-      function example() {
-        // write the missing code here
+      function example(arr) {
+        return [
+          function (a) {
+            return [a, a + 9];
+          }
+        ]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
@@ -386,11 +391,11 @@ describe('the JavaScript language', () => {
 
     it("doesn't have a private scope inside blocks", () => {
       let j = 0;
-      for (let i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         j += i;
       }
 
-      //expect(i).toEqual(ReferenceError);
+      expect(i).toEqual(5);
       expect(j).toEqual(10);
     });
   });
@@ -404,7 +409,7 @@ describe('the JavaScript language', () => {
         }
       };
 
-      //expect(obj.theName()).toBe(function);
+      expect(obj.theName()).toBe('bob');
     });
 
     it('can create properties dynamically', () => {
@@ -453,7 +458,7 @@ describe('the JavaScript language', () => {
       obj.addPoint();
 
       expect(obj.score()).toEqual(1);
-      //expect(typeof (obj.points)).toEqual(undefined);
+      //expect(typeof (obj.points)).toEqual();
     });
 
     it('may create objects also with the module pattern', () => {
@@ -634,9 +639,8 @@ describe('the JavaScript language', () => {
       };
     }
 
-    //////////////////////////////////////
+
     // "Class"
-    //////////////////////////////////////
     function Lion(energy) {
       Cat.call(this);
       this.energy = energy || 100;
