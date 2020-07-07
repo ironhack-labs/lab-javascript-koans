@@ -168,6 +168,8 @@ describe("the JavaScript language", () => {
     it("may return arrays that contains functions and so on", () => {
       function example() {
         // write the missing code here
+
+
       }
 
       expect(example()[0](1)[1]).toEqual(10);
@@ -311,7 +313,9 @@ describe("the JavaScript language", () => {
       };
 
       example(x);
-      expect(x).toEqual({ property: `test` });
+      expect(x).toEqual({
+        property: `test`
+      });
     });
 
     it("may return a function as the result of invoking a function", () => {
@@ -384,12 +388,11 @@ describe("the JavaScript language", () => {
 
     it("doesn't have a private scope inside blocks", () => {
       let j = 0;
-      let i = 0;
-      for (let i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         j += i;
       }
 
-      expect(i).toEqual(0);
+      expect(i).toEqual(5);
       expect(j).toEqual(10);
     });
   });
@@ -424,7 +427,9 @@ describe("the JavaScript language", () => {
         address: {
           street: `sesame`,
         },
-        friends: [{ name: `triki` }],
+        friends: [{
+          name: `triki`
+        }],
       };
 
       expect(user.address.street).toEqual("sesame");
