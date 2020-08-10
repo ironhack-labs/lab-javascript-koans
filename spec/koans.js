@@ -297,10 +297,10 @@ describe('the JavaScript language', () => {
                 arg[0] = 100;
             }
 
-            const x = [10, 2, 3];
+            const x = [1, 2, 3];
 
             example(x);
-            expect(x).toEqual(100, 2, 3);
+            expect(x).toEqual([100, 2, 3]);
         });
 
         it('passes objects by reference', () => {
