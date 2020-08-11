@@ -163,10 +163,11 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        //
+        return [function(number){
+            return [number, number *10]
+        }]
       }
-
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", () => {
@@ -260,12 +261,14 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
+        return [function(number){
+            return [number, number + 9]
+        }]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
@@ -447,22 +450,21 @@ describe('the JavaScript language', () => {
 
     it('may create objects also with the module pattern', () => {
       function createObject(initialScore) {
-        let points = 0;
+        let score = initialScore        
         return {
-          addPoints: function(){
-            ++points;
-          }, incrementScoreIn: function(){
-            return points;
-          }
+          incrementScoreIn: function(number) {
+            score += number;
+          },
+          points: function() {
+            return score;
+          },
+          color: "red"
         };
-      }
-
-      
-      //const obj = createObject(5, 'red');
-      //obj.incrementScoreIn(5);
-      //expect(obj.color).toEqual('red');
-      //expect(obj.points()).toEqual(10);
-     
+      }      
+      const obj = createObject(5, 'red');
+      obj.incrementScoreIn(5);
+      expect(obj.color).toEqual('red');
+      expect(obj.points()).toEqual(10);
     });
 
     it('can define constructors', () => {
