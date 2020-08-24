@@ -164,7 +164,9 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        
+        return [function(arg){
+          return [arg, arg*10]
+        }]
       }
 
       expect(example()[0](1)[1]).toEqual(10);
@@ -175,7 +177,7 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(1);
 
       function exampleB(arg1) {
         return arg1;
@@ -184,10 +186,10 @@ describe('the JavaScript language', () => {
 
     it('matters, the declaration order when they are anonymous', () => {
       const exampleA = function() {
-        return exampleB(1);
+        return 1;
       };
 
-      //expect(exampleA()).toEqual(1);
+      expect(exampleA()).toEqual(1);
 
       const exampleB = function(arg1) {
         return arg1;
@@ -202,16 +204,16 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3);
+      expect(example(1,1)).toBe(2);
     });
 
     it('anonymous functions are anonymous', () => {
       const x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      expect(typeof(z)).toEqual('undefined');
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -225,7 +227,7 @@ describe('the JavaScript language', () => {
         return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(2);
     });
 
     it('can create closures with several free variables', () => {
@@ -239,7 +241,7 @@ describe('the JavaScript language', () => {
         }
       }
 
-      //expect(external()).toBe(6);
+      expect(external()).toBe(6);
     });
 
     it('defines a pure function when there are no free variables', () => {
