@@ -792,6 +792,9 @@ describe('the JavaScript language', () => {
       });
 
       it('interprets the THIS when the function is executed', () => {
+
+        //
+        //----------NO SABEMOS
         const energy = 200;
         const lion = new Lion();
 
