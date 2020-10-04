@@ -59,11 +59,11 @@ describe('the JavaScript language', () => {
 
     it('knows the type of a function', () => {
       function x() {
-        // ...
+        
       }
 
       expect(typeof x).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof(xxx)).toBe('undefined');
     });
 
     it('has arrays and they can contain anything inside', () => {
@@ -188,11 +188,10 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
-
       const exampleB = function(arg1) {
         return arg1;
       };
+      expect(exampleA()).toEqual(1);
     });
 
     it('can use optional parameters', () => {
@@ -380,11 +379,11 @@ describe('the JavaScript language', () => {
 
     it("doesn't have a private scope inside blocks", () => {
       let j = 0;
-      for (let i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         j += i;
       }
 
-      //expect(i).toEqual();
+      expect(i).toEqual(5);
       expect(j).toEqual(10);
     });
   });
@@ -546,8 +545,8 @@ describe('the JavaScript language', () => {
         Child.prototype = Object.create(Parent.prototype); // prototype chaining
 
         const child = new Child();
-        //expect(child.someMethod()).toEqual();
-        //expect(child.name).toEqual();
+        expect(child.someMethod()).toEqual(10);
+        expect(child.name).toEqual('child');
       });
 
       it('may use the functional inheritance', () => {
@@ -567,7 +566,7 @@ describe('the JavaScript language', () => {
         }
 
         const instance = child();
-        //expect(instance.someMethod()).toBe();
+        expect(instance.someMethod()).toBe(10);
       });
     });
   });
@@ -591,7 +590,7 @@ describe('the JavaScript language', () => {
       myNamespace.addOne();
       myNamespace.addOne();
 
-      //expect(myNamespace.giveMeTheCount()).toBe();
+      expect(myNamespace.giveMeTheCount()).toBe(2);
     });
 
     it("hoists variables the way you probably don't expect", () => {
@@ -605,8 +604,8 @@ describe('the JavaScript language', () => {
         return functions;
       }
 
-      //expect(generate()[0]()).toEqual();
-      //expect(generate()[1]()).toEqual();
+      expect(generate()[0]()).toEqual(0);
+      expect(generate()[1]()).toEqual(1);
     });
   });
 
