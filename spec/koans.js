@@ -165,7 +165,7 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        // write the missing code here
+        
       }
 
       //expect(example()[0](1)[1]).toEqual(10);
@@ -414,12 +414,12 @@ describe('the JavaScript language', () => {
 
     it('may define complex objects', () => {
       let user = {
-        address: {street: 'sesame'}
-        //
+        address: {street: 'sesame'},
+        friends: [{name: 'triki'}]
       };
 
       expect(user.address.street).toEqual('sesame');
-     //expect(user.friends[0].name).toEqual('triki');
+     expect(user.friends[0].name).toEqual('triki');
     });
 
     it('has a pattern called, the Module Pattern', () => {
@@ -663,7 +663,7 @@ describe('the JavaScript language', () => {
         cat.feed();
         cat.feed();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(3);
       });
 
       it('works different on detached functions', () => {
@@ -672,15 +672,15 @@ describe('the JavaScript language', () => {
 
         feed();
 
-        //expect(window.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(window.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it('can be bound explicitly with CALL and APPLY', () => {
         const feed = cat.feed;
         feed.apply(cat);
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it('can be bound in modern browsers with BIND', () => {
@@ -689,7 +689,7 @@ describe('the JavaScript language', () => {
 
         bound();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it('works different when function is attached to other object', () => {
@@ -698,8 +698,8 @@ describe('the JavaScript language', () => {
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-        //expect(otherCat.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(otherCat.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it('can be handled using the SELF trick', () => {
@@ -708,7 +708,7 @@ describe('the JavaScript language', () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it('interprets the THIS when the function is executed', () => {
@@ -720,7 +720,7 @@ describe('the JavaScript language', () => {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
