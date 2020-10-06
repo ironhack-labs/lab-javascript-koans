@@ -165,11 +165,17 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-      /*  return [function(arg){
-       return [[0,10]]
-      }]*/
+        // write the missing code here
+       return [
+         (arg) => {
+           return [
+            arg,
+            arg + 9
+           ]
+         }
+      ]
     }
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", () => {
@@ -189,7 +195,7 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      //expect(exampleA()).toEquala(arg1);
+      //expect(exampleA()).toEqual(1);
 
       const exampleB = function(arg1) {
         return arg1;
@@ -263,6 +269,7 @@ describe('the JavaScript language', () => {
     it('may return arrays that contains closures and so on', () => {
       function example() {
         // write the missing code here
+        
       }
 
       //expect(example()[0](1)[1]).toEqual(10);
@@ -415,16 +422,20 @@ describe('the JavaScript language', () => {
     });
 
     it('may define complex objects', () => {
-      /*let user ={
+      let user ={
         address: {
-          street: 'sesame';
-        };
-        friends: [{name: 'triki'}];
-      }; */
+          street: 'sesame'
+        },
+        friends: [
+          {
+            name: 'triki'
+          }
+        ],
+      }; 
       // write the contents of the obj to make the satisfy the expectations:
 
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+      expect(user.address.street).toEqual('sesame');
+      expect(user.friends[0].name).toEqual('triki');
     });  
 
     it('has a pattern called, the Module Pattern', () => {
