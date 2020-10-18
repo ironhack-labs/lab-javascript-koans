@@ -39,7 +39,7 @@ describe('the JavaScript language', () => {
 
     it('considers zero to be falsy', () => {
       expect(0 == false).toBe(true);// Truthy or Falsy
-      expect(0 === false).toBe(false);// Truthy or Falsy....este tampoco le entedí
+      expect(0 === false).toBe(false);// Truthy or Falsy....este tampoco le entedí...acaso porque uno es un String y el otro es boolenano
     });
 
     it('considers nulls to be falsy', () => {
@@ -52,9 +52,9 @@ describe('the JavaScript language', () => {
         result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBe(true);// Truthy or Falsy
+      expect(null === false).toBe(false);// Truthy or Falsy
+      expect(null == false).toBe(false);// Truthy or Falsy....no entender
     });
 
     it('knows the type of a function', () => {
