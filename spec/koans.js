@@ -86,12 +86,12 @@ describe('the JavaScript language', () => {
       const arr = [
         1,
         2,
-        function(arg) {
+        function(arg) {//arg vale 1 durante el callback, no entender
           return 3 + arg;
         }
       ];
 
-      //expect(arr[2](1)).toEqual();
+      expect(arr[2](1)).toEqual(4);//3+1=4
     });
 
     it('concatenate arrays - well, kind of', () => {
