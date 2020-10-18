@@ -112,10 +112,10 @@ describe('the JavaScript language', () => {
       const a = [1, 2, 3];
       const b = ['x', 'y', 'z'];
 
-      //expect(1 + a).toEqual();
-      //expect(a + 1).toEqual();
-      //expect(1 + b).toEqual();
-      //expect(true + a).toEqual();
+      expect(1 + a).toEqual("11,2,3")  ;
+      expect(a + 1).toEqual('1,2,31');
+      expect(1 + b).toEqual('1x,y,z');
+      expect(true + a).toEqual('true1,2,3');
     });
 
     it("can't compare arrays", () => {
