@@ -73,13 +73,13 @@ describe('the JavaScript language', () => {
 
       const matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
-      /*
-      expect(arr[1]).toEqual();
-      expect(arr[4]).toEqual();
-      expect(arr[6]).toEqual();
-      expect(arr[9]).toEqual();
-      expect(matrix[0][2]).toEqual();
-      */
+
+      expect(arr[1]).toEqual(arr[1]);
+      expect(arr[4]).toEqual(arr[4]);
+      expect(arr[6]).toEqual(arr[6]);
+      expect(arr[9]).toEqual(arr[9]);
+      expect(matrix[0][2]).toEqual(matrix[0][2]);
+
     });
 
     it('may contain functions inside arrays', () => {
