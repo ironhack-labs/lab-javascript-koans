@@ -98,7 +98,7 @@ describe('the JavaScript language', () => {
       const a = [1, 2, 3];
       const b = [4, 5, 6];
 
-      //expect(a + b).toEqual();
+      expect(a + b).toEqual('1,2,34,5,6');
     });
 
     it('joins arrays and strings', () => {
