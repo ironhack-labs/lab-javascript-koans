@@ -54,7 +54,7 @@ describe('the JavaScript language', () => {
 
       expect(result == false).toBe(true);// Truthy or Falsy
       expect(null === false).toBe(false);// Truthy or Falsy
-      expect(null == false).toBe(false);// Truthy or Falsy....no entender
+      expect(null == false).toBe(false);// Truthy or Falsy....no enteder
     });
 
     it('knows the type of a function', () => {
@@ -62,8 +62,8 @@ describe('the JavaScript language', () => {
         // ...
       }
 
-      expect(typeof x).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof (x)).toBe('function');
+      expect(typeof(x)).toBe('function');// tener duda
     });
 
     it('has arrays and they can contain anything inside', () => {
