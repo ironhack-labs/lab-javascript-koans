@@ -38,8 +38,8 @@ describe('the JavaScript language', () => {
     });
 
     it('considers zero to be falsy', () => {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBe(true);// Truthy or Falsy
+      expect(0 === false).toBe(false);// Truthy or Falsy....este tampoco le entedí
     });
 
     it('considers nulls to be falsy', () => {
