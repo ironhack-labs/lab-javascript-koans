@@ -22,24 +22,23 @@ describe('the JavaScript language', () => {
 
     it('knows the type of the variable', () => {
       const x = 1;
-
       expect(typeof x).toEqual('number');
     });
 
     it('surprises me, NaN is not comparable with NaN', () => {
-      expect(5 / 'a').toEqual(5 / 'a');
-      expect(typeof(NaN)).toEqual("number");
+      expect(5 / 'a').toEqual(NaN);
+      expect(typeof(NaN)).toEqual("number"); //typeof NaN === 'number'
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
     it('considers an empty string to be falsy', () => {
-      expect("" == false).toBe(true);// Truthy or Falsy
-      expect("" === false).toBe(false);// Truthy or Falsy....este no ñe entendí
+      expect("" == false).toBe(true);
+      expect("" === false).toBe(false);
     });
 
     it('considers zero to be falsy', () => {
-      expect(0 == false).toBe(true);// Truthy or Falsy
-      expect(0 === false).toBe(false);// Truthy or Falsy....este tampoco le entedí...acaso porque uno es un String y el otro es boolenano
+      expect(0 == false).toBe(true);
+      expect(0 === false).toBe(false);
     });
 
     it('considers nulls to be falsy', () => {
@@ -52,18 +51,17 @@ describe('the JavaScript language', () => {
         result = false;
       }
 
-      expect(result == false).toBe(true);// Truthy or Falsy
-      expect(null === false).toBe(false);// Truthy or Falsy
-      expect(null == false).toBe(false);// Truthy or Falsy....no enteder
+      expect(result == false).toBe(true);
+      expect(null === false).toBe(false);
+      expect(null == false).toBe(false); //Type of null is object
     });
 
     it('knows the type of a function', () => {
       function x() {
         // ...
       }
-
       expect(typeof (x)).toBe('function');
-      expect(typeof(x)).toBe('function');// tener duda
+      expect(typeof(xxx)).toBe('undefined');
     });
 
     it('has arrays and they can contain anything inside', () => {
@@ -73,20 +71,18 @@ describe('the JavaScript language', () => {
 
       const matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
-
-      expect(arr[1]).toEqual(arr[1]);
-      expect(arr[4]).toEqual(arr[4]);
-      expect(arr[6]).toEqual(arr[6]);
-      expect(arr[9]).toEqual(arr[9]);
-      expect(matrix[0][2]).toEqual(matrix[0][2]);
-
+      expect(arr[1]).toEqual(2);
+      expect(arr[4]).toEqual(5);
+      expect(arr[6]).toEqual(undefined);
+      expect(arr[9]).toEqual(6);
+      expect(matrix[0][2]).toEqual("c");
     });
 
     it('may contain functions inside arrays', () => {
       const arr = [
         1,
         2,
-        function(arg) {//arg vale 1 durante el callback, no entender
+        function(arg) {
           return 3 + arg;
         }
       ];
@@ -105,7 +101,7 @@ describe('the JavaScript language', () => {
       const a = [1, 2, 3];
 
       expect ("1" + a).toEqual("1".concat(a));
-      expect(a + "1").toEqual(a+"1");
+      expect(a + "1").toEqual("1,2,31");
     });
 
     it('joins arrays and other things', () => {
@@ -122,16 +118,16 @@ describe('the JavaScript language', () => {
       const a = [1, 2, 3];
       const b = [1, 2, 3];
 
-      //expect(a == b).toBe.....();  // Truthy or Falsy
-      //expect(a === b).toBe.....(); // Truthy or Falsy
+      expect(a == b).toBe(false);
+      expect(a === b).toBe(false);
     });
 
     it('is not the same to compare by value than by reference ', () => {
       const a = [1, 2, 3];
       const b = [1, 2, 3];
 
-      expect(a).toEqual(b); // Jasmine toEqual compares by value
-      expect(a).not.toBe(b); // Jasmine toBe compares by reference
+      expect(a).toEqual(b); // Jasmine toEqual compares by value ==
+      expect(a).not.toBe(b); // Jasmine toBe compares by reference ===
     });
   });
 
@@ -141,7 +137,7 @@ describe('the JavaScript language', () => {
         return 'some example';
       }
 
-      //expect(example()).toEqual();
+      expect(example()).toEqual('some example');
     });
 
     it('can declare anonymous functions', () => {
@@ -149,8 +145,8 @@ describe('the JavaScript language', () => {
         return a + b;
       };
 
-      //expect(typeof(someVar)).toBe();
-      //expect(someVar(1,1)).toBe();
+      expect(typeof(someVar)).toBe("function");
+      expect(someVar(1,1)).toBe(2);
     });
 
     it('may return anything', () => {
@@ -160,15 +156,17 @@ describe('the JavaScript language', () => {
 
       const result = example(2);
 
-      //expect(result[1]).toEqual();
+      expect(result[1]).toEqual(4);
     });
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        // write the missing code here
+        return [function(arg){
+          return [0,arg*10]
+        },function(){}]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", () => {
@@ -176,7 +174,7 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(1);
 
       function exampleB(arg1) {
         return arg1;
@@ -187,12 +185,10 @@ describe('the JavaScript language', () => {
       const exampleA = function() {
         return exampleB(1);
       };
-
-      //expect(exampleA()).toEqual(1);
-
       const exampleB = function(arg1) {
         return arg1;
       };
+      expect(exampleA()).toEqual(1);
     });
 
     it('can use optional parameters', () => {
@@ -203,16 +199,16 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3);
+      expect(example(1,1)).toBe(2);
     });
 
     it('anonymous functions are anonymous', () => {
       const x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      expect(typeof(z)).toEqual('undefined');
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -226,7 +222,7 @@ describe('the JavaScript language', () => {
         return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(2);
     });
 
     it('can create closures with several free variables', () => {
@@ -240,7 +236,7 @@ describe('the JavaScript language', () => {
         }
       }
 
-      //expect(external()).toBe(6);
+      expect(external()).toBe(undefined);
     });
 
     it('defines a pure function when there are no free variables', () => {
@@ -256,14 +252,16 @@ describe('the JavaScript language', () => {
         return internal(4, 4);
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(9);
     });
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
+        //return array=[function(arg){
+        //    return array=[0,9+arg]
+          //}
+       // }]
       }
-
       //expect(example()[0](1)[1]).toEqual(10);
       //expect(example()[0](2)[1]).toEqual(11);
       //expect(example()[0](3)[1]).toEqual(12);
