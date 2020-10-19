@@ -447,8 +447,8 @@ describe('the JavaScript language', () => {
       const obj = createObject();
       obj.addPoint();
 
-      //expect(obj.score()).toEqual();
-      //expect(typeof(obj.points)).toEqual();
+      expect(obj.score()).toEqual(1);
+      expect(typeof(obj.points)).toEqual('undefined');
     });
 
     it('may create objects also with the module pattern', () => {
