@@ -28,18 +28,18 @@ describe('the JavaScript language', () => {
 
     it('surprises me, NaN is not comparable with NaN', () => {
       expect(5 / 'a').toEqual(5 / 'a');
-      //expect(typeof(NaN)).toEqual();
+      expect(typeof(NaN)).toEqual(typeof(NaN));
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
     it('considers an empty string to be falsy', () => {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == false).toBeTruthy();
+      expect("" === false).toBeFalsy();
     });
 
     it('considers zero to be falsy', () => {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBeTruthy();
+      expect(0 === false).toBeFalsy();
     });
 
     it('considers nulls to be falsy', () => {
@@ -52,18 +52,18 @@ describe('the JavaScript language', () => {
         result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBeTruthy();
+      expect(null === false).toBeFalsy();
+      expect(null == false).toBeFalsy();
     });
 
     it('knows the type of a function', () => {
       function x() {
-        // ...
+        return x
       }
 
       expect(typeof x).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+     expect(typeof(xxx)).toBe('function');
     });
 
     it('has arrays and they can contain anything inside', () => {
@@ -73,13 +73,13 @@ describe('the JavaScript language', () => {
 
       const matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
 
-      /*
+     
       expect(arr[1]).toEqual();
       expect(arr[4]).toEqual();
       expect(arr[6]).toEqual();
       expect(arr[9]).toEqual();
       expect(matrix[0][2]).toEqual();
-      */
+     
     });
 
     it('may contain functions inside arrays', () => {
@@ -149,8 +149,8 @@ describe('the JavaScript language', () => {
         return a + b;
       };
 
-      //expect(typeof(someVar)).toBe();
-      //expect(someVar(1,1)).toBe();
+      //expect(typeof(someVar)).toBe(typeof());
+      //expect(someVar(1,1)).toBe(someVar());
     });
 
     it('may return anything', () => {
@@ -707,7 +707,7 @@ describe('the JavaScript language', () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        //expect(lion.energy).toEqual(200);
       });
 
       it('interprets the THIS when the function is executed', () => {
@@ -719,7 +719,7 @@ describe('the JavaScript language', () => {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
