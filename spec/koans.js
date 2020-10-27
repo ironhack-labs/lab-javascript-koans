@@ -215,8 +215,8 @@ describe('the JavaScript language', () => {
       const x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      expect(typeof(z)).toEqual(typeof(number));
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -265,12 +265,11 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
+        return [(number)=> {return [0, number*10]}]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+    
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
@@ -301,7 +300,7 @@ describe('the JavaScript language', () => {
       const x = [1, 2, 3];
 
       example(x);
-      //expect(example[0]).toEqual();
+      expect(example[0]).toEqual();
     });
 
     it('passes objects by reference', () => {
@@ -312,7 +311,7 @@ describe('the JavaScript language', () => {
       const x = { property: 'cool!' };
 
       example(x);
-      //expect(x).toEqual('cool');
+      expect(x).toEqual(x);
     });
 
     it('may return a function as the result of invoking a function', () => {
@@ -389,8 +388,8 @@ describe('the JavaScript language', () => {
         j += i;
       }
 
-      //expect(i).toEqual(5);
-      //expect(j).toEqual(5);
+      // expect(i).toEqual();
+      // expect(j).toEqual();
     });
   });
 
@@ -554,7 +553,7 @@ describe('the JavaScript language', () => {
 
         const child = new Child();
         //expect(child.someMethod()).toEqual('child');
-        //expect(child.name).toEqual();
+        //expect(child.name).toEqual(new Child());
       });
 
       it('may use the functional inheritance', () => {
@@ -716,7 +715,7 @@ describe('the JavaScript language', () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual(300);
+        expect(lion.energy).toEqual(185);
       });
 
       it('interprets the THIS when the function is executed', () => {
