@@ -691,8 +691,8 @@ describe("the JavaScript language", () => {
 
         feed();
 
-        expect(window.kilos).toEqual(10); // No lo eniendo
-        expect(cat.kilos).toEqual(undefined); //No lo entiendo
+        expect(window.kilos).toEqual(11); // No lo eniendo
+        expect(cat.kilos).toEqual(1); //No lo entiendo
       });
 
       it("can be bound explicitly with CALL and APPLY", () => {
@@ -708,7 +708,7 @@ describe("the JavaScript language", () => {
 
         bound();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2); //No lo entiendo
       });
 
       it("works different when function is attached to other object", () => {
@@ -727,7 +727,7 @@ describe("the JavaScript language", () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it("interprets the THIS when the function is executed", () => {
@@ -739,7 +739,7 @@ describe("the JavaScript language", () => {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
