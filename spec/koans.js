@@ -166,10 +166,13 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        // write the missing code here
+        const myFunction = (_number)=>{
+          return [_number, _number * 10, _number * 20]
+        }
+        return [myFunction]
       }
-
-      //expect(example()[0](1)[1]).toEqual(10);
+        
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", () => {
