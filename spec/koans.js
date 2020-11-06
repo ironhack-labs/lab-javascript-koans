@@ -28,7 +28,7 @@ describe('the JavaScript language', () => {
 
     it('surprises me, NaN is not comparable with NaN', () => {
       expect(5 / 'a').toEqual(5 / 'a');
-      // expect(typeof(NaN)).toEqual();
+      expect(typeof(NaN)).toEqual('number');
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
@@ -165,10 +165,13 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        // write the missing code here
+        const myFunction = (_number)=>{
+          return [_number, _number * 10, _number * 20]
+        }
+        return [myFunction]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", () => {
@@ -188,11 +191,11 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      // expect(exampleA()).toEqual('1');
-
       const exampleB = function(arg1) {
         return arg1;
       };
+
+      expect(exampleA()).toEqual(1);
     });
 
     it('can use optional parameters', () => {
@@ -238,9 +241,10 @@ describe('the JavaScript language', () => {
           const c = 3;
           return a + b + c;
         }
+        return internal()
       }
 
-      // expect(external()).toBe(6);
+      expect(external()).toBe(6);
     });
 
     it('defines a pure function when there are no free variables', () => {
@@ -261,12 +265,15 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
+        const myFunction = (_number)=>{
+          return [_number, _number + 9]
+        }
+        return [myFunction]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
@@ -614,7 +621,6 @@ describe('the JavaScript language', () => {
     });
   });
 
-// ------------------------------------STOP HERE------------------------------------
 
   context('has ways to simulate classes', () => {
     // "Class"
@@ -670,7 +676,7 @@ describe('the JavaScript language', () => {
         cat.feed();
         cat.feed();
 
-        // expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(3);
       });
 
       it('works different on detached functions', () => {
@@ -679,15 +685,15 @@ describe('the JavaScript language', () => {
 
         feed();
 
-        // expect(window.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(window.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it('can be bound explicitly with CALL and APPLY', () => {
         const feed = cat.feed;
         feed.apply(cat);
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it('can be bound in modern browsers with BIND', () => {
@@ -696,7 +702,7 @@ describe('the JavaScript language', () => {
 
         bound();
 
-        //expect(cat.kilos).toEqual();
+        expect(cat.kilos).toEqual(2);
       });
 
       it('works different when function is attached to other object', () => {
@@ -705,8 +711,8 @@ describe('the JavaScript language', () => {
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-        //expect(otherCat.kilos).toEqual();
-        //expect(cat.kilos).toEqual();
+        expect(otherCat.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
       });
 
       it('can be handled using the SELF trick', () => {
@@ -715,7 +721,7 @@ describe('the JavaScript language', () => {
 
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(185);
       });
 
       it('interprets the THIS when the function is executed', () => {
@@ -727,7 +733,7 @@ describe('the JavaScript language', () => {
         };
         lion.hunt();
 
-        //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
       });
     });
   });
