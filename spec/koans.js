@@ -181,12 +181,12 @@ describe('the JavaScript language', () => {
       }
     });
 
-    it('matters, the declaration order when they are anonymous', () => {  /**/ 
+    it('matters, the declaration order when they are anonymous', () => {   
       const exampleA = function() {
         return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(ReferenceError);
+      expect(() => { exampleA() }).toThrow(new Error (`Cannot access 'exampleB' before initialization`));
 
       const exampleB = function(arg1) {
         return arg1;
@@ -376,13 +376,13 @@ describe('the JavaScript language', () => {
       expect(f.apply(f, [1,1])).toEqual(2);
     });
 
-    it("doesn't have a private scope inside blocks", () => {    /**/ 
+    it("doesn't have a private scope inside blocks", () => {    
       let j = 0;
       for (let i = 0; i < 5; i++) {
         j += i;
       }
 
-      //expect(i).toEqual(ReferenceError);
+      expect(() => { i }).toThrow(new Error ('i is not defined'));
       expect(j).toEqual(10);
     });
   });
