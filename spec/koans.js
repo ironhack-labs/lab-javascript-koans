@@ -165,7 +165,7 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        // write the missing code here
+        // return 
       }
 
       //expect(example()[0](1)[1]).toEqual(10);
@@ -176,7 +176,7 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       }
 
-      //expect(exampleA()).toEqual();
+      expect(exampleA()).toEqual(1);
 
       function exampleB(arg1) {
         return arg1;
@@ -203,16 +203,16 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3);
+      expect(example(1,1)).toBe(2);
     });
 
     it('anonymous functions are anonymous', () => {
       const x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      expect(typeof(z)).toEqual('undefined');
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -226,7 +226,7 @@ describe('the JavaScript language', () => {
         return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(2);
     });
 
     it('can create closures with several free variables', () => {
@@ -240,7 +240,7 @@ describe('the JavaScript language', () => {
         }
       }
 
-      //expect(external()).toBe(6);
+      expect(external()).toBe(undefined);
     });
 
     it('defines a pure function when there are no free variables', () => {
@@ -256,7 +256,7 @@ describe('the JavaScript language', () => {
         return internal(4, 4);
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(9);
     });
 
     it('may return arrays that contains closures and so on', () => {
@@ -279,13 +279,13 @@ describe('the JavaScript language', () => {
       const z = true;
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual(1);
 
       example(y);
-      //expect(y).toEqual();
+      expect(y).toEqual('example');
 
       example(z);
-      //expect(z).toEqual();
+      expect(z).toEqual(true);
     });
 
     it('passes arrays by reference', () => {
@@ -296,7 +296,7 @@ describe('the JavaScript language', () => {
       const x = [1, 2, 3];
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual([100, 2, 3]);
     });
 
     it('passes objects by reference', () => {
@@ -307,7 +307,7 @@ describe('the JavaScript language', () => {
       const x = { property: 'cool!' };
 
       example(x);
-      //expect(x).toEqual();
+      expect(x).toEqual({ property: 'test' });
     });
 
     it('may return a function as the result of invoking a function', () => {
@@ -319,9 +319,9 @@ describe('the JavaScript language', () => {
         return add;
       }
 
-      //expect(example()(1,2)).toEqual();
+      expect(example()(1,2)).toEqual(3);
       const f = example();
-      //expect(f(2,2)).toEqual();
+      expect(f(2,2)).toEqual(4);
     });
 
     it('can return closures as a function result', () => {
@@ -333,7 +333,7 @@ describe('the JavaScript language', () => {
 
       const f = plus(5);
 
-      //expect(f(3)).toBe();
+      expect(f(3)).toBe(8);
     });
 
     it('can have functions that receive other functions as arguments', () => {
@@ -345,7 +345,7 @@ describe('the JavaScript language', () => {
         return arg(2, 2) + 1;
       }
 
-      //expect(example(add)).toEqual();
+      expect(example(add)).toEqual(5);
     });
 
     it('may have functions as the input and the output', () => {
@@ -359,7 +359,7 @@ describe('the JavaScript language', () => {
         return 1;
       });
 
-      //expect(f(2)).toBe();
+      expect(f(2)).toBe(3);
     });
 
     it("can invoke functions indirectly using the special 'call'", () => {
@@ -367,7 +367,7 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(f.call(f,1,1)).toEqual();
+      expect(f.call(f,1,1)).toEqual(2);
     });
 
     it("can invoke functions indirectly using the special 'apply'", () => {
@@ -375,7 +375,7 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(f.apply(f, [1,1])).toEqual();
+      expect(f.apply(f, [1,1])).toEqual(2);
     });
 
     it("doesn't have a private scope inside blocks", () => {
@@ -385,7 +385,7 @@ describe('the JavaScript language', () => {
       }
 
       //expect(i).toEqual();
-      //expect(j).toEqual();
+      expect(j).toEqual(10);
     });
   });
 
@@ -398,7 +398,7 @@ describe('the JavaScript language', () => {
         }
       };
 
-      //expect(obj.theName()).toBe();
+      expect(obj.theName()).toBe('bob');
     });
 
     it('can create properties dynamically', () => {
@@ -408,17 +408,20 @@ describe('the JavaScript language', () => {
       };
       obj.address = 'palm tree';
 
-      //expect(obj.address).toEqual();
-      //expect(obj['address']).toEqual();
-      //expect(obj['name']).toEqual();
+      expect(obj.address).toEqual('palm tree');
+      expect(obj['address']).toEqual('palm tree');
+      expect(obj['name']).toEqual('bob');
     });
 
     it('may define complex objects', () => {
-      let user;
+      let user = {
+        address: {street: 'sesame'},
+        friends: [{name: 'triki'}]
+      }
       // write the contents of the obj to make the satisfy the expectations:
 
-      //expect(user.address.street).toEqual('sesame');
-      //expect(user.friends[0].name).toEqual('triki');
+      expect(user.address.street).toEqual('sesame');
+      expect(user.friends[0].name).toEqual('triki');
     });
 
     it('has a pattern called, the Module Pattern', () => {
