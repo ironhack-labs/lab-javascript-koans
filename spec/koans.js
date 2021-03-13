@@ -192,9 +192,9 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      //expect(exampleA()).toEqual(1);
+      expect(exampleA()).toEqual(1);
 
-      const exampleB = function(arg1) {
+      function exampleB(arg1) {
         return arg1;
       };
     });
@@ -207,16 +207,16 @@ describe('the JavaScript language', () => {
         return a + b;
       }
 
-      //expect(example(1,1,1)).toBe();
-      //expect(example(1,1)).toBe();
+      expect(example(1,1,1)).toBe(3);
+      expect(example(1,1)).toBe(2);
     });
 
     it('anonymous functions are anonymous', () => {
       const x = function z() {
         return 1;
       };
-      //expect(typeof(z)).toEqual();
-      //expect(x()).toEqual();
+      expect(typeof(z)).toEqual('undefined');
+      expect(x()).toEqual(1);
     });
 
     it('can create closures with free variables', () => {
@@ -230,7 +230,7 @@ describe('the JavaScript language', () => {
         return internal();
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(2);
     });
 
     it('can create closures with several free variables', () => {
@@ -242,9 +242,10 @@ describe('the JavaScript language', () => {
           const c = 3;
           return a + b + c;
         }
+        return internal()
       }
 
-      //expect(external()).toBe(6);
+      expect(external()).toBe(6);
     });
 
     it('defines a pure function when there are no free variables', () => {
@@ -260,17 +261,16 @@ describe('the JavaScript language', () => {
         return internal(4, 4);
       }
 
-      //expect(external()).toBe();
+      expect(external()).toBe(9);
     });
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      // expect(example()[0](1)[1]).toEqual(10);
+      // expect(example()[0](2)[1]).toEqual(11);
+      // expect(example()[0](3)[1]).toEqual(12);
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
