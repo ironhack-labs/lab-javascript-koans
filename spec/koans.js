@@ -165,10 +165,12 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains functions and so on', () => {
       function example() {
-        // write the missing code here
+        return [function(num) {
+          return [num, num*10]
+        }];
       }
 
-      // expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](1)[1]).toEqual(10);
     });
 
     it("doesn't care about the declaration order when they are named", () => {
@@ -260,12 +262,15 @@ describe('the JavaScript language', () => {
 
     it('may return arrays that contains closures and so on', () => {
       function example() {
-        // write the missing code here
+        return [function(num){
+          const increment = 9;
+          return [0,num + increment]
+        }]
       }
 
-      //expect(example()[0](1)[1]).toEqual(10);
-      //expect(example()[0](2)[1]).toEqual(11);
-      //expect(example()[0](3)[1]).toEqual(12);
+      expect(example()[0](1)[1]).toEqual(10);
+      expect(example()[0](2)[1]).toEqual(11);
+      expect(example()[0](3)[1]).toEqual(12);
     });
 
     it('passes primitive types as values (a copy) to functions', () => {
