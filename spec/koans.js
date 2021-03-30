@@ -450,16 +450,30 @@ describe('the JavaScript language', () => {
     });
 
     it('may create objects also with the module pattern', () => {
-      function createObject(initialScore) {
+      function createObject(initialScore, initialColor) {
+        debugger
+        let color = initialColor;
+        let score = initialScore;
+        function incrementScoreIn(num){
+          return score += num;
+        }
+        function points(){
+          return score;
+        }
+        return {
+          incrementScoreIn: incrementScoreIn,
+          points: points,
+          color: color,
+        }
         // write the code here
       }
 
-      /*
+      
       const obj = createObject(5, 'red');
       obj.incrementScoreIn(5);
       expect(obj.color).toEqual('red');
       expect(obj.points()).toEqual(10);
-      */
+      
     });
 
     it('can define constructors', () => {
