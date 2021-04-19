@@ -33,13 +33,13 @@ describe('the JavaScript language', () => {
     });
 
     it('considers an empty string to be falsy', () => {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == true).toBeFalsy();// Truthy or Falsy
+      // expect("" === false).toBeTruthy();// Truthy or Falsy
     });
 
     it('considers zero to be falsy', () => {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == true).toBeFalsy();// Truthy or Falsy
+      expect(0 === true).toBeFalsy();// Truthy or Falsy
     });
 
     it('considers nulls to be falsy', () => {
