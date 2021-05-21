@@ -121,6 +121,7 @@ So, the test `expect(1 == "1").toBeTruthy()` will pass. There is a huge list of 
 We will see there are many matchers we can use. Right now, we just need the ones described above to do the Koans.
 
 ## Exercise
+
 ### Requirements
 
 - Fork this repo
@@ -129,11 +130,13 @@ We will see there are many matchers we can use. Right now, we just need the ones
 ### Submission
 
 Upon completion, run the following commands:
+
 ```bash
 $ git add .
 $ git commit -m "done"
 $ git push origin master
 ```
+
 Create Pull Request so your TAs can check up your work.
 
 ### Instructions
@@ -167,6 +170,6 @@ To do that, the correct workflow is the one used on [TDD](https://en.wikipedia.o
 
 This process has to be done for each test. **Do not uncomment all the tests and launch the app. It will be more difficult for you to see if your code is passing the tests.**
 
-As we said, this is the first step to become a better developer. 
+As we said, this is the first step to become a better developer.
 
 Good luck to all of you and happy coding. :heart:

@@ -71,7 +71,11 @@ describe('the JavaScript language', () => {
       arr.push(5);
       arr[9] = 6;
 
-      const matrix = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 7, 8]];
+      const matrix = [
+        ['a', 'b', 'c'],
+        ['d', 'e', 'f'],
+        ['g', 7, 8]
+      ];
 
       /*
       expect(arr[1]).toEqual();
@@ -86,7 +90,7 @@ describe('the JavaScript language', () => {
       const arr = [
         1,
         2,
-        function(arg) {
+        function (arg) {
           return 3 + arg;
         }
       ];
@@ -145,7 +149,7 @@ describe('the JavaScript language', () => {
     });
 
     it('can declare anonymous functions', () => {
-      const someVar = function(a, b) {
+      const someVar = function (a, b) {
         return a + b;
       };
 
@@ -184,13 +188,13 @@ describe('the JavaScript language', () => {
     });
 
     it('matters, the declaration order when they are anonymous', () => {
-      const exampleA = function() {
+      const exampleA = function () {
         return exampleB(1);
       };
 
       //expect(exampleA()).toEqual(1);
 
-      const exampleB = function(arg1) {
+      const exampleB = function (arg1) {
         return arg1;
       };
     });
@@ -326,7 +330,7 @@ describe('the JavaScript language', () => {
 
     it('can return closures as a function result', () => {
       function plus(amount) {
-        return function(number) {
+        return function (number) {
           return number + amount;
         };
       }
@@ -350,12 +354,12 @@ describe('the JavaScript language', () => {
 
     it('may have functions as the input and the output', () => {
       function plus(originalFunction) {
-        return function(arg1) {
+        return function (arg1) {
           return originalFunction() + arg1;
         };
       }
 
-      const f = plus(function() {
+      const f = plus(function () {
         return 1;
       });
 
@@ -393,7 +397,7 @@ describe('the JavaScript language', () => {
     it('can define object literals', () => {
       const obj = {
         name: 'bob',
-        theName: function() {
+        theName: function () {
           return this.name;
         }
       };
@@ -426,10 +430,10 @@ describe('the JavaScript language', () => {
         let points = 0;
 
         return {
-          addPoint: function() {
+          addPoint: function () {
             ++points;
           },
-          score: function() {
+          score: function () {
             return points;
           }
         };
@@ -459,7 +463,7 @@ describe('the JavaScript language', () => {
       function Obj() {
         const name = 'bob';
 
-        this.theName = function() {
+        this.theName = function () {
           return name;
         };
       }
@@ -472,12 +476,12 @@ describe('the JavaScript language', () => {
       function Obj() {
         const name = 'bob';
 
-        this.theName = function() {
+        this.theName = function () {
           return name;
         };
       }
 
-      Obj.someStaticMethod = function() {
+      Obj.someStaticMethod = function () {
         return 22;
       };
 
@@ -489,7 +493,7 @@ describe('the JavaScript language', () => {
         const name = 'bob';
       }
 
-      Obj.prototype.theName = function() {
+      Obj.prototype.theName = function () {
         return this.name;
       };
 
@@ -503,7 +507,7 @@ describe('the JavaScript language', () => {
         const self = {};
         const name = 'bob';
 
-        self.theName = function() {
+        self.theName = function () {
           return name;
         };
 
@@ -520,7 +524,7 @@ describe('the JavaScript language', () => {
       const methodNames = ['meow', 'jump'];
 
       for (let i = 0; i < methodNames.length; i++) {
-        obj[[methodNames[i]]] = function() {
+        obj[[methodNames[i]]] = function () {
           return 'it works';
         };
       }
@@ -533,7 +537,7 @@ describe('the JavaScript language', () => {
         function Parent() {
           this.name = 'parent';
         }
-        Parent.prototype.someMethod = function() {
+        Parent.prototype.someMethod = function () {
           return 10;
         };
 
@@ -552,7 +556,7 @@ describe('the JavaScript language', () => {
         function parent() {
           const name = 'parent';
           const self = {};
-          self.someMethod = function() {
+          self.someMethod = function () {
             return 10;
           };
           return self;
@@ -574,14 +578,14 @@ describe('the JavaScript language', () => {
     it('can invoke functions immediately to take advantage of scopes', () => {
       const myNamespace = {};
 
-      (function(theNamespace) {
+      (function (theNamespace) {
         let counter = 0;
 
-        theNamespace.addOne = function() {
+        theNamespace.addOne = function () {
           counter++;
         };
 
-        theNamespace.giveMeTheCount = function() {
+        theNamespace.giveMeTheCount = function () {
           return counter;
         };
       })(myNamespace);
@@ -596,7 +600,7 @@ describe('the JavaScript language', () => {
       function generate() {
         const functions = [];
         for (let i = 0; i < 5; i++) {
-          functions.push(function() {
+          functions.push(function () {
             return i;
           });
         }
@@ -612,10 +616,10 @@ describe('the JavaScript language', () => {
     // "Class"
     function Cat() {
       this.kilos = 1;
-      this.feed = function() {
+      this.feed = function () {
         this.kilos++;
       };
-      this.isPurring = function() {
+      this.isPurring = function () {
         return true;
       };
     }
@@ -628,24 +632,24 @@ describe('the JavaScript language', () => {
       this.energy = energy || 100;
       const self = this;
 
-      const run = function() {
+      const run = function () {
         // private method
         self.energy -= 10;
       };
-      const attack = function() {
+      const attack = function () {
         // private method
         self.energy -= 5;
       };
-      this.playWithFriend = function(friend) {
+      this.playWithFriend = function (friend) {
         if (friend.isPurring()) self.energy += 10;
       };
-      this.hunt = function() {
+      this.hunt = function () {
         // public method
         run();
         attack();
         this.onHunting(); // fire event
       };
-      this.onHunting = function() {
+      this.onHunting = function () {
         /* event */
       };
     }
@@ -653,7 +657,7 @@ describe('the JavaScript language', () => {
     context('and the THIS keyword', () => {
       let cat;
 
-      beforeEach(function() {
+      beforeEach(function () {
         cat = new Cat();
         window.kilos = 0;
       });
@@ -714,7 +718,7 @@ describe('the JavaScript language', () => {
         const energy = 200;
         const lion = new Lion();
 
-        lion.hunt = function() {
+        lion.hunt = function () {
           this.energy = 4000;
         };
         lion.hunt();
