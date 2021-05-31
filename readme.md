@@ -23,6 +23,8 @@ He told them:
 > "Not the wind, not the flag; The mind is moving."
 ```
 
+<br>
+
 ### What are the Koans?
 
 [Koans](https://en.wikipedia.org/wiki/K%C5%8Dan) (公案) originate from Zen Buddhism, and are paradoxical riddles or stories used to test "students" on their path to enlightenment. They are designed to provoke thought or doubt in the student's mind. We are here to learn to code, so... what are the Koans?
@@ -34,17 +36,23 @@ There are Koans for all the programming languages. We will work with JavaScript 
 - You get an assertion that is not passing a **test**.
 - You have to give the test the correct expected result to pass it.
 
-We are going to test the code assertions through Jasmine. We have introduced here two new concepts: test and [Jasmine](http://jasmine.github.io/). Let's see a brief introduction to both of them.
+We are going to test the code assertions through Jest. We have introduced two new concepts here: tests and [Jest](https://jestjs.io/). Let's do a brief introduction to both of them.
+
+<br>
 
 ## Testing
 
 When we are coding, we have to be sure that our code is working as we expect. More than that, when we update our existing code, we have to be 100% sure that our old code is still working. As our website becomes larger, it becomes more difficult to check that all our features are working as we expect. How can we automatize this process? The answer is with **testing**.
+
+<br>
 
 ### Introduction to testing
 
 Testing allows us to check if the full set of features we have build is working as we expect. Sometimes you can create new features that override or damage the old ones. We avoid this with testing.
 
 For now, you have enough with this brief introduction. We will learn testing in depth later on the course.
+
+<br>
 
 ### Anatomy of a test
 
@@ -70,13 +78,17 @@ given the parameters 1 and 2 to the add function, we expect to get 3 as a result
 
 This is the anatomy of a test. We have the knowledge to understand what is a test and how it works. Now we will introduce you to a JavaScript framework to test our application.
 
-## Jasmine
+<br>
 
-[Jasmine](http://jasmine.github.io/) is a JavaScript framework used to test JavaScript code. If you take a look at the documentation, you will see that it has many options to test our code. In this lab, we will work with `expects` and `matchers`.
+## Jest
+
+[Jest](https://jestjs.io/) is a JavaScript testing framework used to test JavaScript code. If you take a look at the documentation, you will see that it has many options to test our code. In this lab, we will work with [`expects`](https://jestjs.io/docs/expect) and [`matchers`](https://jestjs.io/docs/using-matchers).
+
+<br>
 
 ### Describe, it, expect and matchers
 
-To understand better what are the parts of the test in Jasmine, we will walk through an example. This is the first test we will find in our Koans:
+To understand better what are the parts of the test in Jest, we will walk through an example. This is the first test we will find in our Koans:
 
 ```javascript
 describe('the JavaScript language', () => {
@@ -90,6 +102,8 @@ describe('the JavaScript language', () => {
 ```
 
 We will go through each different part of the test to explain all of them:
+
+<br>
 
 #### describe
 
@@ -120,12 +134,17 @@ So, the test `expect(1 == "1").toBeTruthy()` will pass. There is a huge list of 
 
 We will see there are many matchers we can use. Right now, we just need the ones described above to do the Koans.
 
+<br>
+
 ## Exercise
 
 ### Requirements
 
 - Fork this repo
 - Clone this repo
+- Visit the "Actions" tab in your fork, and enable workflows.
+
+<br>
 
 ### Submission
 
@@ -139,13 +158,19 @@ $ git push origin master
 
 Create Pull Request so your TAs can check up your work.
 
+<br>
+
 ### Instructions
 
-We need to execute our tests. After you forked and cloned this repo, open the file `SpecRunner.html` in your browser.
+We need to execute our tests. After you forked and cloned this repo, open your terminal, change directories into the root of the lab, and run `npm install` to install the test runner.
+Next, you can run the `npm run test:watch` command to run automated tests. Open the resulting `lab-solution.html` file with the "Live Server" VSCode extension to see the test results.
 
 In the beginning, you will see all the tests in green. This is because only the tests that are passing are un-commented. The tests we have to implement are commented out.
 
-All the tests are located inside the `spec` folder. Open the `koans.js` file and uncomment the following line:
+<br>
+
+All the tests are located inside the `tests` folder. Open the `koans.spec.js` file and uncomment the following line:
+⠀
 
 ```javascript
 it("surprises me, NaN is not comparable with NaN", () => { {
@@ -155,9 +180,13 @@ it("surprises me, NaN is not comparable with NaN", () => { {
 });
 ```
 
-When we uncomment the line and refresh de `SpecRunner.html` page, we will see something like that:
+<br>
+⠀
+When we uncomment the line and save the file, tests will refresh and we will see something like that:
 
-![](https://i.imgur.com/6aOBOPf.png)
+![](https://i.imgur.com/syHurzK.png)
+⠀
+<br>
 
 **The main goal is not to finish all the tests. We want you to understand why each test is failing and how does JavaScript work in specific scopes.**
 
@@ -168,6 +197,7 @@ To do that, the correct workflow is the one used on [TDD](https://en.wikipedia.o
 - Change the code to pass the test
 - Refresh the page to see that the test is passing
 
+⠀
 This process has to be done for each test. **Do not uncomment all the tests and launch the app. It will be more difficult for you to see if your code is passing the tests.**
 
 As we said, this is the first step to become a better developer.

@@ -1,5 +1,3 @@
-context = describe;
-
 describe('the JavaScript language', () => {
   describe('has different types and operators', () => {
     it('considers numbers to be equal to their string representation', () => {
@@ -28,7 +26,7 @@ describe('the JavaScript language', () => {
 
     it('surprises me, NaN is not comparable with NaN', () => {
       expect(5 / 'a').toEqual(5 / 'a');
-      //expect(typeof(NaN)).toEqual();
+      // expect(typeof NaN).toEqual();
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
@@ -612,7 +610,7 @@ describe('the JavaScript language', () => {
     });
   });
 
-  context('has ways to simulate classes', () => {
+  describe('has ways to simulate classes', () => {
     // "Class"
     function Cat() {
       this.kilos = 1;
@@ -654,7 +652,7 @@ describe('the JavaScript language', () => {
       };
     }
 
-    context('and the THIS keyword', () => {
+    describe('and the THIS keyword', () => {
       let cat;
 
       beforeEach(function () {
