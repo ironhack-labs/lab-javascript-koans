@@ -184,7 +184,7 @@ it("surprises me, NaN is not comparable with NaN", () => { {
 ⠀
 When we uncomment the line and save the file, tests will refresh and we will see something like that:
 
-![](https://i.imgur.com/syHurzK.png)
+![](https://education-team-2020.s3-eu-west-1.amazonaws.com/web-dev/labs/tests-passed-failed.png)
 ⠀
 <br>
 
