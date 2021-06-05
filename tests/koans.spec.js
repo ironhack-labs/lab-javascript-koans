@@ -26,18 +26,18 @@ describe('the JavaScript language', () => {
 
     it('surprises me, NaN is not comparable with NaN', () => {
       expect(5 / 'a').toEqual(5 / 'a');
-      // expect(typeof NaN).toEqual();
+      expect(typeof NaN).toEqual("number");
       expect(isNaN(5 / 'a')).toBeTruthy();
     });
 
     it('considers an empty string to be falsy', () => {
-      //expect("" == false).toBe......();// Truthy or Falsy
-      //expect("" === false).toBe.....();// Truthy or Falsy
+      expect("" == false).toBeTruthy();// Truthy or Falsy
+      expect("" === false).toBeFalsy();// Truthy or Falsy
     });
 
     it('considers zero to be falsy', () => {
-      //expect(0 == false).toBe......();// Truthy or Falsy
-      //expect(0 === false).toBe.....();// Truthy or Falsy
+      expect(0 == false).toBeTruthy();// Truthy or Falsy
+      expect(0 === false).toBeFalsy();// Truthy or Falsy
     });
 
     it('considers nulls to be falsy', () => {
@@ -50,24 +50,24 @@ describe('the JavaScript language', () => {
         result = false;
       }
 
-      //expect(result == false).toBe......();// Truthy or Falsy
-      //expect(null === false).toBe.....();// Truthy or Falsy
-      //expect(null == false).toBe....();// Truthy or Falsy
+      expect(result == false).toBeTruthy();// Truthy or Falsy
+      expect(null === false).toBeFalsy();// Truthy or Falsy
+      expect(null == false).toBeFalsy();// Truthy or Falsy
     });
 
     it('knows the type of a function', () => {
       function x() {
-        // ...
+         return 0
       }
 
       expect(typeof x).toBe('function');
-      //expect(typeof(xxx)).toBe('...');
+      expect(typeof(x())).toBe('number');
     });
 
     it('has arrays and they can contain anything inside', () => {
-      const arr = [1, 2, 3, 4];
-      arr.push(5);
-      arr[9] = 6;
+       const arr = [1, 2, 3, 4];
+       arr.push(5);
+       arr[9] = 6;
 
       const matrix = [
         ['a', 'b', 'c'],
@@ -75,13 +75,13 @@ describe('the JavaScript language', () => {
         ['g', 7, 8]
       ];
 
-      /*
-      expect(arr[1]).toEqual();
-      expect(arr[4]).toEqual();
-      expect(arr[6]).toEqual();
-      expect(arr[9]).toEqual();
-      expect(matrix[0][2]).toEqual();
-      */
+      
+      expect(arr[1]).toEqual(2);
+      expect(arr[4]).toEqual(5);
+      expect(arr[6]).toEqual(undefined);
+      expect(arr[9]).toEqual(6);
+      expect(matrix[0][2]).toEqual('c');
+      
     });
 
     it('may contain functions inside arrays', () => {
@@ -93,7 +93,7 @@ describe('the JavaScript language', () => {
         }
       ];
 
-      //expect(arr[2](1)).toEqual();
+      expect(arr[2](1)).toEqual(0);
     });
 
     it('concatenate arrays - well, kind of', () => {
@@ -219,7 +219,7 @@ describe('the JavaScript language', () => {
 
     it('can create closures with free variables', () => {
       function external() {
-        const a = 1;
+        //const a = 1;
 
         function internal() {
           return a + 1;
