@@ -190,7 +190,7 @@ describe('the JavaScript language', () => {
         return exampleB(1);
       };
 
-      // expect(exampleA()).toEqual(1);
+      // // expect(exampleA()).toEqual(1);
 
       const exampleB = function (arg1) {
         return arg1;
