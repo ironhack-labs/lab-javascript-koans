@@ -24,10 +24,10 @@ describe('the JavaScript language', () => {
       expect(typeof x).toEqual('number');
     });
 
-    it('surprises me, NaN is not comparable with NaN', () => {
-      expect(5 / 'a').toEqual(5 / 'a');
-      // expect(typeof NaN).toEqual();
-      expect(isNaN(5 / 'a')).toBeTruthy();
+    it("surprises me, NaN is not comparable with NaN", () =>  {
+      expect(5 / "a").toEqual(5 / "a");
+      //expect(typeof(NaN)).toEqual();
+      expect(isNaN(5 / "a")).toBeTruthy();
     });
 
     it('considers an empty string to be falsy', () => {
