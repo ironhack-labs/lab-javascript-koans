@@ -36,27 +36,29 @@ There are Koans for all the programming languages. We will work with JavaScript 
 - You get an assertion that is not passing a **test**.
 - You have to give the test the correct expected result to pass it.
 
-We are going to test the code assertions through Jest. We have introduced two new concepts here: tests and [Jest](https://jestjs.io/). Let's do a brief introduction to both of them.
+We are going to test the code assertions through Jasmine. We have introduced two new concepts: tests and [Jasmine](http://jasmine.github.io/). Let's make a brief introduction to both of them.
 
 <br>
+
+
 
 ## Testing
 
-When we are coding, we have to be sure that our code is working as we expect. More than that, when we update our existing code, we have to be 100% sure that our old code is still working. As our website becomes larger, it becomes more difficult to check that all our features are working as we expect. How can we automatize this process? The answer is with **testing**.
+When we are coding, we have to be sure that our code is working as we expect. More than that, when we update our existing code, we have to be 100% sure that our old code is still working. As our website becomes larger, it becomes more difficult to check that all our features are working as we expect. How can we automate this process? The answer is with **testing**.
 
-<br>
 
-### Introduction to testing
 
 Testing allows us to check if the full set of features we have build is working as we expect. Sometimes you can create new features that override or damage the old ones. We avoid this with testing.
 
-For now, you have enough with this brief introduction. We will learn testing in depth later on the course.
-
 <br>
+
+
 
 ### Anatomy of a test
 
 The syntax to create a test depends on the framework we are using. So we will explain the basic anatomy of a test with [pseudocode](https://en.wikipedia.org/wiki/Pseudocode).
+
+
 
 Given a function with some parameters, we expect to get a result. If the result is what we are expecting, the test will pass. If we get an unexpected result, the test will fail. The framework will show the tests that are passing in green, and the tests that are failing in red.
 
@@ -80,17 +82,17 @@ This is the anatomy of a test. We have the knowledge to understand what is a tes
 
 <br>
 
-## Jest
 
-[Jest](https://jestjs.io/) is a JavaScript testing framework used to test JavaScript code. If you take a look at the documentation, you will see that it has many options to test our code. In this lab, we will work with [`expects`](https://jestjs.io/docs/expect) and [`matchers`](https://jestjs.io/docs/using-matchers).
 
-<br>
+## Jasmine
+
+[Jasmine](http://jasmine.github.io/) is a JavaScript framework used to test JavaScript code. If you take a look at the documentation, you will see that it has many options to test our code. In this lab, we will work with `expects` and `matchers`.
 
 ### Describe, it, expect and matchers
 
-To understand better what are the parts of the test in Jest, we will walk through an example. This is the first test we will find in our Koans:
+To understand better what are the parts of the test in Jasmine, we will walk through an example. This is the first test we will find in our Koans:
 
-```javascript
+```
 describe('the JavaScript language', () => {
   describe('has different types and operators', () => {
     it('considers numbers to be equal to their string representation', () => {
@@ -103,9 +105,9 @@ describe('the JavaScript language', () => {
 
 We will go through each different part of the test to explain all of them:
 
-<br>
 
-#### describe
+
+#### `describe`
 
 It's used to group different tests on our code. This is very helpful when we see the results of the tests. In the code above, we have two different describes:
 
@@ -114,15 +116,21 @@ It's used to group different tests on our code. This is very helpful when we see
 
 As you can see, those are just information strings. When we execute our tests, they appear in the page grouping the different tests we have. This is very helpful when we have a lot of tests to identify where is a test that is not passing.
 
-#### it
+
+
+#### `it`
 
 It receives a `string` that indicates what we are testing. It has to be a clear description of what we are going to do. In our example, we are testing that JavaScript considers the numbers to be equal to their string representation.
 
-#### expect
+
+
+#### `expect`
 
 What we are expecting in the test. This function contains the expression we want to test. This expression has to coincide with the matcher of the test. If they agree, the test will pass. If they disagree, the test will fail.
 
-#### matcher
+
+
+#### Matchers
 
 The matchers are going to determine if a test will pass or not. The expression in the expect has to agree with the matcher. In our example, we are testing that JavaScript considers the numbers to be equal to their string representation. The matcher we selected is `.toBeTruthy()`.
 
@@ -134,15 +142,17 @@ So, the test `expect(1 == "1").toBeTruthy()` will pass. There is a huge list of 
 
 We will see there are many matchers we can use. Right now, we just need the ones described above to do the Koans.
 
-<br>
+
 
 ## Exercise
 
 ### Requirements
 
 - Fork this repo
+
 - Clone this repo
-- Visit the "Actions" tab in your fork, and enable workflows.
+
+  
 
 <br>
 
@@ -152,7 +162,7 @@ Upon completion, run the following commands:
 
 ```bash
 $ git add .
-$ git commit -m "done"
+$ git commit -m "Solved lab"
 $ git push origin master
 ```
 
@@ -160,35 +170,29 @@ Create Pull Request so your TAs can check up your work.
 
 <br>
 
+
+
 ### Instructions
 
-We need to execute our tests. After you forked and cloned this repo, open your terminal, change directories into the root of the lab, and run `npm install` to install the test runner.
-Next, you can run the `npm run test:watch` command to run automated tests. Open the resulting `lab-solution.html` file with the "Live Server" VSCode extension to see the test results.
+We need to execute our tests. After you forked and cloned this repo, open the file `SpecRunner.html` in your browser.
 
 In the beginning, you will see all the tests in green. This is because only the tests that are passing are un-commented. The tests we have to implement are commented out.
 
-<br>
+All the tests are located inside the `spec` folder. Open the `koans.js` file and uncomment the following line:
 
-All the tests are located inside the `tests` folder. Open the `koans.spec.js` file and uncomment the following line:
-⠀
-
-```javascript
-it("surprises me, NaN is not comparable with NaN", () => { {
+```js
+it ("surprises me, NaN is not comparable with NaN", () => { {
   expect(5 / "a").toEqual(5 / "a");
   //expect(typeof(NaN)).toEqual();
   expect(isNaN(5 / "a")).toBeTruthy();
 });
 ```
 
-<br>
-⠀
-When we uncomment the line and save the file, tests will refresh and we will see something like that:
+When we uncomment the line and refresh de `SpecRunner.html` page, we will see something like that:
 
-![](https://education-team-2020.s3-eu-west-1.amazonaws.com/web-dev/labs/tests-passed-failed.png)
-⠀
-<br>
+[![img](https://camo.githubusercontent.com/8f20065f1c2b6a9bd19888350de78377056ac3c96780ad2ecc509eba9837dd52/68747470733a2f2f692e696d6775722e636f6d2f36614f424f50662e706e67)](https://camo.githubusercontent.com/8f20065f1c2b6a9bd19888350de78377056ac3c96780ad2ecc509eba9837dd52/68747470733a2f2f692e696d6775722e636f6d2f36614f424f50662e706e67)
 
-**The main goal is not to finish all the tests. We want you to understand why each test is failing and how does JavaScript work in specific scopes.**
+**The main goal is not to finish all the tests. We want you to understand why each test is failing and how JavaScript works in different scenarios.**
 
 To do that, the correct workflow is the one used on [TDD](https://en.wikipedia.org/wiki/Test-driven_development):
 
@@ -197,9 +201,8 @@ To do that, the correct workflow is the one used on [TDD](https://en.wikipedia.o
 - Change the code to pass the test
 - Refresh the page to see that the test is passing
 
-⠀
 This process has to be done for each test. **Do not uncomment all the tests and launch the app. It will be more difficult for you to see if your code is passing the tests.**
 
 As we said, this is the first step to become a better developer.
 
-Good luck to all of you and happy coding. :heart:
+Good luck to all of you and happy coding. ❤️
